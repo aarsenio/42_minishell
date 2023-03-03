@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:14:05 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/03 11:11:33 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:57:17 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	destroy_list(t_list *x)
 	{
 		tmp = x->next;
 		x->next = x->next->next;
+		if (tmp->token)
+			free(tmp->token);
 		free (tmp);
 	}
 }

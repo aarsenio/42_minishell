@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:33:42 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/06 17:07:06 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:20:59 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 typedef struct s_toklist
 {
-	struct s_toklist	*next;
 	char				*token;
+	struct s_toklist	*next;
 }t_toklist;
 
 // parse

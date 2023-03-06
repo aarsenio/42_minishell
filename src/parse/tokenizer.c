@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:37:42 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/06 17:10:00 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:16:49 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,23 @@ int	letter_count(char *input, int i)
 int	pipe_redirections(char *input, int i)
 {
 	char	*token;
+	char	symbol;
 
+	if (input[i] == '>' || input[i] == '<')
+	{
+		symbol = input[i];
+		if (input[i + 1] == symbol)
+		{
+			token = malloc(sizeof(char) * 3);
+			if (!token)
+				return (0);
+			token[0] = input[i];
+			token[1] = input[i];
+			token[2] = '\0';
+			add_node(new_node(token), toklist());
+			return (i + 2);
+		}
+	}
 	token = malloc(sizeof(char) * 2);
 	if (!token)
 		return (0);
@@ -104,7 +120,7 @@ void	tokenizer(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '|')
+		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 			i = pipe_redirections(input, i);
 		else if (input[i] == '"' || input[i] == '\'')
 			i = quotes(input, i);

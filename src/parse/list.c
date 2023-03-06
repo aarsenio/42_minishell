@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:14:05 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/03 11:57:17 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:23:23 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_list *list(void)
+t_data *data(void)
 {
-	static t_list	list;
+	static t_data	data;
 
-	return (&list);
+	return (&data);
 }
 
-void	add_node(t_list *new, t_list *x)
+void	add_node(t_toklist *new, t_toklist *x)
 {
 	while (x)
 	{
@@ -32,11 +32,11 @@ void	add_node(t_list *new, t_list *x)
 	}
 }
 
-t_list	*new_node(char *token)
+t_toklist	*new_node(char *token)
 {
-	t_list	*new;
+	t_toklist	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_toklist));
 	if (!new)
 		return (NULL);
 	new->next = NULL;
@@ -44,10 +44,10 @@ t_list	*new_node(char *token)
 	return (new);
 }
 
-void	destroy_list(t_list *x)
+void	destroy_list(t_toklist *x)
 {
-	t_list	*tmp;
-	
+	t_toklist	*tmp;
+
 	while (x->next)
 	{
 		tmp = x->next;
@@ -58,11 +58,11 @@ void	destroy_list(t_list *x)
 	}
 }
 
-void	print_list(void)
+void	print_toklist(void)
 {
-	t_list *tmp;
+	t_toklist *tmp;
 
-	tmp = list()->next;
+	tmp = data()->tok_list->next;
 	while (tmp)
 	{
 		printf("%s\n", tmp->token);

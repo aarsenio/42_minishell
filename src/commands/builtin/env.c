@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 14:40:51 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/04 00:02:07 by nuno             ###   ########.fr       */
+/*   Created: 2022/12/11 23:29:50 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2023/03/06 11:17:31 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int main()
+void	cmd_env()
 {
-	char	*input;
+	t_envplist	*temp;
 
-	while (1)
+	temp = data()->envp_list;
+	while (temp != NULL)
 	{
-		input = readline("minishell$ ");
-		tokenizer(input);
-		print_toklist();
-		destroy_list(list());
-		free(input);
+		printf("%s=%s\n", temp->var_name, temp->var_value);
+		temp = temp->next;
 	}
+	return ;
 }

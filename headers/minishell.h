@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:33:42 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/03 11:55:31 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:46:23 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 # include <readline/history.h>
 # include <stdlib.h>
 
-typedef struct s_list
+typedef struct s_toklist
 {
-	struct s_list	*next;
+	struct s_toklist	*next;
 	char			*token;
-}t_list;
+}t_toklist;
 
 // parse
-t_list	*list(void);
-t_list	*new_node(char *token);
-void	add_node(t_list *new, t_list *x);
-void	destroy_list(t_list *x);
+t_toklist	*toklist(void);
+t_toklist	*new_node(char *token);
+void	add_node(t_toklist *new, t_toklist *x);
+void	destroy_toklist();
 void	tokenizer(char *input);
-void	print_list(void);
+void	print_toklist(void);
 
 #endif

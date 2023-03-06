@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:37:42 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/03 17:53:57 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:45:41 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	pipe_redirections(char *input, int i)
 			return ;
 	token[0] = input[i];
 	token[1] = '\0';
-	add_node(new_node(token), list());
+	add_node(new_node(token), toklist());
 }
 
 int	alphanumeric(char *input, int i)
@@ -49,7 +49,7 @@ int	alphanumeric(char *input, int i)
 	while (input[i] && input[i] != ' ' && input[i] != '\n' && input[i] != '\t' && input[i] != '|')
 		token[j++] = input[i++];
 	token[j] = '\0';
-	add_node(new_node(token), list());
+	add_node(new_node(token), toklist());
 	return (i);
 }
 

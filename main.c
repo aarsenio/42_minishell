@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:40:51 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/04 00:02:07 by nuno             ###   ########.fr       */
+/*   Updated: 2023/03/03 12:48:45 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main()
 	{
 		input = readline("minishell$ ");
 		tokenizer(input);
-		print_toklist();
+		print_list();
 		destroy_list(list());
 		free(input);
 	}

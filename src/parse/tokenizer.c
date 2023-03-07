@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:37:42 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/06 19:16:49 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:47:02 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	letter_count(char *input, int i)
 	int	result;
 
 	result = 0;
-	while (input[i] && input[i] != ' ' && input[i] != '\n' && input[i] != '\t' \
-	&& input[i] != '|' && input[i] != '"' && input[i] != '\'')
+	while (input[i] && !is_space(input[i]) && !is_pipe_redirect(input[i]) && \
+	!is_quote(input[i]))
 	{
 		result++;
 		i++;
@@ -64,8 +64,8 @@ int	alphanumeric(char *input, int i)
 	token = malloc(sizeof(char) * (letter_count(input, i) + 1));
 	if (!token)
 		return (0);
-	while (input[i] && input[i] != ' ' && input[i] != '\n' && input[i] != '\t' \
-	&& input[i] != '|' && input[i] != '"' && input[i] != '\'')
+	while (input[i] && !is_space(input[i]) && !is_pipe_redirect(input[i]) && \
+	!is_quote(input[i]))
 		token[j++] = input[i++];
 	token[j] = '\0';
 	add_node(new_node(token), toklist());
@@ -101,7 +101,7 @@ int	quotes(char *input, int i)
 	while (input[++i] != quote)
 		token[j++] = input[i];
 	token[j] = '\0';
-	if (input[t - 1] != ' ' && input[t - 1] != '\n' && input[t - 1] != '\t')
+	if (!is_space(input[t - 1]) && !is_pipe_redirect(input[t - 1]))
 	{
 		x = toklist()->next;
 		while (x->next)
@@ -120,11 +120,11 @@ void	tokenizer(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
+		if (is_pipe_redirect(input[i]))
 			i = pipe_redirections(input, i);
-		else if (input[i] == '"' || input[i] == '\'')
+		else if (is_quote(input[i]))
 			i = quotes(input, i);
-		else if (input[i] != ' ' && input[i] != '\n' && input[i] != '\t')
+		else if (!is_space(input[i]))
 			i = alphanumeric(input, i);
 		else
 			i++;

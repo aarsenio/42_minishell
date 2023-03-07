@@ -22,5 +22,8 @@ void		print_toklist(void);
 
 //lib
 char		*ft_strjoin(char const *s1, char const *s2);
+int			is_space(char x);
+int			is_pipe_redirect(char x);
+int			is_quote(char x);
 
 #endif

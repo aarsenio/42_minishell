@@ -6,11 +6,32 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:48:31 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/06 17:05:30 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:41:23 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	is_quote(char x)
+{
+	if (x == '"' || x == '\'')
+		return (1);
+	return (0);
+}
+
+int	is_pipe_redirect(char x)
+{
+	if (x == '|' || x == '>' || x == '<')
+		return (1);
+	return (0);
+}
+
+int	is_space(char x)
+{
+	if (x == ' ' || x == '\n' || x == '\t')
+		return (1);
+	return (0);
+}
 
 int	ft_strlen(const char *s)
 {

@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:37:42 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/07 14:47:02 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:58:56 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	quotes(char *input, int i)
 		x = toklist()->next;
 		while (x->next)
 			x = x->next;
-		x->token = ft_strjoin(x->token, token);
+		x->token = parse_strjoin(x->token, token);
 	}
 	else
 		add_node(new_node(token), toklist());

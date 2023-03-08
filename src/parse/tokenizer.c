@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:37:42 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/03/07 14:58:56 by aarsenio         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 int	letter_count(char *input, int i)
@@ -17,7 +5,7 @@ int	letter_count(char *input, int i)
 	int	result;
 
 	result = 0;
-	while (input[i] && !is_space(input[i]) && !is_pipe_redirect(input[i]) && \
+	while (input[i] && !is_space(input[i]) && !is_pipe_rdr(input[i]) && \
 	!is_quote(input[i]))
 	{
 		result++;
@@ -42,7 +30,7 @@ int	pipe_redirections(char *input, int i)
 			token[0] = input[i];
 			token[1] = input[i];
 			token[2] = '\0';
-			add_node(new_node(token), toklist());
+			add_toknode(new_toknode(token, get_operator(token)), toklist());
 			return (i + 2);
 		}
 	}
@@ -51,24 +39,35 @@ int	pipe_redirections(char *input, int i)
 		return (0);
 	token[0] = input[i];
 	token[1] = '\0';
-	add_node(new_node(token), toklist());
+	add_toknode(new_toknode(token, get_operator(token)), toklist());
 	return (i + 1);
 }
 
 int	alphanumeric(char *input, int i)
 {
-	char	*token;
-	int		j;
+	char		*token;
+	int			j;
+	int			tmp;
+	t_toklist	*x;
 
 	j = 0;
+	tmp = i;
 	token = malloc(sizeof(char) * (letter_count(input, i) + 1));
 	if (!token)
 		return (0);
-	while (input[i] && !is_space(input[i]) && !is_pipe_redirect(input[i]) && \
+	while (input[i] && !is_space(input[i]) && !is_pipe_rdr(input[i]) && \
 	!is_quote(input[i]))
 		token[j++] = input[i++];
 	token[j] = '\0';
-	add_node(new_node(token), toklist());
+	if (is_quote(input[tmp -1]))
+	{
+		x = toklist()->next;
+		while (x->next)
+			x = x->next;
+		x->token = parse_strjoin(x->token, token);
+	}
+	else
+		add_toknode(new_toknode(token, NONE), toklist());
 	return (i);
 }
 
@@ -101,7 +100,7 @@ int	quotes(char *input, int i)
 	while (input[++i] != quote)
 		token[j++] = input[i];
 	token[j] = '\0';
-	if (!is_space(input[t - 1]) && !is_pipe_redirect(input[t - 1]))
+	if (!is_space(input[t - 1]) && !is_pipe_rdr(input[t - 1]))
 	{
 		x = toklist()->next;
 		while (x->next)
@@ -109,8 +108,22 @@ int	quotes(char *input, int i)
 		x->token = parse_strjoin(x->token, token);
 	}
 	else
-		add_node(new_node(token), toklist());
+		add_toknode(new_toknode(token, NONE), toklist());
 	return (i + 1);
+}
+
+int	check_token(void)
+{
+	t_toklist	*x;
+
+	x = toklist()->next;
+	while (x->next)
+	{
+		if (x->operator && x->next->operator)
+			return (0);
+		x = x->next;
+	}
+	return (1);
 }
 
 void	tokenizer(char *input)
@@ -120,7 +133,7 @@ void	tokenizer(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (is_pipe_redirect(input[i]))
+		if (is_pipe_rdr(input[i]))
 			i = pipe_redirections(input, i);
 		else if (is_quote(input[i]))
 			i = quotes(input, i);
@@ -128,5 +141,10 @@ void	tokenizer(char *input)
 			i = alphanumeric(input, i);
 		else
 			i++;
+	}
+	if (!check_token())
+	{
+		printf("Syntax error\n");
+		destroy_toklist();
 	}
 }

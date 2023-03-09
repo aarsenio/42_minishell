@@ -56,11 +56,12 @@ void	print_arglist(void)
 	while (x)
 	{
 		i = 0;
-		printf("%i\n", x->ac);
-		printf("%i\n", x->operator);
+		printf("argc: %i\n", x->ac);
+		printf("operator: %i\n", x->operator);
+		printf("frase: ");
 		while (x->av[i])
 			printf("%s ", x->av[i++]);
 		x = x->next;
-		printf("\n");
+		printf("\n\n");
 	}
 }

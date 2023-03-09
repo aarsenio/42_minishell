@@ -1,5 +1,5 @@
 #include <minishell.h>
-
+/*
 bool	builtin(t_statement *s, t_data *data)
 {
 	if (streq(s->argv[0], "exit"))
@@ -117,3 +117,4 @@ void	exec_type(t_statement *statement_list, t_data *data)
 	if (!WTERMSIG(temp_status))
 		g_exit_status = temp_status >> 8;
 }
+*/

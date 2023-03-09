@@ -20,12 +20,13 @@ int	check_input(char *input)
 	return (1);
 }
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **envp)
 {
 	char	*input;
 
 	(void)ac;
 	(void)av;
+	(void)envp;
 	while (1)
 	{
 		input = readline("minishell$ ");

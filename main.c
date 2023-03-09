@@ -33,8 +33,9 @@ int	main(int ac, char **av, char **envp)
 		if (check_input(input))
 		{
 			tokenizer(input);
-			print_toklist();
-			destroy_toklist();
+			token_handler();
+			print_arglist();
+			destroy_arglist();
 		}
 		else
 			printf("Syntax error\n");

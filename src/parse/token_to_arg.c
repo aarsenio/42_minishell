@@ -5,10 +5,8 @@ int	arg_counter(t_toklist *x)
 	int	result;
 
 	result = 0;
-	while (x)
+	while (x && x->operator == 0)
 	{
-		if (x->operator != 0)
-			break ;
 		result++;
 		x = x->next;	
 	}
@@ -18,27 +16,36 @@ int	arg_counter(t_toklist *x)
 void	token_handler(void)
 {
 	t_toklist	*x;
-	t_operator	tmp;
+	t_operator	op;
 	char		**av;
 	int			i;
+	int			j;
 	int			ac;
 
 	x = toklist()->next;
-	tmp = x->operator;
+	op = NONE;
 	while (x)
 	{
-		i = 0;
-		av = malloc(sizeof(char*) * arg_counter(x));
-		while (x && x->operator != NONE)
+		if (x->operator != NONE)
 		{
-			av[i++] = x->token;
+			op = x->operator;
+			x = x->next;
+		}
+		av = malloc(sizeof(char*) * arg_counter(x));
+		i = 0;
+		ac = 0;
+		while (x && x->operator == NONE)
+		{
+			av[i] = malloc(sizeof(char) * (ft_strlen(x->token) + 1));
+			j = -1;
+			while (x->token[++j])
+				av[i][j] = x->token[j];
+			av[i++][j] = '\0';
 			ac++;
 			x = x->next;
 		}
-		add_argnode(new_argnode(ac, av, tmp), arglist());
-		if (x->operator != NONE)
-			tmp = x->operator;
-		x = x->next;
+		av[i] = NULL;
+		add_argnode(new_argnode(ac, av, op), arglist());
 	}
 	destroy_toklist();
 }

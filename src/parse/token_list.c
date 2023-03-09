@@ -1,12 +1,5 @@
 #include <minishell.h>
 
-t_toklist	*toklist(void)
-{
-	static t_toklist	toklist;
-
-	return (&toklist);
-}
-
 void	add_toknode(t_toklist *new, t_toklist *x)
 {
 	while (x)

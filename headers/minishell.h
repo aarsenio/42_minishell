@@ -51,7 +51,10 @@ void		tokenizer(char *input);
 void		print_toklist(void);
 t_arglist 	*arglist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
-t_arglist	*new_argnode(int ac, char **av, t_operator operator);
+t_arglist	*new_argnode(int ac, char **av, t_operator	operator);
+void		token_handler(void);
+void		destroy_arglist(void);
+void		print_arglist(void);
 
 //lib
 int			ft_strlen(const char *s);

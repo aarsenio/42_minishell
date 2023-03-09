@@ -1,3 +1,4 @@
+/*
 #include <minishell.h>
 
 int	check_input(char *input)
@@ -20,13 +21,12 @@ int	check_input(char *input)
 	return (1);
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(int ac, char **av)
 {
 	char	*input;
 
 	(void)ac;
 	(void)av;
-	(void)envp;
 	while (1)
 	{
 		input = readline("minishell$ ");
@@ -41,3 +41,4 @@ int	main(int ac, char **av, char **envp)
 		free(input);
 	}
 }
+*/

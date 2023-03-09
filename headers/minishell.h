@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <unistd.h>
+# include <sys/types.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -15,6 +17,15 @@ typedef enum e_operator
 	RDR_INPUT_UNTIL,
 	PIPE,
 }t_operator;
+
+/*var_name - nome das variaveis envirnonment;
+	var_value - valor das variaveis envirnonment*/
+typedef struct s_envplist
+{
+	char				*var_name;
+	char				*var_value;
+	struct s_envplist	*next;
+}t_envplist;
 
 typedef struct s_toklist
 {
@@ -50,5 +61,13 @@ int			is_pipe_rdr(char x);
 int			is_quote(char x);
 t_operator	get_operator(char *op);
 int			ft_strcmp(char *s1, char *s2);
+
+//commands
+	//built_ins
+void	cmd_echo(t_arglist	*arg);
+void	cmd_env();
+
+//utils
+t_envplist	*envplist(void);
 
 #endif

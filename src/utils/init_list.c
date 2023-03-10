@@ -2,14 +2,14 @@
 
 t_envplist	*envplist(void)
 {
-	static t_envplist envplist;
+	static t_envplist	envplist;
 
 	return (&envplist);
 }
 
-t_arglist *arglist(void)
+t_arglist	*arglist(void)
 {
-	static t_arglist arglist;
+	static t_arglist	arglist;
 
 	return (&arglist);
 }

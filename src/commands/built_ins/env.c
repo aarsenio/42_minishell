@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	cmd_env()
+void	cmd_env(void)
 {
 	t_envplist	*temp;
 

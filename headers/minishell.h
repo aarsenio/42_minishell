@@ -67,8 +67,16 @@ int			ft_strcmp(char *s1, char *s2);
 
 //commands
 	//built_ins
-void	cmd_echo(t_arglist	*arg);
-void	cmd_env();
+int			builtins(void);
+void		cmd_cd(void);
+void		cmd_echo(void);
+void		cmd_env(void);
+void		cmd_exit(void);
+void		cmd_export(void);
+void		cmd_pwd(void);
+void		cmd_unset(void);
+	//executes
+void		execute(void);
 
 //utils
 t_envplist	*envplist(void);

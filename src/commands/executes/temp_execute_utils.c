@@ -1,5 +1,4 @@
-/*
-#include <minishell.h>
+/*#include <minishell.h>
 
 int	end_and_error_message(char *msg)
 {

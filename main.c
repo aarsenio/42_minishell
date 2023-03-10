@@ -14,7 +14,10 @@ int	check_input(char *input)
 			while (input[++i] && input[i] != symbol)
 				;
 			if (!input[i])
+			{
+				printf("Syntax error\n");
 				return (0);
+			}
 		}
 	}
 	return (1);
@@ -30,15 +33,13 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		input = readline("minishell$ ");
-		if (check_input(input))
+		if (check_input(input) && input[0] != '\0')
 		{
 			tokenizer(input);
 			token_handler();
 			print_arglist();
 			destroy_arglist();
 		}
-		else
-			printf("Syntax error\n");
 		free(input);
 	}
 }

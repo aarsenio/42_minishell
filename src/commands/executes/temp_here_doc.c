@@ -1,5 +1,4 @@
-/*
-#include <minishell.h>
+/*#include <minishell.h>
 
 static void	child_here_doc(int *pipe_fd, char *limiter)
 {
@@ -12,7 +11,7 @@ static void	child_here_doc(int *pipe_fd, char *limiter)
 		if (line)
 			free(line);
 		write(1, "> ", 2);
-		line = get_next_line(STDIN_FILENO);				//verificar como fazer
+		line = get_next_line(STDIN_FILENO);		//verificar como fazer
 		write(pipe_fd[1], line, ft_strlen(line));
 	}
 	free(line);

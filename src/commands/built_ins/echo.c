@@ -1,20 +1,20 @@
 #include <minishell.h>
 
-void	cmd_echo(t_arglist	*arg)
+void	cmd_echo(void)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	if (arg->ac >= 2 && ft_strcmp(arg->av[1], "-n"))
+	if (arglist()->ac > 2 && ft_strcmp(arglist()->av[1], "-n"))
 		i++;
-	while (arg->av[i])
+	while (arglist()->av[i])
 	{
-		printf("%s", arg->av[i]);
-			if (arg->av[i + 1])
-				printf(" ");
+		printf("%s", arglist()->av[i]);
+		if (arglist()->av[i + 1])
+			printf(" ");
 		i++;
 	}
-	if (arg->ac >= 2 && !ft_strcmp(arg->av[1], "-n"))
+	if (arglist()->ac > 2 && !ft_strcmp(arglist()->av[1], "-n"))
 		printf("\n");
 	return ;
 }

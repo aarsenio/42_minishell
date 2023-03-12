@@ -1,20 +1,36 @@
 #include <minishell.h>
 
+static int		is_n_flag(char *str)
+{
+	if (*str == '-')
+		str++;
+	else
+		return (0);
+	while (*str == 'n')
+		str++;
+	if (!*str)
+		return (1);
+	else
+		return (0);
+}
+
 void	cmd_echo(void)
 {
-	int	i;
+	int			i;
+	t_arglist	*x;
 
 	i = 1;
-	if (arglist()->ac > 2 && ft_strcmp(arglist()->av[1], "-n"))
+	x = arglist()->next;
+	if (x->ac > 2 && is_n_flag(x->av[1]))
 		i++;
-	while (arglist()->av[i])
+	while (x->av[i])
 	{
-		printf("%s", arglist()->av[i]);
-		if (arglist()->av[i + 1])
+		printf("%s", x->av[i]);
+		if (x->av[i + 1])
 			printf(" ");
 		i++;
 	}
-	if (arglist()->ac > 2 && !ft_strcmp(arglist()->av[1], "-n"))
+	if (x->ac >= 2 && !is_n_flag(x->av[1]))
 		printf("\n");
 	return ;
 }

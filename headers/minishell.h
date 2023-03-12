@@ -49,7 +49,7 @@ void		add_toknode(t_toklist *new, t_toklist *x);
 void		destroy_toklist(void);
 void		tokenizer(char *input);
 void		print_toklist(void);
-t_arglist 	*arglist(void);
+t_arglist	*arglist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
 t_arglist	*new_argnode(int ac, char **av, t_operator	operator);
 void		token_handler(void);

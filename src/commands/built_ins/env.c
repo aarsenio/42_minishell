@@ -2,13 +2,13 @@
 
 void	cmd_env(void)
 {
-	t_envplist	*temp;
+	t_envplist	*x;
 
-	temp = envplist();
-	while (temp != NULL)
+	x = envplist()->next;
+	while (x != NULL)
 	{
-		printf("%s=%s\n", temp->var_name, temp->var_value);
-		temp = temp->next;
+		printf("%s=%s\n", x->var_name, x->var_value);
+		x = x->next;
 	}
 	return ;
 }

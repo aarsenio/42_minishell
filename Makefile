@@ -1,5 +1,5 @@
 CC			= 	cc
-CFLAGS		= 	-Wall -Wextra -Werror -g# -fsanitize=thread -fsanitize=address
+CFLAGS		= 	-Wall -Wextra -Werror -g -fsanitize=thread #-fsanitize=address
 RM			= 	/bin/rm -f
 NAME		= 	minishell
 INCLUDES	= 	./headers

@@ -21,16 +21,6 @@ int	is_space(char x)
 	return (0);
 }
 
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
 char	*parse_strjoin(char const *s1, char const *s2)
 {
 	char		*newstr;
@@ -54,5 +44,6 @@ char	*parse_strjoin(char const *s1, char const *s2)
 	while (x->next)
 		x = x->next;
 	free(x->token);
+	x->token = NULL;
 	return (newstr);
 }

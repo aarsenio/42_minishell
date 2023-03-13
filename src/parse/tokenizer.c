@@ -59,7 +59,7 @@ int	alphanumeric(char *input, int i)
 	!is_quote(input[i]))
 		token[j++] = input[i++];
 	token[j] = '\0';
-	if (is_quote(input[tmp -1]))
+	if (tmp != 0 && is_quote(input[tmp - 1]))
 	{
 		x = toklist()->next;
 		while (x->next)

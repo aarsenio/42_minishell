@@ -42,6 +42,12 @@ typedef struct s_arglist
 	struct s_arglist	*next;
 }t_arglist;
 
+typedef struct s_data
+{
+	char				**argv;
+	int					n_pipes;
+}t_data;
+
 // parse
 t_toklist	*toklist(void);
 t_toklist	*new_toknode(char *token, t_operator operator);
@@ -77,6 +83,12 @@ void		cmd_pwd(void);
 void		cmd_unset(void);
 	//executes
 void		execute(void);
+void		exec_executables(void);
+void		exec_redirects(void);
+void		exec_pipe(void);
+
+//libft
+size_t	ft_lstsize(t_arglist *lst);
 
 //utils
 t_envplist	*envplist(void);

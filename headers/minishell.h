@@ -49,27 +49,28 @@ typedef struct s_data
 }t_data;
 
 // parse
-t_toklist	*toklist(void);
 t_toklist	*new_toknode(char *token, t_operator operator);
 void		add_toknode(t_toklist *new, t_toklist *x);
 void		destroy_toklist(void);
 void		tokenizer(char *input);
 void		print_toklist(void);
-t_arglist	*arglist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
 t_arglist	*new_argnode(int ac, char **av, t_operator	operator);
 void		token_handler(void);
 void		destroy_arglist(void);
 void		print_arglist(void);
+void		add_envpnode(t_envplist *new, t_envplist *x);
+t_envplist	*new_envpnode(char *name, char *value);
+void		destroy_envplist(void);
+void		init_envplist(char **envp);
+void		print_envplist(void);
 
-//lib
-int			ft_strlen(const char *s);
+// parse lib
 char		*parse_strjoin(char const *s1, char const *s2);
 int			is_space(char x);
 int			is_pipe_rdr(char x);
 int			is_quote(char x);
 t_operator	get_operator(char *op);
-int			ft_strcmp(char *s1, char *s2);
 
 //commands
 	//built_ins
@@ -88,9 +89,14 @@ void		exec_redirects(void);
 void		exec_pipe(void);
 
 //libft
-size_t	ft_lstsize(t_arglist *lst);
+size_t		ft_lstsize(t_arglist *lst);
+int			ft_strlen(const char *s);
+int			ft_strcmp(char *s1, char *s2);
 
 //utils
 t_envplist	*envplist(void);
+t_toklist	*toklist(void);
+t_arglist	*arglist(void);
+t_data		*data(void);
 
 #endif

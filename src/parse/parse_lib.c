@@ -47,3 +47,18 @@ char	*parse_strjoin(char const *s1, char const *s2)
 	x->token = NULL;
 	return (newstr);
 }
+
+t_operator	get_operator(char *op)
+{
+	if (ft_strcmp(op, "|") == 0)
+		return (PIPE);
+	else if (ft_strcmp(op, "<") == 0)
+		return (RDR_INPUT);
+	else if (ft_strcmp(op, "<<") == 0)
+		return (RDR_INPUT_UNTIL);
+	else if (ft_strcmp(op, ">") == 0)
+		return (RDR_OUT_REPLACE);
+	else if (ft_strcmp(op, ">>") == 0)
+		return (RDR_OUT_APPEND);
+	return (NONE);
+}

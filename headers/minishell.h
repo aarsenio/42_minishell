@@ -45,7 +45,6 @@ typedef struct s_arglist
 typedef struct s_data
 {
 	char				**argv;
-	int					n_pipes;
 }t_data;
 
 // parse

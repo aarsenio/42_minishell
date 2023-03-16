@@ -3,6 +3,7 @@
 
 # include <unistd.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -73,7 +74,7 @@ t_operator	get_operator(char *op);
 
 //commands
 	//built_ins
-int			builtins(void);
+int			builtins(char **av);
 void		cmd_cd(void);
 void		cmd_echo(void);
 void		cmd_env(void);
@@ -83,9 +84,9 @@ void		cmd_pwd(void);
 void		cmd_unset(void);
 	//executes
 void		execute(void);
-void		exec_executables(void);
-void		exec_redirects(void);
-void		exec_pipe(void);
+void		exec_executables(t_arglist *node);
+void		exec_redirects(t_arglist *node);
+void		exec_pipe(t_arglist *node);
 
 //libft
 size_t		ft_lstsize(t_arglist *lst);

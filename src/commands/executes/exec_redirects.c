@@ -1,6 +1,8 @@
 #include <minishell.h>
 
-void	exec_redirects(void)
+void	exec_redirects(t_arglist *node)
 {
-	return ;
+	(void)node;
+	
+	exit(0);
 }

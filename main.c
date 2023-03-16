@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	data()->argv = envp;
 	init_envplist(envp);
-	print_envplist();
+	//print_envplist();
 	while (1)
 	{
 		input = readline("minishell$ ");

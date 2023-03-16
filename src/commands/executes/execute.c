@@ -1,31 +1,34 @@
 #include <minishell.h>
-
 /*
 static void	search_path_and_execute()
 {
 	return ;
 }
-
-static void	exe_cmds_rdir(void)
-{
-	if (arglist()->operator == PIPE)
-		exec_pipe();
-	else if (arglist()->operator == NONE)
-		exec_executables();
-	else
-		exec_redirects();
-}
 */
+void	exec_executables(t_arglist *node)
+{
+	if(builtins(node->av))
+		return ;
+
+}
 
 void	execute(void)
 {
-	if (builtins())
-		return ;
-	/*else if (ft_lstsize(arglist()->next) == 1)
+	t_arglist	*temp;
+
+	temp = arglist()->next;
+	while (temp)
 	{
-		if (fork() == 0)
-			search_path_and_execute();
+		if (temp->operator == PIPE)
+			exec_pipe(temp);
+		else if (temp->operator > 0 && temp->operator < 5)
+			exec_redirects(temp);
+		else if (temp->operator == NONE && fork() == 0)
+		{
+			if (!builtins(temp->av))
+				exec_executables(temp);
+		}
+		waitpid(-1, 0, 0);
+		temp = temp->next;
 	}
-	else if (fork() == 0)
-		exe_cmds_rdir();*/
 }

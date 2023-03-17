@@ -25,24 +25,21 @@ int	check_input(char *input)
 
 int	main(int ac, char **av, char **envp)
 {
-	char	*input;
-
 	(void)ac;
 	(void)av;
 	data()->argv = envp;
 	init_envplist(envp);
-	print_envplist();
 	while (1)
 	{
-		input = readline("minishell$ ");
-		if (check_input(input) && input[0] != '\0')
+		data()->input = readline("minishell$ ");
+		if (check_input(data()->input) && data()->input[0] != '\0')
 		{
-			tokenizer(input);
+			tokenizer(data()->input);
 			token_handler();
-			print_arglist();
+			//print_arglist();
 			execute();
 			destroy_arglist();
 		}
-		free(input);
+		free(data()->input);
 	}
 }

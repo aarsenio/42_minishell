@@ -46,6 +46,7 @@ typedef struct s_arglist
 typedef struct s_data
 {
 	char				**argv;
+	char				*input;
 }t_data;
 
 // parse

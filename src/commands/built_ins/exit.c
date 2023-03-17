@@ -2,5 +2,9 @@
 
 void	cmd_exit(void)
 {
-	exit(0) ;
+	destroy_arglist();
+	destroy_envplist();
+	if (data()->input)
+		free(data()->input);
+	exit(0);
 }

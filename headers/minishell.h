@@ -69,7 +69,7 @@ void		print_envplist(void);
 // parse lib
 char		*parse_strjoin(char const *s1, char const *s2);
 int			is_space(char x);
-int			is_pipe_rdr(char x);
+int			is_operator(char x);
 int			is_quote(char x);
 t_operator	get_operator(char *op);
 

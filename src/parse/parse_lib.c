@@ -7,7 +7,7 @@ int	is_quote(char x)
 	return (0);
 }
 
-int	is_pipe_rdr(char x)
+int	is_operator(char x)
 {
 	if (x == '|' || x == '>' || x == '<')
 		return (1);

@@ -85,7 +85,6 @@ void		cmd_pwd(void);
 void		cmd_unset(void);
 	//executes
 void		execute(void);
-void		exec_executables(t_arglist *node);
 void		exec_redirects(t_arglist *node);
 void		exec_pipe(t_arglist *node);
 
@@ -99,5 +98,6 @@ t_envplist	*envplist(void);
 t_toklist	*toklist(void);
 t_arglist	*arglist(void);
 t_data		*data(void);
+void		init_shell(char **envp);
 
 #endif

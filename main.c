@@ -27,8 +27,7 @@ int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	(void)av;
-	data()->argv = envp;
-	init_envplist(envp);
+	init_shell(envp);
 	while (1)
 	{
 		data()->input = readline("minishell$ ");

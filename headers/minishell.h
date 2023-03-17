@@ -73,6 +73,9 @@ int			is_operator(char x);
 int			is_quote(char x);
 t_operator	get_operator(char *op);
 
+// expander
+void		token_expander(void);
+
 //commands
 	//built_ins
 int			builtins(char **av);
@@ -92,6 +95,7 @@ void		exec_pipe(t_arglist *node);
 size_t		ft_lstsize(t_arglist *lst);
 int			ft_strlen(const char *s);
 int			ft_strcmp(char *s1, char *s2);
+char		*ft_strcpy(char *str);
 
 //utils
 t_envplist	*envplist(void);

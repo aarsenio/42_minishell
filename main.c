@@ -34,6 +34,7 @@ int	main(int ac, char **av, char **envp)
 		if (check_input(data()->input) && data()->input[0] != '\0')
 		{
 			tokenizer(data()->input);
+			token_expander();
 			token_handler();
 			//print_arglist();
 			execute();

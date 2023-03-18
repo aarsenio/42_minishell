@@ -112,4 +112,5 @@ void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);
 void		exit_free_matrix(char **matrix,char *str);
 void		free_matrix(char **matrix);
+void		perror_exit(char *msg);
 #endif

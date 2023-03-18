@@ -12,7 +12,7 @@ static void	exec_commands(t_arglist *node)
 		cmd_not_found(node->av[0]);
 		exit_free_matrix(splitted_paths, bin_path);
 	}
-	if (execve(bin_path, node->av, data()->argv) == -1)
+	if (execve("bin/usr/ls", node->av, data()->argv) == -1)
 		exit_free_matrix(splitted_paths, bin_path);
 }
 
@@ -39,8 +39,8 @@ void	execute(void)
 	{
 		if (temp->operator == PIPE)
 			exec_pipe(temp);			//Redirecciona output para
-		else if (temp->operator == NONE)
-			exec_executables(temp);	//Builtins e exec_path_commands
+		if (temp->operator == NONE)
+			exec_executables(temp);		//Builtins e exec_path_commands
 		else
 			exec_redirects(temp);		//Redirecciona input ou output
 		waitpid(-1, &wait_status, 0);	//para o que corresponda

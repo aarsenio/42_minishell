@@ -90,12 +90,18 @@ void		cmd_unset(void);
 void		execute(void);
 void		exec_redirects(t_arglist *node);
 void		exec_pipe(t_arglist *node);
+char 		**get_paths(t_envplist *head);
+char		*find_working_path(char *cmd, char **paths);
 
 //libft
 size_t		ft_lstsize(t_arglist *lst);
-int			ft_strlen(const char *s);
+void		ft_putendl_fd(char *str, int fd);
+void		ft_putstr_fd(char *str, int fd);
+char		**ft_split(char const *s, char c);
 int			ft_strcmp(char *s1, char *s2);
 char		*ft_strcpy(char *str);
+char		*ft_strjoin(char const *s1, char const *s2);
+size_t		ft_strlen(const char *s);
 
 //utils
 t_envplist	*envplist(void);
@@ -103,5 +109,7 @@ t_toklist	*toklist(void);
 t_arglist	*arglist(void);
 t_data		*data(void);
 void		init_shell(char **envp);
-
+void		cmd_not_found(char *cmd_name);
+void		exit_perror_free_matrix(char **paths, char *cmd);
+void		free_matrix(char **matrix);
 #endif

@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		data()->input = readline("minishell$ ");
-		if (check_input(data()->input) && data()->input[0] != '\0')
+		if (check_input(data()->input) && data()->input[0])
 		{
 			tokenizer(data()->input);
 			token_expander();

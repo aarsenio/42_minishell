@@ -9,7 +9,6 @@ void	token_expander(void)
 	int			j;
 
 	t = toklist()->next;
-	
 	while (t)
 	{
 		i = 0;

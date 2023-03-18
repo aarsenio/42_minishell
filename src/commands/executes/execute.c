@@ -10,17 +10,23 @@ static void	exec_commands(t_arglist *node)
 	if (!bin_path)
 	{
 		cmd_not_found(node->av[0]);
-		exit_perror_free_matrix(splitted_paths, bin_path);
+		exit_free_matrix(splitted_paths, bin_path);
 	}
 	if (execve(bin_path, node->av, data()->argv) == -1)
-		exit_perror_free_matrix(splitted_paths, bin_path);
+		exit_free_matrix(splitted_paths, bin_path);
 }
 
 static void	exec_executables(t_arglist *node)
 {
+	pid_t	pid;
+
 	if (builtins(node->av))
 		return ;
-	exec_commands(node);
+	pid = fork();
+	if (pid == -1)
+		perror("Error forking");
+	if (pid == 0)
+		exec_commands(node);
 }
 
 void	execute(void)

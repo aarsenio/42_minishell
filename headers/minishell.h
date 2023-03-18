@@ -110,6 +110,6 @@ t_arglist	*arglist(void);
 t_data		*data(void);
 void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);
-void		exit_perror_free_matrix(char **paths, char *cmd);
+void		exit_free_matrix(char **matrix,char *str);
 void		free_matrix(char **matrix);
 #endif

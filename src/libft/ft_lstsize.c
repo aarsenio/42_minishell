@@ -3,7 +3,7 @@
 size_t	ft_lstsize(t_arglist *lst)
 {
 	t_arglist	*temp;
-	size_t	size;
+	size_t		size;
 
 	temp = lst;
 	size = 0;

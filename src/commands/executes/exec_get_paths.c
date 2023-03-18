@@ -8,10 +8,10 @@ char	**get_paths(t_envplist *head)
 	while (temp)
 	{
 		if (!ft_strcmp("PATH", temp->var_name))
-			return(ft_split(temp->var_value, ':'));
+			return (ft_split(temp->var_value, ':'));
 		temp = temp->next;
 	}
-	return(NULL);
+	return (NULL);
 }
 
 char	*find_working_path(char *cmd, char **paths)
@@ -30,6 +30,8 @@ char	*find_working_path(char *cmd, char **paths)
 		free(temp);
 		if (access(bin_path, F_OK) == 0)
 			return (bin_path);
+		free(bin_path);
+		bin_path = NULL;
 		i++;
 	}
 	return (NULL);

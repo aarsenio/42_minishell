@@ -6,12 +6,13 @@ void	cmd_not_found(char *cmd_name)
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 }
 
-void	exit_perror_free_matrix(char **paths, char *cmd)
+void	exit_free_matrix(char **matrix, char *str)
 {
-	if (cmd)
-		perror(cmd);
-	if (paths)
-		free_matrix(paths);
+	if (str)
+		free(str);
+	str = NULL;
+	if (matrix)
+		free_matrix(matrix);
 	exit(0);
 }
 

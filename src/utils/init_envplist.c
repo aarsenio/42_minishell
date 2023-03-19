@@ -12,8 +12,8 @@ int	varname_length(char *str)
 
 int	varvalue_length(char *str)
 {
-	int i;
-	int result;
+	int	i;
+	int	result;
 
 	i = varname_length(str);
 	result = 0;
@@ -22,11 +22,11 @@ int	varvalue_length(char *str)
 	return (result + 1);
 }
 
-char *copy_name(char *str)
+char	*copy_name(char *str)
 {
 	char	*name;
 	int		i;
-	
+
 	name = malloc(sizeof(char) * varname_length(str));
 	if (!name)
 		return (NULL);
@@ -37,7 +37,7 @@ char *copy_name(char *str)
 	return (name);
 }
 
-char *copy_value(char *str)
+char	*copy_value(char *str)
 {
 	char	*value;
 	int		i;
@@ -60,5 +60,6 @@ void	init_envplist(char **envp)
 
 	i = -1;
 	while (envp[++i])
-		add_envpnode(new_envpnode(copy_name(envp[i]), copy_value(envp[i])), envplist());
+		add_envpnode(new_envpnode(copy_name \
+		(envp[i]), copy_value(envp[i])), envplist());
 }

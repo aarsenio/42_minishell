@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **envp)
 			tokenizer(data()->input);
 			token_expander();
 			token_handler();
-			print_arglist();
+			//print_arglist();
 			execute();
 			destroy_arglist();
 		}

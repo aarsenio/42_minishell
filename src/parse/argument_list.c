@@ -13,7 +13,7 @@ void	add_argnode(t_arglist *new, t_arglist *x)
 	}
 }
 
-t_arglist	*new_argnode(int ac, char **av, t_operator	operator)
+t_arglist	*new_argnode(int ac, char **av, t_operator	prev_op, t_operator	next_op)
 {
 	t_arglist	*new;
 
@@ -23,7 +23,8 @@ t_arglist	*new_argnode(int ac, char **av, t_operator	operator)
 	new->next = NULL;
 	new->ac = ac;
 	new->av = av;
-	new->operator = operator;
+	new->prev_op = prev_op;
+	new->next_op = next_op;
 	return (new);
 }
 
@@ -57,7 +58,8 @@ void	print_arglist(void)
 	{
 		i = 0;
 		printf("argc: %i\n", x->ac);
-		printf("operator: %i\n", x->operator);
+		printf("previous operator: %i\n", x->prev_op);
+		printf("next operator: %i\n", x->next_op);
 		printf("frase: ");
 		while (x->av[i])
 			printf("%s ", x->av[i++]);

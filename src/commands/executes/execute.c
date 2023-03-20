@@ -37,9 +37,9 @@ void	execute(void)
 	temp = arglist()->next;
 	while (temp)
 	{
-		if (temp->operator == PIPE)
+		if (temp->prev_op == PIPE)
 			exec_pipe(temp);			//Redirecciona output para
-		if (temp->operator == NONE)
+		if (temp->prev_op == NONE)
 			exec_executables(temp);		//Builtins e exec_path_commands
 		else
 			exec_redirects(temp);		//Redirecciona input ou output

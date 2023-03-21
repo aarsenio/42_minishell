@@ -34,6 +34,8 @@ void	token_handler(void)
 			x = x->next;
 		}
 		av = malloc(sizeof(char*) * arg_counter(x));
+		if (!av)
+			return ;
 		i = 0;
 		ac = 0;
 		while (x && x->operator == NONE)

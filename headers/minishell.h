@@ -75,7 +75,8 @@ int			is_quote(char x);
 t_operator	get_operator(char *op);
 
 // expander
-void		token_expander(void);
+char		*expander(char *str);
+int			expander_checker(char *str);
 
 //commands
 	//built_ins

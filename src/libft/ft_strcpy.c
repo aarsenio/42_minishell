@@ -7,6 +7,8 @@ char	*ft_strcpy(char *str)
 
 	i = -1;
 	s = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!s)
+		return (NULL);
 	while (str[++i])
 		s[i] = str[i];
 	s[i] = '\0';

@@ -59,6 +59,8 @@ int	alphanumeric(char *input, int i)
 	!is_quote(input[i]))
 		token[j++] = input[i++];
 	token[j] = '\0';
+	if (expander_checker(token))
+		token = expander(token);
 	if (tmp != 0 && is_quote(input[tmp - 1]))
 	{
 		x = toklist()->next;
@@ -100,6 +102,8 @@ int	quotes(char *input, int i)
 	while (input[++i] != quote)
 		token[j++] = input[i];
 	token[j] = '\0';
+	if (quote == '"' && expander_checker(token))
+		token = expander(token);
 	if (t != 0 && !is_space(input[t - 1]) && !is_operator(input[t - 1]))
 	{
 		x = toklist()->next;

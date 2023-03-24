@@ -40,12 +40,15 @@ void	token_handler(void)
 		ac = 0;
 		while (x && x->operator == NONE)
 		{
-			av[i] = malloc(sizeof(char) * (ft_strlen(x->token) + 1));
-			j = -1;
-			while (x->token[++j])
-				av[i][j] = x->token[j];
-			av[i++][j] = '\0';
-			ac++;
+			if (x->token)
+			{
+				av[i] = malloc(sizeof(char) * (ft_strlen(x->token) + 1));
+				j = -1;
+				while (x->token[++j])
+					av[i][j] = x->token[j];
+				av[i++][j] = '\0';
+				ac++;
+			}
 			x = x->next;
 		}
 		av[i] = NULL;

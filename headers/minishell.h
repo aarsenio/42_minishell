@@ -77,6 +77,7 @@ t_operator	get_operator(char *op);
 // expander
 char		*expander(char *str);
 int			expander_checker(char *str);
+int			expendable_len(char *token, int i);
 
 //commands
 	//built_ins

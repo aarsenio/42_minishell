@@ -16,13 +16,11 @@ void	exec_pipe(t_arglist *node)
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
 		if (builtins(node->av))
-			return ;
+			exit(0);
 		exec_commands(node);
 	}
 	else
 	{
-		data()->stin_fd = dup(STDIN_FILENO);
-		//printf("STDNIN: %d\n",data()->stin_fd);
 		dup2(pipe_fd[0], STDIN_FILENO);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);

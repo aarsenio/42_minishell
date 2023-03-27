@@ -6,7 +6,7 @@ int	check_input(char *input)
 	char	symbol;
 
 	i = -1;
-	while (input[++i])
+	while (input && input[++i])
 	{
 		if (input[i] == '"' || input[i] == '\'')
 		{
@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **envp)
 			add_history(data()->input);
 			tokenizer(data()->input);
 			token_handler();
-			execute();
+			//execute();
 			destroy_arglist();
 		}
 		free(data()->input);

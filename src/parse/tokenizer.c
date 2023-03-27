@@ -67,6 +67,7 @@ int	alphanumeric(char *input, int i)
 		while (x->next)
 			x = x->next;
 		x->token = parse_strjoin(x->token, token);
+		free(token);
 	}
 	else
 		add_toknode(new_toknode(token, NONE), toklist());
@@ -110,6 +111,7 @@ int	quotes(char *input, int i)
 		while (x->next)
 			x = x->next;
 		x->token = parse_strjoin(x->token, token);
+		free(token);
 	}
 	else
 		add_toknode(new_toknode(token, NONE), toklist());

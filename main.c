@@ -33,11 +33,13 @@ int	main(int ac, char **av, char **envp)
 		data()->input = readline("minishell$ ");
 		if (check_input(data()->input) && data()->input[0])
 		{
+			add_history(data()->input);
 			tokenizer(data()->input);
 			token_handler();
 			execute();
 			destroy_arglist();
 		}
 		free(data()->input);
+		data()->input = NULL;
 	}
 }

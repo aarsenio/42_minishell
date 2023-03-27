@@ -4,7 +4,7 @@ void	cmd_exit(void)
 {
 	destroy_arglist();
 	destroy_envplist();
-	if (data()->input)
-		free(data()->input);
+	free(data()->input);
+	data()->input = NULL;
 	exit(0);
 }

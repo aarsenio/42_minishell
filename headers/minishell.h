@@ -19,8 +19,6 @@ typedef enum e_operator
 	PIPE,
 }t_operator;
 
-/*var_name - nome das variaveis envirnonment;
-	var_value - valor das variaveis envirnonment*/
 typedef struct s_envplist
 {
 	char				*var_name;
@@ -48,6 +46,7 @@ typedef struct s_data
 {
 	char				**argv;
 	char				*input;
+	int					stin_fd;
 }t_data;
 
 // parse
@@ -57,7 +56,8 @@ void		destroy_toklist(void);
 void		tokenizer(char *input);
 void		print_toklist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
-t_arglist	*new_argnode(int ac, char **av, t_operator	prev_op, t_operator	next_op);
+t_arglist	*new_argnode(int ac, char **av, \
+			t_operator	prev_op, t_operator	next_op);
 void		token_handler(void);
 void		destroy_arglist(void);
 void		print_arglist(void);
@@ -91,6 +91,9 @@ void		cmd_pwd(void);
 void		cmd_unset(void);
 	//executes
 void		execute(void);
+void		exec_commands(t_arglist *node);
+void		exec_executables(t_arglist *node);
+void		exec_redirects(t_arglist *node);
 void		exec_redirects(t_arglist *node);
 void		exec_pipe(t_arglist *node);
 char 		**get_paths(t_envplist *head);
@@ -115,5 +118,5 @@ void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);
 void		exit_free_matrix(char **matrix,char *str);
 void		free_matrix(char **matrix);
-void		perror_exit(char *msg);
+void		free_perror_exit(char *msg);
 #endif

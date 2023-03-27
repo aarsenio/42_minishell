@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-static void	exec_commands(t_arglist *node)
+void	exec_commands(t_arglist *node)
 {
 	char	*bin_path;
 	char	**splitted_paths;
@@ -12,11 +12,11 @@ static void	exec_commands(t_arglist *node)
 		cmd_not_found(node->av[0]);
 		exit_free_matrix(splitted_paths, bin_path);
 	}
-	if (execve("bin/usr/ls", node->av, data()->argv) == -1)
+	if (execve(bin_path, node->av, data()->argv) == -1)
 		exit_free_matrix(splitted_paths, bin_path);
 }
 
-static void	exec_executables(t_arglist *node)
+void	exec_executables(t_arglist *node)
 {
 	pid_t	pid;
 
@@ -24,9 +24,14 @@ static void	exec_executables(t_arglist *node)
 		return ;
 	pid = fork();
 	if (pid == -1)
-		perror("Error forking");
+		free_perror_exit("Error forking in exe_executables");
 	if (pid == 0)
 		exec_commands(node);
+	else
+	{
+		dup2(data()->stin_fd, STDIN_FILENO);
+		close(data()->stin_fd);
+	}
 }
 
 void	execute(void)
@@ -37,15 +42,14 @@ void	execute(void)
 	temp = arglist()->next;
 	while (temp)
 	{
-		if (temp->prev_op == PIPE)
-			exec_pipe(temp);			//Redirecciona output para
-		if (temp->prev_op == NONE)
-			exec_executables(temp);		//Builtins e exec_path_commands
+		if (temp->next_op == PIPE)
+			exec_pipe(temp);
+		else if (temp->next_op == NONE)
+			exec_executables(temp);
 		else
-			exec_redirects(temp);		//Redirecciona input ou output
-		waitpid(-1, &wait_status, 0);	//para o que corresponda
-		if (!WIFEXITED(wait_status))
-			cmd_exit();
+			exec_redirects(temp);
+		waitpid(-1, &wait_status, 0);
 		temp = temp->next;
 	}
+	return ;
 }

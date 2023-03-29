@@ -21,14 +21,12 @@ void	exec_executables(t_arglist *node)
 	pid_t	pid;
 
 	if (builtins(node->av))
-		exit(0);
+		return ;
 	pid = fork();
 	if (pid == -1)
 		free_perror_exit("Error forking in exe_executables");
 	if (pid == 0)
 		exec_commands(node);
-	else
-		wait(NULL);
 }
 
 void	execute(void)
@@ -36,16 +34,14 @@ void	execute(void)
 	int			wait_status;
 	t_arglist	*temp;
 	pid_t		pid;
-	int	i = 0;
 
-	temp = arglist()->next;
-	while (i++ < 3 && temp)
+	pid = fork();
+	if (pid == -1)
+		free_perror_exit("Error creating pipe");
+	if (pid == 0)
 	{
-		printf("%s\n", temp->av[0]);
-		pid = fork();
-		if (pid == -1)
-			free_perror_exit("Error creating pipe");
-		if (pid == 0)
+		temp = arglist()->next;
+		while (temp)
 		{
 			if (temp->next_op == PIPE)
 				exec_pipe(temp);
@@ -53,12 +49,13 @@ void	execute(void)
 				exec_executables(temp);
 			else
 				exec_redirects(temp);
-		}
-		else
-		{
-			waitpid(-1, &wait_status, 0);
 			temp = temp->next;
 		}
+	}
+	else
+	{
+		waitpid(-1, &wait_status, 0);
+		// fazer algo com wait_status
 	}
 	return ;
 }

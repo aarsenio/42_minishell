@@ -30,13 +30,14 @@ int	main(int ac, char **av, char **envp)
 	init_shell(envp);
 	while (1)
 	{
+
 		data()->input = readline("minishell$ ");
 		if (check_input(data()->input) && data()->input[0])
 		{
 			add_history(data()->input);
 			tokenizer(data()->input);
 			token_handler();
-			//execute();
+			execute();
 			destroy_arglist();
 		}
 		free(data()->input);

@@ -2,6 +2,7 @@
 
 void	exec_pipe(t_arglist *node)
 {
+	int		wait_status;
 	int		pipe_fd[2];
 	pid_t	pid;
 
@@ -16,7 +17,7 @@ void	exec_pipe(t_arglist *node)
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
 		if (builtins(node->av))
-			exit(0);
+			exit(0) ;
 		exec_commands(node);
 	}
 	else
@@ -24,5 +25,6 @@ void	exec_pipe(t_arglist *node)
 		dup2(pipe_fd[0], STDIN_FILENO);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
+		waitpid(0, &wait_status, 0);
 	}
 }

@@ -136,7 +136,7 @@ int	check_token(void)
 	return (1);
 }
 
-void	tokenizer(char *input)
+int	tokenizer(char *input)
 {
 	int		i;
 
@@ -156,5 +156,8 @@ void	tokenizer(char *input)
 	{
 		printf("Syntax error\n");
 		destroy_toklist();
+		return (0);
 	}
+	token_handler();
+	return (1);
 }

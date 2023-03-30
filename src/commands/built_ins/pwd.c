@@ -2,5 +2,14 @@
 
 void	cmd_pwd(void)
 {
-	return ;
+	char *pwd;
+	
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+	{
+		perror("pwd");
+		return ;
+	}
+	printf("%s\n", pwd);
+	free(pwd);
 }

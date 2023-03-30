@@ -32,5 +32,4 @@ void	cmd_echo(void)
 	}
 	if (x->ac >= 2 && !is_n_flag(x->av[1]))
 		printf("\n");
-	return ;
 }

@@ -16,9 +16,7 @@ void	exec_pipe(t_arglist *node)
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
-		if (builtins(node->av))
-			exit(0) ;
-		exec_commands(node);
+		exec_executables(node);
 	}
 	else
 	{

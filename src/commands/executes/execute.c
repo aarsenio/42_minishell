@@ -18,15 +18,9 @@ void	exec_commands(t_arglist *node)
 
 void	exec_executables(t_arglist *node)
 {
-	pid_t	pid;
-
 	if (builtins(node->av))
-		return ;
-	pid = fork();
-	if (pid == -1)
-		free_perror_exit("Error forking in exe_executables");
-	if (pid == 0)
-		exec_commands(node);
+		exit(0);
+	exec_commands(node);
 }
 
 void	execute(void)

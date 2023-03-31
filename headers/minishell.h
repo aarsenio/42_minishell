@@ -81,9 +81,9 @@ int			expendable_len(char *token, int i);
 
 //commands
 	//built_ins
-int			builtins(char **av);
+int			builtins(t_arglist *node);
 void		cmd_cd(void);
-void		cmd_echo(void);
+void		cmd_echo(t_arglist *node);
 void		cmd_env(void);
 void		cmd_exit(void);
 void		cmd_export(void);

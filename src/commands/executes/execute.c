@@ -18,7 +18,7 @@ void	exec_commands(t_arglist *node)
 
 void	exec_executables(t_arglist *node)
 {
-	if (builtins(node->av))
+	if (builtins(node))
 		exit(0);
 	exec_commands(node);
 }

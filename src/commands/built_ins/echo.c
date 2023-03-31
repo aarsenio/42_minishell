@@ -14,22 +14,20 @@ static int		is_n_flag(char *str)
 		return (0);
 }
 
-void	cmd_echo(void)
+void	cmd_echo(t_arglist *node)
 {
 	int			i;
-	t_arglist	*x;
 
 	i = 1;
-	x = arglist()->next;
-	if (x->ac > 2 && is_n_flag(x->av[1]))
+	if (node->ac > 2 && is_n_flag(node->av[1]))
 		i++;
-	while (x->av[i])
+	while (node->av[i])
 	{
-		printf("%s", x->av[i]);
-		if (x->av[i + 1])
+		printf("%s", node->av[i]);
+		if (node->av[i + 1])
 			printf(" ");
 		i++;
 	}
-	if (x->ac >= 2 && !is_n_flag(x->av[1]))
+	if (node->ac >= 2 && !is_n_flag(node->av[1]))
 		printf("\n");
 }

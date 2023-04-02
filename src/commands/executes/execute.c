@@ -1,10 +1,17 @@
 #include <minishell.h>
 
+long long	exit_status;
+
 void	exec_commands(t_arglist *node)
 {
 	char	*bin_path;
 	char	**splitted_paths;
 
+	if (strchr(node->av[0], '/'))
+	{
+		if (execve(node->av[0], node->av, data()->argv) == -1)
+		exit(0);
+	}
 	splitted_paths = get_paths(envplist()->next);
 	bin_path = find_working_path(node->av[0], splitted_paths);
 	if (!bin_path)
@@ -49,7 +56,7 @@ void	execute(void)
 	else
 	{
 		waitpid(-1, &wait_status, 0);
-		// fazer algo com wait_status
+		exit_status = wait_status;
 	}
 	return ;
 }

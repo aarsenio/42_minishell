@@ -14,11 +14,9 @@ void	free_perror_exit(char *msg)
 
 void	exit_free_matrix(char **matrix, char *str)
 {
-	if (str)
-		free(str);
+	free(str);
 	str = NULL;
-	if (matrix)
-		free_matrix(matrix);
+	free_matrix(matrix);
 	cmd_exit();
 }
 

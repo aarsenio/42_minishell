@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	cmd_export(void)
+int	cmd_export(void)
 {
-	return ;
+	return(0);
 }

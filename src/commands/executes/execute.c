@@ -1,7 +1,5 @@
 #include <minishell.h>
 
-long long	exit_status;
-
 void	exec_commands(t_arglist *node)
 {
 	char	*bin_path;
@@ -16,6 +14,8 @@ void	exec_commands(t_arglist *node)
 	bin_path = find_working_path(node->av[0], splitted_paths);
 	if (!bin_path)
 	{
+		exit_status = 127;
+		printf("exit_status: %d\n", exit_status);
 		cmd_not_found(node->av[0]);
 		exit_free_matrix(splitted_paths, bin_path);
 	}
@@ -56,7 +56,8 @@ void	execute(void)
 	else
 	{
 		waitpid(-1, &wait_status, 0);
-		exit_status = wait_status;
+		if (!WTERMSIG(wait_status))
+			exit_status = wait_status;
 	}
 	return ;
 }

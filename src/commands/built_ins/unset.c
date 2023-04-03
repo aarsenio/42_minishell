@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	cmd_unset(void)
+int	cmd_unset(void)
 {
-	return ;
+	return(0);
 }

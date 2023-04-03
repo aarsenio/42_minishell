@@ -34,5 +34,5 @@ char	*find_working_path(char *cmd, char **paths)
 		bin_path = NULL;
 		i++;
 	}
-	return (NULL);
+	return (0);
 }

@@ -9,6 +9,8 @@
 # include <readline/history.h>
 # include <stdlib.h>
 
+extern int	exit_status;
+
 typedef enum e_operator
 {
 	NONE,
@@ -82,13 +84,14 @@ int			expendable_len(char *token, int i);
 //commands
 	//built_ins
 int			builtins(t_arglist *node);
-void		cmd_cd(void);
-void		cmd_echo(t_arglist *node);
-void		cmd_env(void);
-void		cmd_exit(void);
-void		cmd_export(void);
-void		cmd_pwd(void);
-void		cmd_unset(void);
+int			cmd_cd(void);
+int			cmd_echo(t_arglist *node);
+int 		cmd_env(void);
+int			cmd_export(void);
+int			cmd_pwd(void);
+int			cmd_unset(void);
+void 		cmd_exit(void);
+
 	//executes
 void		execute(void);
 void		exec_commands(t_arglist *node);

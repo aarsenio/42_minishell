@@ -46,9 +46,9 @@ void	execute(void)
 		temp = arglist()->next;
 		while (temp)
 		{
-			if (temp->next_op == PIPE)
+			if (temp->pipe == PIPE)
 				exec_pipe(temp);
-			else if (temp->next_op == NONE)
+			else if (temp->pipe == NONE)
 				exec_executables(temp);
 			else
 				exec_redirects(temp);

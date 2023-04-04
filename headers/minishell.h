@@ -40,8 +40,8 @@ typedef struct s_arglist
 {
 	int					ac;
 	char				**av;
-	t_operator			prev_op;
-	t_operator			next_op;
+	t_operator			rdr;
+	t_operator			pipe;
 	struct s_arglist	*next;
 }t_arglist;
 
@@ -60,7 +60,7 @@ int			tokenizer(char *input);
 void		print_toklist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
 t_arglist	*new_argnode(int ac, char **av, \
-			t_operator	prev_op, t_operator	next_op);
+			t_operator	rdr, t_operator	pipe);
 void		token_handler(void);
 void		destroy_arglist(void);
 void		print_arglist(void);

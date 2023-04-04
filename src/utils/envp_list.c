@@ -42,16 +42,3 @@ void	destroy_envplist(void)
 		free (tmp);
 	}
 }
-
-void	print_envplist(void)
-{
-	t_envplist	*tmp;
-
-	tmp = envplist()->next;
-	while (tmp)
-	{
-		printf("name: %s\n", tmp->var_name);
-		printf("value: %s\n\n", tmp->var_value);
-		tmp = tmp->next;
-	}
-}

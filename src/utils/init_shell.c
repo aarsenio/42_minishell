@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	ft_envplstsize(t_envplist *lst)
+static int	ft_envplstsize(t_envplist *lst)
 {
 	t_envplist	*temp;
 	int			size;

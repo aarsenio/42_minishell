@@ -25,15 +25,6 @@ int	check_input(char *input)
 	return (1);
 }
 
-void	print_envp(void)
-{
-	int	i;
-
-	i = -1;
-	while (data()->envp[++i])
-		printf("%s\n", data()->envp[i]);
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	(void)ac;

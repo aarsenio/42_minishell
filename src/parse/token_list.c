@@ -39,15 +39,3 @@ void	destroy_toklist(void)
 		free (tmp);
 	}
 }
-
-void	print_toklist(void)
-{
-	t_toklist	*tmp;
-
-	tmp = toklist()->next;
-	while (tmp)
-	{
-		printf("%s\n", tmp->token);
-		tmp = tmp->next;
-	}
-}

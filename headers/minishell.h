@@ -9,7 +9,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 typedef enum e_operator
 {

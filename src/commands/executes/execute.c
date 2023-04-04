@@ -14,8 +14,8 @@ void	exec_commands(t_arglist *node)
 	bin_path = find_working_path(node->av[0], splitted_paths);
 	if (!bin_path)
 	{
-		exit_status = 127;
-		printf("exit_status: %d\n", exit_status);
+		g_exit_status = 127;
+		printf("g_exit_status: %d\n", g_exit_status);
 		cmd_not_found(node->av[0]);
 		exit_free_matrix(splitted_paths, bin_path);
 	}
@@ -57,7 +57,7 @@ void	execute(void)
 	{
 		waitpid(-1, &wait_status, 0);
 		if (!WTERMSIG(wait_status))
-			exit_status = wait_status;
+			g_exit_status = wait_status;
 	}
 	return ;
 }

@@ -118,24 +118,6 @@ int	quotes(char *input, int i)
 	return (i + 1);
 }
 
-int	check_token(void)
-{
-	t_toklist	*x;
-
-	x = toklist()->next;
-	if (x->operator != RDR_OUT_REPLACE && x->operator != RDR_OUT_APPEND &&  x->operator != NONE)
-		return (0);
-	while (x->next)
-	{
-		if (x->operator && x->next->operator)
-			return (0);
-		x = x->next;
-	}
-	if (x->operator != NONE)
-		return (0);
-	return (1);
-}
-
 int	tokenizer(char *input)
 {
 	int		i;
@@ -151,12 +133,6 @@ int	tokenizer(char *input)
 			i = alphanumeric(input, i);
 		else
 			i++;
-	}
-	if (!check_token())
-	{
-		printf("Syntax error\n");
-		destroy_toklist();
-		return (0);
 	}
 	token_handler();
 	return (1);

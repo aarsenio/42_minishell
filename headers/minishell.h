@@ -23,6 +23,7 @@ typedef enum e_operator
 
 typedef struct s_envplist
 {
+	char				*full;
 	char				*var_name;
 	char				*var_value;
 	struct s_envplist	*next;
@@ -46,7 +47,7 @@ typedef struct s_arglist
 
 typedef struct s_data
 {
-	char				**argv;
+	char				**envp;
 	char				*input;
 	int					stin_fd;
 }t_data;
@@ -64,7 +65,7 @@ void		token_handler(void);
 void		destroy_arglist(void);
 void		print_arglist(void);
 void		add_envpnode(t_envplist *new, t_envplist *x);
-t_envplist	*new_envpnode(char *name, char *value);
+t_envplist	*new_envpnode(char *name, char *value, char *full);
 void		destroy_envplist(void);
 void		init_envplist(char **envp);
 void		print_envplist(void);
@@ -87,7 +88,7 @@ int			builtins(t_arglist *node);
 int			cmd_cd(void);
 int			cmd_echo(t_arglist *node);
 int 		cmd_env(void);
-int			cmd_export(void);
+void		cmd_export(t_arglist *node);
 int			cmd_pwd(void);
 int			cmd_unset(void);
 void 		cmd_exit(void);
@@ -113,10 +114,15 @@ char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlen(const char *s);
 
 //utils
+int			varname_length(char *str);
+int			varvalue_length(char *str);
+char		*copy_value(char *str);
+char		*copy_name(char *str);
 t_envplist	*envplist(void);
 t_toklist	*toklist(void);
 t_arglist	*arglist(void);
 t_data		*data(void);
+void		update_envp(void);
 void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);
 void		exit_free_matrix(char **matrix,char *str);

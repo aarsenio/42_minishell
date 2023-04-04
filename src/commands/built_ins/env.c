@@ -7,7 +7,8 @@ int	cmd_env(void)
 	x = envplist()->next;
 	while (x)
 	{
-		printf("%s=%s\n", x->var_name, x->var_value);
+		if (x->var_value)
+			printf("%s=%s\n", x->var_name, x->var_value);
 		x = x->next;
 	}
 	return(0);

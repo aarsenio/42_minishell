@@ -9,7 +9,7 @@ int	builtins(t_arglist *node)
 	else if (!ft_strcmp(node->av[0], "pwd"))
 		cmd_pwd();
 	else if (!ft_strcmp(node->av[0], "export"))
-		cmd_export();
+		cmd_export(node);
 	else if (!ft_strcmp(node->av[0], "unset"))
 		cmd_unset();
 	else if (!ft_strcmp(node->av[0], "env"))

@@ -5,7 +5,7 @@ int	varname_length(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
 	return (i + 1);
 }
@@ -31,7 +31,7 @@ char	*copy_name(char *str)
 	if (!name)
 		return (NULL);
 	i = -1;
-	while (str[++i] != '=')
+	while (str[++i] && str[i] != '=')
 		name[i] = str[i];
 	name[i] = '\0';
 	return (name);
@@ -56,10 +56,10 @@ char	*copy_value(char *str)
 
 void	init_envplist(char **envp)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	while (envp[++i])
-		add_envpnode(new_envpnode(copy_name \
-		(envp[i]), copy_value(envp[i])), envplist());
+		add_envpnode(new_envpnode(copy_name(envp[i]), \
+		copy_value(envp[i]), ft_strcpy(envp[i])), envplist());
 }

@@ -7,7 +7,7 @@ void	exec_commands(t_arglist *node)
 
 	if (strchr(node->av[0], '/'))
 	{
-		if (execve(node->av[0], node->av, data()->argv) == -1)
+		if (execve(node->av[0], node->av, data()->envp) == -1)
 		exit(0);
 	}
 	splitted_paths = get_paths(envplist()->next);
@@ -15,11 +15,11 @@ void	exec_commands(t_arglist *node)
 	if (!bin_path)
 	{
 		g_exit_status = 127;
-		printf("g_exit_status: %d\n", g_exit_status);
+		//printf("g_exit_status: %d\n", g_exit_status);
 		cmd_not_found(node->av[0]);
 		exit_free_matrix(splitted_paths, bin_path);
 	}
-	if (execve(bin_path, node->av, data()->argv) == -1)
+	if (execve(bin_path, node->av, data()->envp) == -1)
 		exit_free_matrix(splitted_paths, bin_path);
 }
 
@@ -36,6 +36,8 @@ void	execute(void)
 	t_arglist	*temp;
 	pid_t		pid;
 
+	if (ft_lstsize(arglist()) == 1 && builtins(arglist()->next))
+		return ;
 	pid = fork();
 	if (pid == -1)
 		free_perror_exit("Error creating pipe");

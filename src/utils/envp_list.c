@@ -13,7 +13,7 @@ void	add_envpnode(t_envplist *new, t_envplist *x)
 	}
 }
 
-t_envplist	*new_envpnode(char *name, char *value)
+t_envplist	*new_envpnode(char *name, char *value, char *full)
 {
 	t_envplist	*new;
 
@@ -23,6 +23,7 @@ t_envplist	*new_envpnode(char *name, char *value)
 	new->next = NULL;
 	new->var_name = name;
 	new->var_value = value;
+	new->full = full;
 	return (new);
 }
 

@@ -21,7 +21,12 @@ static void	change_path()
 		free(t);
 	}
 	if (fetch_node("PWD"))
+	{
 		fetch_node("PWD")->var_value = getcwd(NULL, 0);
+		t = ft_strjoin(fetch_node("PWD")->var_name, "=");
+		fetch_node("PWD")->full = ft_strjoin(t, fetch_node("PWD")->var_value);
+		free(t);
+	}
 }
 
 void	cmd_cd(t_arglist *node)

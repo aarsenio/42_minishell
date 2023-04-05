@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	cmd_cd(void)
+void	cmd_cd(void)
 {
-	return(0);
+	return ;
 }

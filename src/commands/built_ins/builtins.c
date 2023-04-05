@@ -11,7 +11,7 @@ int	builtins(t_arglist *node)
 	else if (!ft_strcmp(node->av[0], "export"))
 		cmd_export(node);
 	else if (!ft_strcmp(node->av[0], "unset"))
-		cmd_unset();
+		cmd_unset(node);
 	else if (!ft_strcmp(node->av[0], "env"))
 		cmd_env();
 	else if (!ft_strcmp(node->av[0], "exit"))

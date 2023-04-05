@@ -5,6 +5,8 @@ char	*replace_search(char *str)
 	t_envplist	*tmp;
 
 	tmp = envplist()->next;
+	if (!ft_strcmp(str, "?"))
+		return (ft_itoa(g_exit_status));
 	while (tmp)
 	{
 		if (!ft_strcmp(str, tmp->var_name))

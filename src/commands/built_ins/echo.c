@@ -14,7 +14,7 @@ static int		is_n_flag(char *str)
 		return (0);
 }
 
-int	cmd_echo(t_arglist *node)
+void	cmd_echo(t_arglist *node)
 {
 	int			i;
 
@@ -30,5 +30,4 @@ int	cmd_echo(t_arglist *node)
 	}
 	if (node->ac >= 2 && !is_n_flag(node->av[1]))
 		printf("\n");
-	return(0);
 }

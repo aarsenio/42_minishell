@@ -29,6 +29,7 @@ void	cmd_unset(t_arglist *node)
 	int			i;
 	
 	i = 0;
+	g_exit_status = 0;
 	while (node->av[++i])
 		destroy_node(node->av[i]);
 	update_envp();

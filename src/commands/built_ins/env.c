@@ -5,6 +5,7 @@ void	cmd_env(void)
 	t_envplist	*x;
 
 	x = envplist()->next;
+	g_exit_status = 0;
 	while (x)
 	{
 		if (x->var_value)

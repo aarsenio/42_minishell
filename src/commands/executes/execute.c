@@ -40,7 +40,7 @@ void	execute(void)
 		return ;
 	pid = fork();
 	if (pid == -1)
-		free_perror_exit("Error creating pipe");
+		perror_exit("Error creating pipe");
 	if (pid == 0)
 	{
 		temp = arglist()->next;

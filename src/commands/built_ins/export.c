@@ -40,15 +40,22 @@ t_envplist	*fetch_node(char *str)
 
 void	cmd_export(t_arglist *node)
 {
-	int	i;
+	int		i;
+	char	*err_msg;
+	char	*t;
 
 	i = 0;
+	g_exit_status = 0;
 	while (node->av[++i])
 	{
 		if (!is_valid(node->av[i][0]))
 		{
-			perror("export");
-			g_exit_status = 1;
+			g_exit_status = 2;
+			t = ft_strjoin("minishell: export: `", node->av[i]);
+			err_msg = ft_strjoin(t, "': not a valid identifier");
+			free(t);
+			ft_putendl_fd(err_msg, 2);
+			free(err_msg);
 		}
 		else
 		{

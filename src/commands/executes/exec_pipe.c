@@ -7,10 +7,10 @@ void	exec_pipe(t_arglist *node)
 	pid_t	pid;
 
 	if (pipe(pipe_fd) == -1)
-		free_perror_exit("Error creating pipe");
+		perror_exit("Error creating pipe");
 	pid = fork();
 	if (pid == -1)
-		free_perror_exit("Error forking in exec_pipe");
+		perror_exit("Error forking in exec_pipe");
 	if (pid == 0)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);

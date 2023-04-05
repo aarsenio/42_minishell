@@ -6,7 +6,7 @@ void	cmd_not_found(char *cmd_name)
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 }
 
-void	free_perror_exit(char *msg)
+void	perror_exit(char *msg)
 {
 	perror(msg);
 	cmd_exit();

@@ -85,7 +85,7 @@ int			expendable_len(char *token, int i);
 //commands
 	//built_ins
 int			builtins(t_arglist *node);
-void		cmd_cd(void);
+void		cmd_cd(t_arglist *node);
 void		cmd_echo(t_arglist *node);
 void		cmd_env(void);
 void		cmd_export(t_arglist *node);
@@ -123,10 +123,11 @@ t_envplist	*envplist(void);
 t_toklist	*toklist(void);
 t_arglist	*arglist(void);
 t_data		*data(void);
+t_envplist	*fetch_node(char *str);
 void		update_envp(void);
 void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);
 void		exit_free_matrix(char **matrix,char *str);
 void		free_matrix(char **matrix);
-void		free_perror_exit(char *msg);
+void		perror_exit(char *msg);
 #endif

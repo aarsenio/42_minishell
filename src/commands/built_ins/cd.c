@@ -2,10 +2,24 @@
 
 static void	change_path()
 {
+	char	*t;
+
 	if (fetch_node("OLDPWD"))
+	{
+		free(fetch_node("OLDPWD")->full);
 		free(fetch_node("OLDPWD")->var_value);
+		fetch_node("OLDPWD")->var_value = malloc(1);
+		fetch_node("OLDPWD")->var_value[0] = '\0';
+		fetch_node("OLDPWD")->full = ft_strjoin(fetch_node("OLDPWD")->var_name, "=");
+	}
 	if (fetch_node("OLDPWD") && fetch_node("PWD"))
+	{
 		fetch_node("OLDPWD")->var_value = fetch_node("PWD")->var_value;
+		free(fetch_node("OLDPWD")->full);
+		t = ft_strjoin(fetch_node("OLDPWD")->var_name, "=");
+		fetch_node("OLDPWD")->full = ft_strjoin(t, fetch_node("OLDPWD")->var_value);
+		free(t);
+	}
 	if (fetch_node("PWD"))
 		fetch_node("PWD")->var_value = getcwd(NULL, 0);
 }
@@ -34,4 +48,5 @@ void	cmd_cd(t_arglist *node)
 		return ;
 	}
 	change_path();
+	update_envp();
 }

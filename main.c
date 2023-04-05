@@ -17,7 +17,8 @@ int	check_input(char *input)
 				;
 			if (!input[i])
 			{
-				printf("Syntax error\n");
+				g_exit_status = 1;
+				ft_putendl_fd("minishell: Syntax error: unclosed quotes", 2);
 				return (0);
 			}
 		}

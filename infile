@@ -1,0 +1,18 @@
+minishell$ cd ..
+minishell$ ls
+Estou no child 1
+vai entrar
+Estou no exec_commands
+en.subject.pdf	headers  main.c  Makefile  minishell  src
+minishell$ cd ..
+minishell$ ls
+Estou no child 1
+vai entrar
+Estou no exec_commands
+en.subject.pdf	headers  main.c  Makefile  minishell  src
+minishell$ c
+Estou no child 1
+vai entrar
+Estou no exec_commands
+c: command not found
+make: *** [Makefile:38: r] Interrupt

@@ -10,12 +10,12 @@ void	exec_commands(t_arglist *node)
 		if (execve(node->av[0], node->av, data()->envp) == -1)
 		exit(0);
 	}
+	ft_putendl_fd("Estou no exec_commands", 2);
 	splitted_paths = get_paths(envplist()->next);
 	bin_path = find_working_path(node->av[0], splitted_paths);
 	if (!bin_path)
 	{
 		g_exit_status = 127;
-		//printf("g_exit_status: %d\n", g_exit_status);
 		cmd_not_found(node->av[0]);
 		exit_free_matrix(splitted_paths, bin_path);
 	}
@@ -43,15 +43,20 @@ void	execute(void)
 		perror_exit("Error creating pipe");
 	if (pid == 0)
 	{
+		ft_putendl_fd("Estou no child 1", 2);
 		temp = arglist()->next;
+
 		while (temp)
 		{
-			if (temp->pipe == PIPE)
-				exec_pipe(temp);
-			else if (temp->pipe == NONE)
-				exec_executables(temp);
-			else
+			if (temp->rdr != NONE)
 				exec_redirects(temp);
+			else if (temp->rdr == NONE && temp->pipe == PIPE)
+				exec_pipe(temp);
+			else if (temp->rdr == NONE && temp->pipe == NONE)
+			{
+				ft_putendl_fd("vai entrar", 2);
+				exec_executables(temp);
+			}
 			temp = temp->next;
 		}
 	}

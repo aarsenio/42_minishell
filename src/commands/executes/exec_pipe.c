@@ -13,6 +13,7 @@ void	exec_pipe(t_arglist *node)
 		perror_exit("Error forking in exec_pipe");
 	if (pid == 0)
 	{
+		ft_putendl_fd("Estou no child 2", 2);
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);

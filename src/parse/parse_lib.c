@@ -53,12 +53,12 @@ t_operator	get_operator(char *op)
 	if (ft_strcmp(op, "|") == 0)
 		return (PIPE);
 	else if (ft_strcmp(op, "<") == 0)
-		return (RDR_INPUT);
+		return (R_IN);
 	else if (ft_strcmp(op, "<<") == 0)
-		return (RDR_INPUT_UNTIL);
+		return (R_IN_UNT);
 	else if (ft_strcmp(op, ">") == 0)
-		return (RDR_OUT_REPLACE);
+		return (R_OUT_REP);
 	else if (ft_strcmp(op, ">>") == 0)
-		return (RDR_OUT_APPEND);
+		return (R_OUT_APP);
 	return (NONE);
 }

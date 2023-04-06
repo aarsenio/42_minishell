@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	exec_commands(t_arglist *node)
+static void	exec_commands(t_arglist *node)
 {
 	char	*bin_path;
 	char	**splitted_paths;
@@ -10,7 +10,6 @@ void	exec_commands(t_arglist *node)
 		if (execve(node->av[0], node->av, data()->envp) == -1)
 		exit(0);
 	}
-	ft_putendl_fd("Estou no exec_commands", 2);
 	splitted_paths = get_paths(envplist()->next);
 	bin_path = find_working_path(node->av[0], splitted_paths);
 	if (!bin_path)
@@ -30,10 +29,33 @@ void	exec_executables(t_arglist *node)
 	exec_commands(node);
 }
 
+static void loop_execute_nodes(void)
+{
+	t_arglist	*t;
+	size_t		i;
+
+	t = arglist()->next;
+	i = -1;
+	while (t)
+	{
+		if (++i < ft_lstsize(t) && (t->next->rdr \
+			== R_OUT_REP || t->next->rdr == R_OUT_APP))
+			exec_outputs(t->next);
+		if (t->rdr == R_IN)
+			exec_inputs(t);
+		else if (t->rdr == R_IN_UNT)
+			exec_inputs_until(t);
+		else if (t->pipe == PIPE)
+			exec_pipe(t);
+		else if (t->pipe == NONE)
+			exec_executables(t);
+		t = t->next;
+	}
+}
+
 void	execute(void)
 {
 	int			wait_status;
-	t_arglist	*temp;
 	pid_t		pid;
 
 	if (ft_lstsize(arglist()) == 1 && builtins(arglist()->next))
@@ -43,22 +65,8 @@ void	execute(void)
 		perror_exit("Error creating pipe");
 	if (pid == 0)
 	{
-		ft_putendl_fd("Estou no child 1", 2);
-		temp = arglist()->next;
-
-		while (temp)
-		{
-			if (temp->rdr != NONE)
-				exec_redirects(temp);
-			else if (temp->rdr == NONE && temp->pipe == PIPE)
-				exec_pipe(temp);
-			else if (temp->rdr == NONE && temp->pipe == NONE)
-			{
-				ft_putendl_fd("vai entrar", 2);
-				exec_executables(temp);
-			}
-			temp = temp->next;
-		}
+		loop_execute_nodes();
+		exit(0);
 	}
 	else
 	{

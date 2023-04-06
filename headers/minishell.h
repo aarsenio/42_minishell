@@ -15,10 +15,10 @@ extern int	g_exit_status;
 typedef enum e_operator
 {
 	NONE,
-	RDR_OUT_REPLACE,
-	RDR_OUT_APPEND,
-	RDR_INPUT,
-	RDR_INPUT_UNTIL,
+	R_OUT_REP,
+	R_OUT_APP,
+	R_IN,
+	R_IN_UNT,
 	PIPE,
 }t_operator;
 
@@ -96,10 +96,10 @@ void 		cmd_exit(void);
 
 	//executes
 void		execute(void);
-void		exec_commands(t_arglist *node);
 void		exec_executables(t_arglist *node);
-void		exec_redirects(t_arglist *node);
-void		exec_redirects(t_arglist *node);
+void		exec_inputs(t_arglist *node);
+void		exec_inputs_until(t_arglist *node);
+void		exec_outputs(t_arglist *node);
 void		exec_pipe(t_arglist *node);
 char 		**get_paths(t_envplist *head);
 char		*find_working_path(char *cmd, char **paths);

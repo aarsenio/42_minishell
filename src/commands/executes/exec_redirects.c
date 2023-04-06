@@ -1,13 +1,26 @@
 #include <minishell.h>
 
-static void redirect_input_until(t_arglist *node)
+void exec_inputs_until(t_arglist *node)
 {
-	(void)node;
+	pid_t	fd[2];
+	char	*buff;
 
-	return ;
+	pipe(fd);
+	while (1)
+	{
+		buff = readline("> ");
+		if(!ft_strcmp(buff, node->av[0]))
+			break ;
+		ft_putendl_fd(buff, fd[1]);
+	}
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	close(fd[1]);
+	free(buff);
+	buff = NULL;
 }
 
-static void redirect_input(t_arglist *node)
+void exec_inputs(t_arglist *node)
 {
 	int infile;
 	char *error_msg;
@@ -28,22 +41,13 @@ static void redirect_input(t_arglist *node)
 	}
 }
 
-static void redirect_output(t_arglist *node)
+void exec_outputs(t_arglist *node)
 {
-
-	if (node->rdr == RDR_OUT_REPLACE)
-		open(node->av[0], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	else if (node->rdr == RDR_OUT_APPEND)
-		open(node->av[0], O_WRONLY | O_CREAT | O_APPEND, 0666);
-}
-
-void	exec_redirects(t_arglist *node)
-{
-	if (node->rdr == RDR_INPUT)
-		redirect_input(node);
-	else if (node->rdr == RDR_INPUT_UNTIL)
-		redirect_input_until(node);
-	else
-		redirect_output(node);
-	//exit(0);
+	int fd;
+	if (node->rdr == R_OUT_REP)
+		fd = open(node->av[0], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	else if (node->rdr == R_OUT_APP)
+		fd = open(node->av[0], O_WRONLY | O_CREAT | O_APPEND, 0666);
+	dup2(fd, STDOUT_FILENO);
+	close (fd);
 }

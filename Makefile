@@ -1,5 +1,5 @@
 CC			= 	cc
-CFLAGS		= 	-Wall -Wextra -Werror #-g -fsanitize=adress
+CFLAGS		= 	-Wall -Wextra -Werror -g -fsanitize=adress
 RM			= 	/bin/rm -f
 NAME		= 	minishell
 INCLUDES	= 	./headers

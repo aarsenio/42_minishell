@@ -1,5 +1,18 @@
 #include <minishell.h>
 
+void	exec_pipe_before_output(void)
+{
+	printf("entrei pipe_before");
+	int		pipe_fd[2];
+
+	if (pipe(pipe_fd) == -1)
+		perror_exit("Error creating pipe");
+	dup2(pipe_fd[0], STDIN_FILENO);
+	write(pipe_fd[1], '\0', 0);
+	close(pipe_fd[1]);
+	close(pipe_fd[0]);
+}
+
 void	exec_pipe(t_arglist *node)
 {
 	int		wait_status;

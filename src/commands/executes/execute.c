@@ -41,13 +41,17 @@ static void loop_execute_nodes(void)
 		if (++i < ft_lstsize(t) && (t->next->rdr \
 			== R_OUT_REP || t->next->rdr == R_OUT_APP))
 			exec_outputs(t->next);
+		if (++i < ft_lstsize(t) && t->pipe == PIPE \
+			&& (t->next->rdr == R_OUT_REP \
+			|| t->next->rdr == R_OUT_APP))
+			exec_pipe_before_output();
 		if (t->rdr == R_IN)
 			exec_inputs(t);
 		else if (t->rdr == R_IN_UNT)
 			exec_inputs_until(t);
-		else if (t->pipe == PIPE)
+		else if (t->pipe == PIPE && t->next->rdr == NONE)
 			exec_pipe(t);
-		else if (t->pipe == NONE)
+		else if (t->pipe == NONE && t->rdr == NONE)
 			exec_executables(t);
 		t = t->next;
 	}

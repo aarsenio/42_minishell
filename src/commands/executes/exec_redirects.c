@@ -43,6 +43,7 @@ void exec_inputs(t_arglist *node)
 
 void exec_outputs(t_arglist *node)
 {
+	printf("entrei outputs");
 	int fd;
 	if (node->rdr == R_OUT_REP)
 		fd = open(node->av[0], O_WRONLY | O_CREAT | O_TRUNC, 0666);

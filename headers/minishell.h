@@ -51,7 +51,7 @@ typedef struct s_data
 {
 	char				**envp;
 	char				*input;
-	int					stin_fd;
+	int					trigger;
 }t_data;
 
 // parse
@@ -101,7 +101,6 @@ void		exec_executables(t_arglist *node);
 void		exec_inputs(t_arglist *node);
 void		exec_inputs_until(t_arglist *node);
 void		exec_outputs(t_arglist *node);
-void		exec_pipe_before_output(void);
 void		exec_pipe(t_arglist *node);
 char 		**get_paths(t_envplist *head);
 char		*find_working_path(char *cmd, char **paths);

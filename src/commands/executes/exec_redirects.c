@@ -2,6 +2,7 @@
 
 void exec_inputs_until(t_arglist *node)
 {
+	ft_putendl_fd("entrei exec_inputs_until", 2);
 	pid_t	fd[2];
 	char	*buff;
 
@@ -22,9 +23,12 @@ void exec_inputs_until(t_arglist *node)
 
 void exec_inputs(t_arglist *node)
 {
+	ft_putendl_fd("entrei exec_inputs", 2);
 	int infile;
 	char *error_msg;
 
+	if (node->pipe == PIPE)
+		data()->trigger = 1;
 	if(access(node->av[0], F_OK) == 0)
 	{
 		infile = open(node->av[0], O_RDONLY, 0666);
@@ -43,7 +47,7 @@ void exec_inputs(t_arglist *node)
 
 void exec_outputs(t_arglist *node)
 {
-	printf("entrei outputs");
+	ft_putendl_fd("entrei outputs", 2);
 	int fd;
 	if (node->rdr == R_OUT_REP)
 		fd = open(node->av[0], O_WRONLY | O_CREAT | O_TRUNC, 0666);

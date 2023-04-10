@@ -2,6 +2,7 @@
 
 static void	exec_commands(t_arglist *node)
 {
+	ft_putendl_fd("entrei exec_commands", 2);
 	char	*bin_path;
 	char	**splitted_paths;
 
@@ -33,26 +34,27 @@ static void loop_execute_nodes(void)
 {
 	t_arglist	*t;
 	size_t		i;
+	size_t		list_size;
 
+	list_size = ft_lstsize(arglist());
 	t = arglist()->next;
-	i = -1;
+	i = 0;
 	while (t)
 	{
-		if (++i < ft_lstsize(t) && (t->next->rdr \
+		if (++i < list_size && (t->next->rdr \
 			== R_OUT_REP || t->next->rdr == R_OUT_APP))
 			exec_outputs(t->next);
-		if (++i < ft_lstsize(t) && t->pipe == PIPE \
-			&& (t->next->rdr == R_OUT_REP \
-			|| t->next->rdr == R_OUT_APP))
-			exec_pipe_before_output();
 		if (t->rdr == R_IN)
 			exec_inputs(t);
 		else if (t->rdr == R_IN_UNT)
 			exec_inputs_until(t);
 		else if (t->pipe == PIPE && t->next->rdr == NONE)
 			exec_pipe(t);
-		else if (t->pipe == NONE && t->rdr == NONE)
+		else if (t->pipe == NONE && t->rdr == NONE && !data()->trigger)
 			exec_executables(t);
+		if (data()->trigger)
+			data()->trigger = 0;
+		fprintf(stderr, "i: %ld\n", i);
 		t = t->next;
 	}
 }

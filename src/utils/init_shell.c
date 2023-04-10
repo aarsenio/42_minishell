@@ -37,6 +37,7 @@ void	init_shell(char **envp)
 {
 	(void)envp;
 
+	data()->trigger = 0;
 	init_envplist(envp);
 	update_envp();
 }

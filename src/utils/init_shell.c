@@ -1,11 +1,11 @@
 #include <minishell.h>
 
-static int	ft_envplstsize(t_envplist *lst)
+int	ft_envplstsize(void)
 {
 	t_envplist	*temp;
 	int			size;
 
-	temp = lst->next;
+	temp = envplist()->next;
 	size = 0;
 	while (temp != NULL)
 	{
@@ -24,7 +24,7 @@ void	update_envp(void)
 	t = envplist()->next;
 	if (data()->envp)
 		free(data()->envp);
-	data()->envp = malloc(sizeof(char*) * (ft_envplstsize(envplist()) + 1));
+	data()->envp = malloc(sizeof(char*) * (ft_envplstsize() + 1));
 	while (t)
 	{
 		data()->envp[i++] = t->full;

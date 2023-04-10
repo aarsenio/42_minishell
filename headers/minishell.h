@@ -24,6 +24,7 @@ typedef enum e_operator
 
 typedef struct s_envplist
 {
+	int					pos;
 	char				*full;
 	char				*var_name;
 	char				*var_value;
@@ -126,6 +127,8 @@ t_toklist	*toklist(void);
 t_arglist	*arglist(void);
 t_data		*data(void);
 t_envplist	*fetch_node(char *str);
+int			ft_envplstsize(void);
+void		order_envplist(void);
 void		update_envp(void);
 void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);

@@ -42,3 +42,25 @@ void	destroy_envplist(void)
 		free (tmp);
 	}
 }
+
+void	order_envplist(void)
+{
+	t_envplist	*t1;
+	t_envplist	*t2;
+	int			counter;
+
+	t1 = envplist()->next;
+	while (t1)
+	{
+		counter = 0;
+		t2 = envplist()->next;
+		while (t2)
+		{
+			if (ft_strcmp(t1->var_name, t2->var_name) > 0)
+				counter++;
+			t2 = t2->next;
+		}
+		t1->pos = counter;
+		t1 = t1->next;
+	}
+}

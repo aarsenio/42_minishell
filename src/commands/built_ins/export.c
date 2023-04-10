@@ -38,24 +38,46 @@ t_envplist	*fetch_node(char *str)
 	return (NULL);
 }
 
+void	export_print(void)
+{
+	t_envplist	*t;
+	int			i;
+
+	t = envplist()->next;
+	i = 0;
+	order_envplist();
+	while (i < ft_envplstsize())
+	{
+		if (i == t->pos)
+		{
+			printf("declare -X %s", t->var_name);
+			if (t->var_value)
+				printf("=\"%s\"", t->var_value);
+			printf("\n");
+			i++;
+			t = envplist()->next;
+		}
+		else
+			t = t->next;
+	}
+}
+
 void	cmd_export(t_arglist *node)
 {
 	int		i;
-	char	*err_msg;
-	char	*t;
 
 	i = 0;
 	g_exit_status = 0;
+	if (!node->av[1])
+		export_print();
 	while (node->av[++i])
 	{
 		if (!is_valid(node->av[i][0]))
 		{
 			g_exit_status = 2;
-			t = ft_strjoin("minishell: export: `", node->av[i]);
-			err_msg = ft_strjoin(t, "': not a valid identifier");
-			free(t);
-			ft_putendl_fd(err_msg, 2);
-			free(err_msg);
+			ft_putstr_fd("minishell: export: `", 2);
+			ft_putstr_fd(node->av[i], 2);
+			ft_putendl_fd("': not a valid identifier", 2);
 		}
 		else
 		{

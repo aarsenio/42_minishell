@@ -118,6 +118,35 @@ int	quotes(char *input, int i)
 	return (i + 1);
 }
 
+int	token_checker(void)
+{
+	t_toklist	*t;
+
+	t = toklist()->next;
+	if (t->operator == PIPE)
+	{
+		ft_putendl_fd("minishell: syntax error near unexpected token `|'", 2);
+		return (0);
+	}
+	while (t->next)
+	{
+		if (t->operator != NONE && t->next->operator != NONE)
+		{
+			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+			ft_putstr_fd(t->next->token, 2);
+			ft_putendl_fd("'", 2);
+			return (0);
+		}
+		t = t->next;
+	}
+	if (t->operator != NONE)
+	{
+		ft_putendl_fd("minishell: syntax error near unexpected token `newline'", 2);
+		return (0);
+	}
+	return (1);
+}
+
 int	tokenizer(char *input)
 {
 	int		i;
@@ -133,6 +162,11 @@ int	tokenizer(char *input)
 			i = alphanumeric(input, i);
 		else
 			i++;
+	}
+	if (!token_checker())
+	{
+		destroy_toklist();
+		return (0);
 	}
 	token_handler();
 	return (1);

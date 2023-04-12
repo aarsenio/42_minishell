@@ -21,10 +21,14 @@ void	token_handler(void)
 	char		**av;
 	int			i;
 	int			ac;
+	int			index;
+	int			t_index;
 
 	x = toklist()->next;
+	t_index = 0;
 	while (x)
 	{
+		index = t_index;
 		rdr = NONE;
 		pipe = NONE;
 		ac = 0;
@@ -59,8 +63,8 @@ void	token_handler(void)
 		{
 			pipe = x->operator;
 			x = x->next;
+			t_index++;
 		}
-		add_argnode(new_argnode(ac, av, rdr, pipe), arglist());
+		add_argnode(new_argnode(ac, av, rdr, pipe, index), arglist());
 	}
-	destroy_toklist();
 }

@@ -21,6 +21,13 @@ t_toklist	*toklist(void)
 	return (&toklist);
 }
 
+t_cleanlist	*cleanlist(void)
+{
+	static t_cleanlist	cleanlist;
+
+	return (&cleanlist);
+}
+
 t_data	*data(void)
 {
 	static t_data		data;

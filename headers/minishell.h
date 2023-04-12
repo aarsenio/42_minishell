@@ -40,12 +40,21 @@ typedef struct s_toklist
 
 typedef struct s_arglist
 {
+	int					index;
 	int					ac;
 	char				**av;
 	t_operator			rdr;
 	t_operator			pipe;
 	struct s_arglist	*next;
 }t_arglist;
+
+typedef struct s_cleanlist
+{
+	int					index;
+	int					ac;
+	char				**av;
+	struct s_cleanlist	*next;
+}t_cleanlist;
 
 typedef struct s_data
 {
@@ -61,8 +70,8 @@ void		destroy_toklist(void);
 int			tokenizer(char *input);
 void		print_toklist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
-t_arglist	*new_argnode(int ac, char **av, \
-			t_operator	rdr, t_operator	pipe);
+t_arglist	*new_argnode(int ac, char **av, t_operator	rdr, \
+t_operator	pipe, int index);
 void		token_handler(void);
 void		destroy_arglist(void);
 void		print_arglist(void);
@@ -71,6 +80,11 @@ t_envplist	*new_envpnode(char *name, char *value, char *full);
 void		destroy_envplist(void);
 void		init_envplist(char **envp);
 void		print_envplist(void);
+t_cleanlist	*new_cleannode(int ac, char **av, int index);
+void		add_cleannode(t_cleanlist *new, t_cleanlist *x);
+void		destroy_cleanlist(void);
+void		print_cleanlist(void);
+void		create_clean(void);
 
 // parse lib
 char		*parse_strjoin(char const *s1, char const *s2);
@@ -124,6 +138,7 @@ char		*copy_name(char *str);
 t_envplist	*envplist(void);
 t_toklist	*toklist(void);
 t_arglist	*arglist(void);
+t_cleanlist	*cleanlist(void);
 t_data		*data(void);
 t_envplist	*fetch_node(char *str);
 int			ft_envplstsize(void);

@@ -169,5 +169,6 @@ int	tokenizer(char *input)
 		return (0);
 	}
 	token_handler();
+	create_clean();
 	return (1);
 }

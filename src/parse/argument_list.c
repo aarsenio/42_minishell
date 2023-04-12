@@ -13,7 +13,7 @@ void	add_argnode(t_arglist *new, t_arglist *x)
 	}
 }
 
-t_arglist	*new_argnode(int ac, char **av, t_operator	rdr, t_operator	pipe)
+t_arglist	*new_argnode(int ac, char **av, t_operator	rdr, t_operator	pipe, int index)
 {
 	t_arglist	*new;
 
@@ -25,6 +25,7 @@ t_arglist	*new_argnode(int ac, char **av, t_operator	rdr, t_operator	pipe)
 	new->av = av;
 	new->rdr = rdr;
 	new->pipe = pipe;
+	new->index = index;
 	return (new);
 }
 
@@ -57,6 +58,7 @@ void	print_arglist(void)
 	while (x)
 	{
 		i = 0;
+		printf("index: %i\n", x->index);
 		printf("argc: %i\n", x->ac);
 		printf("redirect: %i\n", x->rdr);
 		printf("pipe: %i\n", x->pipe);

@@ -6,6 +6,8 @@ char	*ft_strcpy(char *str)
 	char	*s;
 
 	i = -1;
+	if (!str)
+		return (NULL);
 	s = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!s)
 		return (NULL);

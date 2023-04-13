@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **envp)
 			if (check_input(data()->input) && tokenizer(data()->input))
 			{
 				//print_arglist();
-				print_cleanlist();
+				//print_cleanlist();
 				execute();
 				destroy_cleanlist();
 				destroy_arglist();

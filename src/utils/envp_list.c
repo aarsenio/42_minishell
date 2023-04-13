@@ -39,6 +39,8 @@ void	destroy_envplist(void)
 			free(tmp->var_name);
 		if (tmp->var_value)
 			free(tmp->var_value);
+		if (tmp->full)
+			free(tmp->full);
 		free (tmp);
 	}
 }

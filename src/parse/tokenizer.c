@@ -1,5 +1,15 @@
 #include <minishell.h>
 
+static t_toklist	*lst_node(void)
+{
+	t_toklist	*t;
+
+	t = toklist()->next;
+	while(t->next)
+		t = t->next;
+	return (t);
+}
+
 int	letter_count(char *input, int i)
 {
 	int	result;
@@ -59,7 +69,7 @@ int	alphanumeric(char *input, int i)
 	!is_quote(input[i]))
 		token[j++] = input[i++];
 	token[j] = '\0';
-	if (expander_checker(token))
+	if (expander_checker(token) && lst_node()->operator != R_IN_UNT)
 		token = expander(token);
 	if (tmp != 0 && is_quote(input[tmp - 1]))
 	{
@@ -103,7 +113,7 @@ int	quotes(char *input, int i)
 	while (input[++i] != quote)
 		token[j++] = input[i];
 	token[j] = '\0';
-	if (quote == '"' && expander_checker(token))
+	if (quote == '"' && expander_checker(token) && lst_node()->operator != R_IN_UNT)
 		token = expander(token);
 	if (t != 0 && !is_space(input[t - 1]) && !is_operator(input[t - 1]))
 	{
@@ -130,7 +140,7 @@ int	token_checker(void)
 	}
 	while (t->next)
 	{
-		if (t->operator != NONE && t->next->operator != NONE)
+		if (t->operator != NONE && t->operator != PIPE && t->next->operator == PIPE)
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
 			ft_putstr_fd(t->next->token, 2);

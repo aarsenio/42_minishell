@@ -48,7 +48,9 @@ void exec_inputs(t_arglist *node)
 void exec_outputs(t_arglist *node)
 {
 	ft_putendl_fd("entrei outputs", 2);
-	int fd;
+	int	fd;
+
+	fd = 0;
 	if (node->rdr == R_OUT_REP)
 		fd = open(node->av[0], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (node->rdr == R_OUT_APP)

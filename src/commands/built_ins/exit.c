@@ -2,9 +2,9 @@
 
 void	cmd_exit(void)
 {
-	free(data()->envp);
 	destroy_arglist();
 	destroy_envplist();
+	free(data()->envp);
 	free(data()->input);
 	data()->input = NULL;
 	clear_history();

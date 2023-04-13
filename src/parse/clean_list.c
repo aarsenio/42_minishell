@@ -13,7 +13,7 @@ void	add_cleannode(t_cleanlist *new, t_cleanlist *x)
 	}
 }
 
-t_cleanlist	*new_cleannode(int ac, char **av, int index)
+t_cleanlist	*new_cleannode(int ac, char **av, int index, t_operator rdr)
 {
 	t_cleanlist	*new;
 
@@ -24,6 +24,7 @@ t_cleanlist	*new_cleannode(int ac, char **av, int index)
 	new->ac = ac;
 	new->av = av;
 	new->index = index;
+	new->rdr = rdr;
 	return (new);
 }
 
@@ -56,6 +57,7 @@ void	print_cleanlist(void)
 	while (t)
 	{
 		i = 0;
+		printf("rdr: %i\n", t->rdr);
 		printf("index: %i\n", t->index);
 		printf("ac: %i\n", t->ac);
 		printf("frase: ");

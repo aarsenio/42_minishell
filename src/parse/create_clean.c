@@ -19,9 +19,10 @@ static int	counter(t_toklist *t)
 	return (counter);
 }
 
-void	create_clean(void)
+void	create_cleanlist(void)
 {
 	t_toklist	*t;
+	t_operator	rdr;
 	char		**av;
 	int			index;
 	int			i;
@@ -31,6 +32,7 @@ void	create_clean(void)
 	index = 0;
 	while (t)
 	{
+		rdr = NONE;
 		av = malloc(sizeof(char*) * (counter(t) + 1));
 		if (!av)
 			return ;
@@ -45,10 +47,13 @@ void	create_clean(void)
 				t = t->next;
 			}
 			else
+			{
+				rdr = t->operator;
 				t = t->next->next;
+			}
 		}
 		av[i] = NULL;
-		add_cleannode(new_cleannode(ac, av, index), cleanlist());
+		add_cleannode(new_cleannode(ac, av, index, rdr), cleanlist());
 		index++;
 		if (t && t->operator == PIPE)
 			t = t->next;

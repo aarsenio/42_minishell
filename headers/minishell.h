@@ -50,6 +50,7 @@ typedef struct s_arglist
 
 typedef struct s_cleanlist
 {
+	t_operator			rdr;
 	int					index;
 	int					ac;
 	char				**av;
@@ -72,7 +73,7 @@ void		print_toklist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
 t_arglist	*new_argnode(int ac, char **av, t_operator	rdr, \
 t_operator	pipe, int index);
-void		token_handler(void);
+void		create_arglist(void);
 void		destroy_arglist(void);
 void		print_arglist(void);
 void		add_envpnode(t_envplist *new, t_envplist *x);
@@ -80,11 +81,11 @@ t_envplist	*new_envpnode(char *name, char *value, char *full);
 void		destroy_envplist(void);
 void		init_envplist(char **envp);
 void		print_envplist(void);
-t_cleanlist	*new_cleannode(int ac, char **av, int index);
+t_cleanlist	*new_cleannode(int ac, char **av, int index, t_operator rdr);
 void		add_cleannode(t_cleanlist *new, t_cleanlist *x);
 void		destroy_cleanlist(void);
 void		print_cleanlist(void);
-void		create_clean(void);
+void		create_cleanlist(void);
 
 // parse lib
 char		*parse_strjoin(char const *s1, char const *s2);

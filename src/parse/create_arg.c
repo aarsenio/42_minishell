@@ -13,7 +13,7 @@ int	arg_counter(t_toklist *x)
 	return (result + 1);
 }
 
-void	token_handler(void)
+void	create_arglist(void)
 {
 	t_toklist	*x;
 	t_operator	rdr;

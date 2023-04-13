@@ -178,7 +178,7 @@ int	tokenizer(char *input)
 		destroy_toklist();
 		return (0);
 	}
-	token_handler();
-	create_clean();
+	create_arglist();
+	create_cleanlist();
 	return (1);
 }

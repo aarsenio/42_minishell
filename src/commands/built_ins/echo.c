@@ -14,7 +14,7 @@ static int		is_n_flag(char *str)
 		return (0);
 }
 
-void	cmd_echo(t_arglist *node)
+void	cmd_echo(t_cleanlist *node)
 {
 	int			i;
 

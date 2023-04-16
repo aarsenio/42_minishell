@@ -62,7 +62,7 @@ void	export_print(void)
 	}
 }
 
-void	cmd_export(t_arglist *node)
+void	cmd_export(t_cleanlist *node)
 {
 	int		i;
 

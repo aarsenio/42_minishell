@@ -29,7 +29,7 @@ static void	change_path()
 	}
 }
 
-void	cmd_cd(t_arglist *node)
+void	cmd_cd(t_cleanlist *node)
 {
 	char	*s;
 	char	*err_msg;

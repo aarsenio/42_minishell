@@ -1,11 +1,12 @@
 #include <minishell.h>
 
-static void	exec_commands(t_arglist *node)
+static void	exec_commands(t_cleanlist *node)
 {
-	ft_putendl_fd("entrei exec_commands", 2);
 	char	*bin_path;
 	char	**splitted_paths;
 
+	if(!*node->av)
+		exit(0);
 	if (strchr(node->av[0], '/'))
 	{
 		if (execve(node->av[0], node->av, data()->envp) == -1)
@@ -17,61 +18,83 @@ static void	exec_commands(t_arglist *node)
 	{
 		g_exit_status = 127;
 		cmd_not_found(node->av[0]);
-		exit_free_matrix(splitted_paths, bin_path);
+		exit_free_matrix(node, splitted_paths, bin_path);
 	}
 	if (execve(bin_path, node->av, data()->envp) == -1)
-		exit_free_matrix(splitted_paths, bin_path);
+		exit_free_matrix(node, splitted_paths, bin_path);
 }
 
-void	exec_executables(t_arglist *node)
+void	exec_executables(t_cleanlist *node)
 {
+	if(node->rdr == R_IN || node->rdr == R_IN_UNT)
+		dup2(node->fdin, STDIN_FILENO);
+	if(node->rdr == R_OUT_REP || node->rdr == R_OUT_APP)
+		dup2(node->fdout, STDOUT_FILENO);
+	if (node->fdin != -1)
+		close(node->fdin);
+	if (node->fdout != -1)
+		close(node->fdout);
 	if (builtins(node))
 		exit(0);
 	exec_commands(node);
 }
 
-static void loop_execute_nodes(void)
+static void	loop_cleanlist_execute(void)
 {
-	t_arglist	*t;
-	size_t		i;
-	size_t		list_size;
+	t_cleanlist	*t;
+	int			wait_status;
 
-	list_size = ft_lstsize(arglist());
-	t = arglist()->next;
-	i = 0;
-	while (t)
+	t = cleanlist()->next;
+	while (t && t->next)
 	{
-		if (++i < list_size && (t->next->rdr \
-			== R_OUT_REP || t->next->rdr == R_OUT_APP))
-			exec_outputs(t->next);
-		if (t->rdr == R_IN)
-			exec_inputs(t);
-		else if (t->rdr == R_IN_UNT)
-			exec_inputs_until(t);
-		else if (t->pipe == PIPE && t->next->rdr == NONE)
-			exec_pipe(t);
-		else if (t->pipe == NONE && t->rdr == NONE && !data()->trigger)
-			exec_executables(t);
-		if (data()->trigger)
-			data()->trigger = 0;
-		fprintf(stderr, "i: %ld\n", i);
+		exec_pipe(t);
 		t = t->next;
+	}
+	if (t && !t->next)
+		exec_executables(t);
+	while(t && t->index-- > -1)
+		wait(&wait_status);
+
+}
+
+static void	loop_arglist_redirects(void)
+{
+	t_arglist	*t_one;
+	t_arglist	*t_two;
+
+	t_one = arglist()->next;
+	t_two = arglist()->next;
+	while(t_one)
+	{
+		if (t_one->rdr == R_IN_UNT)
+			heredoc(t_one);
+		t_one = t_one->next;
+	}
+	while(t_two)
+	{
+		if (t_two->rdr == R_IN)
+			exec_input(t_two);
+		else if (t_two->rdr == R_OUT_REP || t_two->rdr == R_OUT_APP)
+			exec_outputs(t_two);
+		t_two = t_two->next;
 	}
 }
 
 void	execute(void)
 {
 	int			wait_status;
-	pid_t		pid;
+	int		pid;
 
-	if (ft_lstsize(arglist()) == 1 && builtins(arglist()->next))
+	if (ft_lstsize(arglist()) == 1 && builtins(cleanlist()->next))
 		return ;
+	initiate_fd();
 	pid = fork();
 	if (pid == -1)
 		perror_exit("Error creating pipe");
 	if (pid == 0)
 	{
-		loop_execute_nodes();
+		loop_arglist_redirects();
+		loop_cleanlist_execute();
 		exit(0);
 	}
 	else

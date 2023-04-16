@@ -1,11 +1,9 @@
 #include <minishell.h>
 
-void	exec_pipe(t_arglist *node)
+void	exec_pipe(t_cleanlist *node)
 {
-	ft_putendl_fd("entrei exec_pipe", 2);
-	int		wait_status;
 	int		pipe_fd[2];
-	pid_t	pid;
+	int		pid;
 
 	if (pipe(pipe_fd) == -1)
 		perror_exit("Error creating pipe");
@@ -24,6 +22,18 @@ void	exec_pipe(t_arglist *node)
 		dup2(pipe_fd[0], STDIN_FILENO);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
-		waitpid(0, &wait_status, 0);
+	}
+}
+
+void	initiate_fd(void)
+{
+	t_cleanlist	*t;
+
+	t = cleanlist()->next;
+	while(t)
+	{
+		t->fdin = -1;
+		t->fdout = -1;
+		t = t->next;
 	}
 }

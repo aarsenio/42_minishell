@@ -1,5 +1,5 @@
 CC			= 	cc
-CFLAGS		= 	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		= 	-Wall -Wextra -Werror -g #-fsanitize=address
 RM			= 	/bin/rm -f
 NAME		= 	minishell
 INCLUDES	= 	./headers
@@ -33,7 +33,7 @@ norm :
 m: fclean
 
 e:
-	@make re && make clean && clear && valgrind --leak-check=full --track-origins=yes ./minishell
+	@make re && make clean && clear && valgrind --suppressions=.ignore_readline --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=valgrind-out.txt ./minishell
 r:
 	@make re && make clean && clear && ./minishell
 

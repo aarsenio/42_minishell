@@ -8,7 +8,7 @@ int	arg_counter(t_toklist *x)
 	while (x && x->operator == NONE)
 	{
 		result++;
-		x = x->next;	
+		x = x->next;
 	}
 	return (result + 1);
 }

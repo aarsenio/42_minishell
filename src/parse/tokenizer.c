@@ -113,7 +113,7 @@ int	quotes(char *input, int i)
 	while (input[++i] != quote)
 		token[j++] = input[i];
 	token[j] = '\0';
-	if (quote == '"' && expander_checker(token) && lst_node()->operator != R_IN_UNT)
+	if (quote == '"' && expander_checker(token))
 		token = expander(token);
 	if (t != 0 && !is_space(input[t - 1]) && !is_operator(input[t - 1]))
 	{

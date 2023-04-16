@@ -9,6 +9,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include <signal.h>
 
 extern int	g_exit_status;
 
@@ -52,6 +53,8 @@ typedef struct s_cleanlist
 {
 	t_operator			rdr;
 	int					index;
+	int					fdin;
+	int					fdout;
 	int					ac;
 	char				**av;
 	struct s_cleanlist	*next;
@@ -61,7 +64,6 @@ typedef struct s_data
 {
 	char				**envp;
 	char				*input;
-	int					trigger;
 }t_data;
 
 // parse
@@ -72,7 +74,7 @@ int			tokenizer(char *input);
 void		print_toklist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
 t_arglist	*new_argnode(int ac, char **av, t_operator	rdr, \
-t_operator	pipe, int index);
+			t_operator	pipe, int index);
 void		create_arglist(void);
 void		destroy_arglist(void);
 void		print_arglist(void);
@@ -101,24 +103,25 @@ int			expendable_len(char *token, int i);
 
 //commands
 	//built_ins
-int			builtins(t_arglist *node);
-void		cmd_cd(t_arglist *node);
-void		cmd_echo(t_arglist *node);
+int			builtins(t_cleanlist *node);
+void		cmd_cd(t_cleanlist *node);
+void		cmd_echo(t_cleanlist *node);
 void		cmd_env(void);
-void		cmd_export(t_arglist *node);
+void		cmd_export(t_cleanlist *node);
 void		cmd_pwd(void);
-void		cmd_unset(t_arglist *node);
+void		cmd_unset(t_cleanlist *node);
 void 		cmd_exit(void);
 
 	//executes
 void		execute(void);
-void		exec_executables(t_arglist *node);
-void		exec_inputs(t_arglist *node);
-void		exec_inputs_until(t_arglist *node);
-void		exec_outputs(t_arglist *node);
-void		exec_pipe(t_arglist *node);
-char 		**get_paths(t_envplist *head);
+void		exec_executables(t_cleanlist *node);
+void		exec_input(t_arglist *arg_node);
+void		heredoc(t_arglist *arg_node);
+void		exec_outputs(t_arglist *arg_node);
+void		exec_pipe(t_cleanlist *node);
+char		**get_paths(t_envplist *head);
 char		*find_working_path(char *cmd, char **paths);
+void		initiate_fd(void);
 
 //libft
 size_t		ft_lstsize(t_arglist *lst);
@@ -147,7 +150,7 @@ void		order_envplist(void);
 void		update_envp(void);
 void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);
-void		exit_free_matrix(char **matrix,char *str);
+void		exit_free_matrix(t_cleanlist *node, char **matrix, char *str);
 void		free_matrix(char **matrix);
 void		perror_exit(char *msg);
 #endif

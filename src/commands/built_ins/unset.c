@@ -24,10 +24,10 @@ void	destroy_node(char *var)
 	}
 }
 
-void	cmd_unset(t_arglist *node)
+void	cmd_unset(t_cleanlist *node)
 {
 	int			i;
-	
+
 	i = 0;
 	g_exit_status = 0;
 	while (node->av[++i])

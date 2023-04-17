@@ -1,60 +1,83 @@
 #include <minishell.h>
 
-void exec_inputs_until(t_arglist *node)
+static	void sig_handler_heredoc(int signal)
 {
-	ft_putendl_fd("entrei exec_inputs_until", 2);
-	pid_t	fd[2];
-	char	*buff;
+	if (signal == SIGQUIT)
+		return ;
+	if (signal == SIGINT)
+	{
+		write(1, "\n", 1);
+		exit(g_exit_status);
+	}
+}
 
+void	heredoc(t_arglist *arg_node)
+{
+	t_cleanlist	*t_clean;
+	int		fd[2];
+	char		*buff;
+
+	signal(SIGQUIT, sig_handler_heredoc);
+	signal(SIGINT, sig_handler_heredoc);
+	t_clean = cleanlist()->next;
 	pipe(fd);
 	while (1)
 	{
 		buff = readline("> ");
-		if(!ft_strcmp(buff, node->av[0]))
+		if (!buff)
+			break;
+		if(!ft_strcmp(buff, arg_node->av[0]))
 			break ;
 		ft_putendl_fd(buff, fd[1]);
 	}
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[0]);
+	while(t_clean && arg_node->index != t_clean->index)
+		t_clean = t_clean->next;
+	if(t_clean)
+		t_clean->fdin = fd[0];
+	else
+		close(fd[0]);
 	close(fd[1]);
 	free(buff);
-	buff = NULL;
 }
 
-void exec_inputs(t_arglist *node)
+void	exec_input(t_arglist *arg_node)
 {
-	ft_putendl_fd("entrei exec_inputs", 2);
-	int infile;
-	char *error_msg;
+	int		infile;
+	char		*error_msg;
+	t_cleanlist	*t_clean;
 
-	if (node->pipe == PIPE)
-		data()->trigger = 1;
-	if(access(node->av[0], F_OK) == 0)
+	t_clean = cleanlist()->next;
+	if(access(arg_node->av[0], F_OK) == 0)
 	{
-		infile = open(node->av[0], O_RDONLY, 0666);
-		dup2(infile, STDIN_FILENO);
-		close(infile);
+		infile = open(arg_node->av[0], O_RDONLY, 0666);
+		while(t_clean && arg_node->index != t_clean->index)
+			t_clean = t_clean->next;
+		if (t_clean)
+			t_clean->fdin = infile;
+		else
+			close(infile);
 	}
 	else
 	{
 		g_exit_status = 1;
-		error_msg = ft_strjoin("minishell: ", node->av[0]);
+		error_msg = ft_strjoin("minishell: ", arg_node->av[0]);
 		perror(error_msg);
 		free(error_msg);
 		exit(1);
 	}
 }
 
-void exec_outputs(t_arglist *node)
+void	exec_outputs(t_arglist *arg_node)
 {
-	ft_putendl_fd("entrei outputs", 2);
-	int	fd;
+	int			fd;
+	t_cleanlist	*t_clean;
 
-	fd = 0;
-	if (node->rdr == R_OUT_REP)
-		fd = open(node->av[0], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	else if (node->rdr == R_OUT_APP)
-		fd = open(node->av[0], O_WRONLY | O_CREAT | O_APPEND, 0666);
-	dup2(fd, STDOUT_FILENO);
-	close (fd);
+	t_clean = cleanlist()->next;
+	if (arg_node->rdr == R_OUT_REP)
+		fd = open(arg_node->av[0], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	else if (arg_node->rdr == R_OUT_APP)
+		fd = open(arg_node->av[0], O_WRONLY | O_CREAT | O_APPEND, 0666);
+	while(t_clean && arg_node->index != t_clean->index)
+		t_clean = t_clean->next;
+	t_clean->fdout = fd;
 }

@@ -12,12 +12,15 @@ void	perror_exit(char *msg)
 	cmd_exit();
 }
 
-void	exit_free_matrix(char **matrix, char *str)
+void	exit_free_matrix(t_cleanlist *node, char **matrix, char *str)
 {
 	free(str);
-	str = NULL;
 	free_matrix(matrix);
 	cmd_exit();
+	if (node->fdin != -1)
+		close(node->fdin);
+	if (node->fdout != -1)
+		close(node->fdout);
 }
 
 void	free_matrix(char **matrix)
@@ -26,11 +29,6 @@ void	free_matrix(char **matrix)
 
 	i = 0;
 	while (matrix[i])
-	{
-		free(matrix[i]);
-		matrix[i] = NULL;
-		i++;
-	}
+		free(matrix[i++]);
 	free(matrix);
-	matrix = NULL;
 }

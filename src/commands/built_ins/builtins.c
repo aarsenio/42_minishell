@@ -1,7 +1,9 @@
 #include <minishell.h>
 
-int	builtins(t_arglist *node)
+int	builtins(t_cleanlist *node)
 {
+	if(!node->av[0])
+		return (0);
 	if (!ft_strcmp(node->av[0], "echo"))
 		cmd_echo(node);
 	else if (!ft_strcmp(node->av[0], "cd"))

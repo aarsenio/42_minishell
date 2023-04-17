@@ -39,7 +39,7 @@ void	create_cleanlist(void)
 		ac = 0;
 		i = 0;
 		while (t && t->operator != PIPE)
-		{	
+		{
 			if (t && t->operator == NONE)
 			{
 				av[i++] = ft_strcpy(t->token);

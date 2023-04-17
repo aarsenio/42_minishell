@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-static int		is_n_flag(char *str)
+static int	is_n_flag(char *str)
 {
 	if (*str == '-')
 		str++;
@@ -14,9 +14,9 @@ static int		is_n_flag(char *str)
 		return (0);
 }
 
-void	cmd_echo(t_cleanlist *node)
+int	cmd_echo(t_cleanlist *node)
 {
-	int			i;
+	int	i;
 
 	i = 1;
 	g_exit_status = 0;
@@ -31,4 +31,5 @@ void	cmd_echo(t_cleanlist *node)
 	}
 	if (node->ac >= 2 && !is_n_flag(node->av[1]))
 		printf("\n");
+	return (0);
 }

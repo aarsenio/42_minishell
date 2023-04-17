@@ -5,7 +5,7 @@ static t_toklist	*lst_node(void)
 	t_toklist	*t;
 
 	t = toklist()->next;
-	while(t->next)
+	while (t->next)
 		t = t->next;
 	return (t);
 }
@@ -140,7 +140,8 @@ int	token_checker(void)
 	}
 	while (t->next)
 	{
-		if (t->operator != NONE && t->operator != PIPE && t->next->operator == PIPE)
+		if (t->operator != NONE && t->operator \
+			!= PIPE && t->next->operator == PIPE)
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
 			ft_putstr_fd(t->next->token, 2);
@@ -151,7 +152,8 @@ int	token_checker(void)
 	}
 	if (t->operator != NONE)
 	{
-		ft_putendl_fd("minishell: syntax error near unexpected token `newline'", 2);
+		ft_putendl_fd("minishell: syntax error \
+			near unexpected token `newline'", 2);
 		return (0);
 	}
 	return (1);

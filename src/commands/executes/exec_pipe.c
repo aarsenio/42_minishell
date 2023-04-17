@@ -24,16 +24,3 @@ void	exec_pipe(t_cleanlist *node)
 		close(pipe_fd[0]);
 	}
 }
-
-void	initiate_fd(void)
-{
-	t_cleanlist	*t;
-
-	t = cleanlist()->next;
-	while(t)
-	{
-		t->fdin = -1;
-		t->fdout = -1;
-		t = t->next;
-	}
-}

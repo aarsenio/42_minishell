@@ -1,22 +1,27 @@
 #include <minishell.h>
 
-void	cmd_not_found(char *cmd_name)
+static	void	exit_destroy_free(void)
 {
-	ft_putstr_fd(cmd_name, STDERR_FILENO);
-	ft_putendl_fd(": command not found", STDERR_FILENO);
+	destroy_arglist();
+	destroy_envplist();
+	free(data()->envp);
+	free(data()->input);
+	data()->input = NULL;
+	clear_history();
+	exit(0);
 }
 
 void	perror_exit(char *msg)
 {
 	perror(msg);
-	cmd_exit();
+	exit_destroy_free();
 }
 
 void	exit_free_matrix(t_cleanlist *node, char **matrix, char *str)
 {
 	free(str);
 	free_matrix(matrix);
-	cmd_exit();
+	exit_destroy_free();
 	if (node->fdin != -1)
 		close(node->fdin);
 	if (node->fdout != -1)

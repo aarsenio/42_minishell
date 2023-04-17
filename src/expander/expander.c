@@ -34,8 +34,9 @@ char	*replace(char *t, char *var, char *replace)
 	int		i;
 	int		j;
 	int		k;
-	
-	result = malloc(sizeof(char) * (ft_strlen(t) - ft_strlen(var) + ft_strlen(replace) + 2));
+
+	result = malloc(sizeof(char) * (ft_strlen(t) \
+		- ft_strlen(var) + ft_strlen(replace) + 2));
 	i = -1;
 	j = 0;
 	while (t[++i])

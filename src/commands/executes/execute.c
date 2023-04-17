@@ -5,12 +5,14 @@ static void	exec_commands(t_cleanlist *node)
 	char	*bin_path;
 	char	**splitted_paths;
 
-	if(!*node->av)
-		exit(0);
+	if (!*node->av)
+		exit(1);
 	if (strchr(node->av[0], '/'))
 	{
+		if (access(bin_path, F_OK) != 0)
+			no_such_file_or_dir(node->av[0]);
 		if (execve(node->av[0], node->av, data()->envp) == -1)
-		exit(0);
+			exit (1);
 	}
 	splitted_paths = get_paths(envplist()->next);
 	bin_path = find_working_path(node->av[0], splitted_paths);
@@ -26,9 +28,9 @@ static void	exec_commands(t_cleanlist *node)
 
 void	exec_executables(t_cleanlist *node)
 {
-	if(node->rdr == R_IN || node->rdr == R_IN_UNT)
+	if (node->rdr == R_IN || node->rdr == R_IN_UNT)
 		dup2(node->fdin, STDIN_FILENO);
-	if(node->rdr == R_OUT_REP || node->rdr == R_OUT_APP)
+	if (node->rdr == R_OUT_REP || node->rdr == R_OUT_APP)
 		dup2(node->fdout, STDOUT_FILENO);
 	if (node->fdin != -1)
 		close(node->fdin);
@@ -52,9 +54,8 @@ static void	loop_cleanlist_execute(void)
 	}
 	if (t && !t->next)
 		exec_executables(t);
-	while(t && t->index-- > -1)
+	while (t && t->index-- > -1)
 		wait(&wait_status);
-
 }
 
 static void	loop_arglist_redirects(void)
@@ -64,13 +65,13 @@ static void	loop_arglist_redirects(void)
 
 	t_one = arglist()->next;
 	t_two = arglist()->next;
-	while(t_one)
+	while (t_one)
 	{
 		if (t_one->rdr == R_IN_UNT)
 			heredoc(t_one);
 		t_one = t_one->next;
 	}
-	while(t_two)
+	while (t_two)
 	{
 		if (t_two->rdr == R_IN)
 			exec_input(t_two);
@@ -82,7 +83,7 @@ static void	loop_arglist_redirects(void)
 
 void	execute(void)
 {
-	int			wait_status;
+	int		wait_status;
 	int		pid;
 
 	if (ft_lstsize(arglist()) == 1 && builtins(cleanlist()->next))
@@ -100,6 +101,8 @@ void	execute(void)
 	else
 	{
 		waitpid(-1, &wait_status, 0);
+		if (WIFEXITED(wait_status))
+			g_exit_status = wait_status;
 		if (!WTERMSIG(wait_status))
 			g_exit_status = wait_status;
 	}

@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-static void	change_path()
+static void	change_path(void)
 {
 	char	*t;
 
@@ -29,29 +29,27 @@ static void	change_path()
 	}
 }
 
-void	cmd_cd(t_cleanlist *node)
+int	cmd_cd(t_cleanlist *node)
 {
 	char	*s;
 	char	*err_msg;
 
-	g_exit_status = 0;
 	if (node->ac > 2)
 	{
-		g_exit_status = 2;
 		ft_putendl_fd("minishell: cd: too many arguments", 2);
-		return ;
+		return (2);
 	}
 	s = node->av[1];
 	if (node->ac == 1 || !ft_strcmp(node->av[1], "~"))
 		s = fetch_node("HOME")->var_value;
 	if (chdir(s) == -1)
 	{
-		g_exit_status = 2;
 		err_msg = ft_strjoin("minishell: cd: ", node->av[1]);
 		perror(err_msg);
 		free(err_msg);
-		return ;
+		return (2);
 	}
 	change_path();
 	update_envp();
+	return (0);
 }

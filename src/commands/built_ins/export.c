@@ -62,12 +62,11 @@ void	export_print(void)
 	}
 }
 
-void	cmd_export(t_cleanlist *node)
+int	cmd_export(t_cleanlist *node)
 {
 	int		i;
 
 	i = 0;
-	g_exit_status = 0;
 	if (!node->av[1])
 		export_print();
 	while (node->av[++i])
@@ -96,10 +95,11 @@ void	cmd_export(t_cleanlist *node)
 			else
 			{
 				if (fetch_node(node->av[i]))
-					return ;
+					return (0);
 				add_envpnode(new_envpnode(copy_name(node->av[i]), NULL, ft_strcpy(node->av[i])), envplist());
 			}
 		}
 	}
 	update_envp();
+	return (0);
 }

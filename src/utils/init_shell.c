@@ -39,7 +39,7 @@ void	update_envp(void)
 	t = envplist()->next;
 	if (data()->envp)
 		free(data()->envp);
-	data()->envp = malloc(sizeof(char*) * (ft_envplstsize() + 1));
+	data()->envp = malloc(sizeof(char *) * (ft_envplstsize() + 1));
 	while (t)
 	{
 		data()->envp[i++] = t->full;
@@ -51,7 +51,6 @@ void	update_envp(void)
 void	init_shell(char **envp)
 {
 	(void)envp;
-
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
 	init_envplist(envp);

@@ -1,17 +1,16 @@
 #include <minishell.h>
 
-void	cmd_pwd(void)
+int	cmd_pwd(void)
 {
-	char *pwd;
+	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
-	g_exit_status = 0;
 	if (!pwd)
 	{
-		g_exit_status = 2;
 		perror("pwd");
-		return ;
+		return (2);
 	}
 	printf("%s\n", pwd);
 	free(pwd);
+	return (0);
 }

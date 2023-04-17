@@ -50,7 +50,7 @@ void	destroy_cleanlist(void)
 
 void	print_cleanlist(void)
 {
-	t_cleanlist *t;
+	t_cleanlist	*t;
 	int			i;
 
 	t = cleanlist()->next;

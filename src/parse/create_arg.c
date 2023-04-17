@@ -36,7 +36,7 @@ void	create_arglist(void)
 		{
 			rdr = x->operator;
 			x = x->next;
-			av = malloc(sizeof(char*) * 2);
+			av = malloc(sizeof(char *) * 2);
 			av[0] = ft_strcpy(x->token);
 			av[1] = NULL;
 			x = x->next;
@@ -44,7 +44,7 @@ void	create_arglist(void)
 		}
 		else
 		{
-			av = malloc(sizeof(char*) * arg_counter(x));
+			av = malloc(sizeof(char *) * arg_counter(x));
 			if (!av)
 				return ;
 			i = 0;

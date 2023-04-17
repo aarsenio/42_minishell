@@ -104,13 +104,13 @@ int			expendable_len(char *token, int i);
 //commands
 	//built_ins
 int			builtins(t_cleanlist *node);
-void		cmd_cd(t_cleanlist *node);
-void		cmd_echo(t_cleanlist *node);
-void		cmd_env(void);
-void		cmd_export(t_cleanlist *node);
-void		cmd_pwd(void);
-void		cmd_unset(t_cleanlist *node);
-void 		cmd_exit(void);
+int			cmd_cd(t_cleanlist *node);
+int			cmd_echo(t_cleanlist *node);
+int			cmd_env(void);
+int			cmd_export(t_cleanlist *node);
+int			cmd_pwd(void);
+int			cmd_unset(t_cleanlist *node);
+int			cmd_exit(t_cleanlist *node);
 
 	//executes
 void		execute(void);
@@ -150,6 +150,7 @@ void		order_envplist(void);
 void		update_envp(void);
 void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);
+void		no_such_file_or_dir(char *path);
 void		exit_free_matrix(t_cleanlist *node, char **matrix, char *str);
 void		free_matrix(char **matrix);
 void		perror_exit(char *msg);

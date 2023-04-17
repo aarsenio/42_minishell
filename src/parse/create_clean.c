@@ -14,7 +14,6 @@ static int	counter(t_toklist *t)
 		}
 		else
 			t = t->next->next;
-
 	}
 	return (counter);
 }
@@ -33,7 +32,7 @@ void	create_cleanlist(void)
 	while (t)
 	{
 		rdr = NONE;
-		av = malloc(sizeof(char*) * (counter(t) + 1));
+		av = malloc(sizeof(char *) * (counter(t) + 1));
 		if (!av)
 			return ;
 		ac = 0;

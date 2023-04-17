@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-static	void sig_handler_heredoc(int signal)
+static void	sig_handler_heredoc(int signal)
 {
 	if (signal == SIGQUIT)
 		return ;
@@ -14,7 +14,7 @@ static	void sig_handler_heredoc(int signal)
 void	heredoc(t_arglist *arg_node)
 {
 	t_cleanlist	*t_clean;
-	int		fd[2];
+	int			fd[2];
 	char		*buff;
 
 	signal(SIGQUIT, sig_handler_heredoc);
@@ -25,14 +25,14 @@ void	heredoc(t_arglist *arg_node)
 	{
 		buff = readline("> ");
 		if (!buff)
-			break;
-		if(!ft_strcmp(buff, arg_node->av[0]))
+			break ;
+		if (!ft_strcmp(buff, arg_node->av[0]))
 			break ;
 		ft_putendl_fd(buff, fd[1]);
 	}
-	while(t_clean && arg_node->index != t_clean->index)
+	while (t_clean && arg_node->index != t_clean->index)
 		t_clean = t_clean->next;
-	if(t_clean)
+	if (t_clean)
 		t_clean->fdin = fd[0];
 	else
 		close(fd[0]);
@@ -42,15 +42,15 @@ void	heredoc(t_arglist *arg_node)
 
 void	exec_input(t_arglist *arg_node)
 {
-	int		infile;
+	int			infile;
 	char		*error_msg;
 	t_cleanlist	*t_clean;
 
 	t_clean = cleanlist()->next;
-	if(access(arg_node->av[0], F_OK) == 0)
+	if (access(arg_node->av[0], F_OK) == 0)
 	{
 		infile = open(arg_node->av[0], O_RDONLY, 0666);
-		while(t_clean && arg_node->index != t_clean->index)
+		while (t_clean && arg_node->index != t_clean->index)
 			t_clean = t_clean->next;
 		if (t_clean)
 			t_clean->fdin = infile;
@@ -77,7 +77,7 @@ void	exec_outputs(t_arglist *arg_node)
 		fd = open(arg_node->av[0], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (arg_node->rdr == R_OUT_APP)
 		fd = open(arg_node->av[0], O_WRONLY | O_CREAT | O_APPEND, 0666);
-	while(t_clean && arg_node->index != t_clean->index)
+	while (t_clean && arg_node->index != t_clean->index)
 		t_clean = t_clean->next;
 	t_clean->fdout = fd;
 }

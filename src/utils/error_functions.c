@@ -4,10 +4,11 @@ static	void	exit_destroy_free(void)
 {
 	destroy_arglist();
 	destroy_envplist();
+	destroy_cleanlist();
 	free(data()->envp);
 	free(data()->input);
 	data()->input = NULL;
-	clear_history();
+	rl_clear_history();
 	exit(0);
 }
 

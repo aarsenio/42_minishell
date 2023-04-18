@@ -50,9 +50,10 @@ int	cmd_exit(t_cleanlist *node)
 	ft_putendl_fd("exit", STDOUT_FILENO);
 	destroy_arglist();
 	destroy_envplist();
+	destroy_cleanlist();
 	free(data()->envp);
 	free(data()->input);
 	data()->input = NULL;
-	clear_history();
+	rl_clear_history();
 	exit(status);
 }

@@ -8,13 +8,10 @@ static void	exec_commands(t_cleanlist *node)
 	if (!*node->av)
 		exit(1);
 	splitted_paths = get_paths(envplist()->next);
-	if (!ft_strcmp(node->av[0], "./minishell"))
-		bin_path = "./minishell";
-	else
-		bin_path = find_working_path(node->av[0], splitted_paths);
-	if (node->av[0][0] == '/')
+	bin_path = find_working_path(node->av[0], splitted_paths);
+	if (ft_strchr(node->av[0], '/'))
 	{
-		if (access(bin_path, F_OK) != 0)
+		if (access(node->av[0], F_OK) != 0)
 			no_such_file_or_dir(node->av[0]);
 		if (execve(node->av[0], node->av, data()->envp) == -1)
 			exit (1);

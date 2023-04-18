@@ -1,5 +1,4 @@
 #include <minishell.h>
-
 char	*replace_search(char *str)
 {
 	t_envplist	*tmp;

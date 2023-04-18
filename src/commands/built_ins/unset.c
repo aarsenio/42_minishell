@@ -1,5 +1,16 @@
 #include <minishell.h>
 
+static int	is_valid(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == '=')
+			return (0);
+	return (1);
+}
+
 void	destroy_node(char *var)
 {
 	t_envplist	*t;
@@ -24,13 +35,23 @@ void	destroy_node(char *var)
 	}
 }
 
-int	cmd_unset(t_cleanlist *node)
+void	cmd_unset(t_cleanlist *node)
 {
 	int			i;
 
 	i = 0;
+	g_exit_status = 0;
 	while (node->av[++i])
-		destroy_node(node->av[i]);
+	{
+		if (!is_valid(node->av[i]))
+		{
+			g_exit_status = 2;
+			ft_putstr_fd("bash: unset: `", 2);
+			ft_putstr_fd(node->av[i], 2);
+			ft_putendl_fd("': not a valid identifier", 2);
+		}
+		else
+			destroy_node(node->av[i]);
+	}
 	update_envp();
-	return (0);
 }

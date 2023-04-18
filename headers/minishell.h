@@ -107,9 +107,9 @@ int			builtins(t_cleanlist *node);
 int			cmd_cd(t_cleanlist *node);
 int			cmd_echo(t_cleanlist *node);
 int			cmd_env(void);
-int			cmd_export(t_cleanlist *node);
+void		cmd_export(t_cleanlist *node);
 int			cmd_pwd(void);
-int			cmd_unset(t_cleanlist *node);
+void		cmd_unset(t_cleanlist *node);
 int			cmd_exit(t_cleanlist *node);
 
 	//executes
@@ -133,6 +133,7 @@ char		*ft_strcpy(char *str);
 char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlen(const char *s);
 char		*ft_itoa(int n);
+long long	ft_atoll(const char *str);
 
 //utils
 int			varname_length(char *str);

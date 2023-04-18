@@ -19,7 +19,6 @@ int	cmd_echo(t_cleanlist *node)
 	int	i;
 
 	i = 1;
-	g_exit_status = 0;
 	if (node->ac > 2 && is_n_flag(node->av[1]))
 		i++;
 	while (node->av[i])

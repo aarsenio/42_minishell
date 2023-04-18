@@ -11,9 +11,9 @@ int	builtins(t_cleanlist *node)
 	else if (!ft_strcmp(node->av[0], "pwd"))
 		g_exit_status = cmd_pwd();
 	else if (!ft_strcmp(node->av[0], "export"))
-		g_exit_status = cmd_export(node);
+		cmd_export(node);
 	else if (!ft_strcmp(node->av[0], "unset"))
-		g_exit_status = cmd_unset(node);
+		cmd_unset(node);
 	else if (!ft_strcmp(node->av[0], "env"))
 		g_exit_status = cmd_env();
 	else if (!ft_strcmp(node->av[0], "exit"))

@@ -12,6 +12,8 @@ static int	is_num_long_long(char *s)
 	int			i;
 
 	i = 0;
+	if (ft_strcmp(s, "-9223372036854775809") <= 0 || ft_strcmp(s, "9223372036854775808") <= 0)
+		return (0);
 	while ((s[i] && s[i] == ' ') || (s[i] >= 9 && s[i] <= 13))
 		i++;
 	if (s[i] == '-' || s[i] == '+')
@@ -23,23 +25,28 @@ static int	is_num_long_long(char *s)
 		n = n * 10 + sig * (s[i++] - '0');
 	if (s[i] && !ft_isdigit(s[i]))
 		return (0);
-	if (n >= -9223372036854775807 || n <= 9223372036854775806)
-		return (1);
-	else
-		return (0);
+	return (1);
 }
 
 int	cmd_exit(t_cleanlist *node)
 {
 	int	status;
 
+	status = 0;
+	if (node->ac > 2)
+	{
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		return (1);
+	}
 	if (node->av[1] && is_num_long_long(node->av[1]))
 	{
-		ft_putendl_fd("minishell: exit:", 1);
-		ft_putendl_fd(node->av[1], 1);
-		ft_putendl_fd(": numeric argument required", 1);
+		ft_putstr_fd("minishell: exit:", 2);
+		ft_putstr_fd(node->av[1], 2);
+		ft_putendl_fd(": numeric argument required", 2);
 		status = 2;
 	}
+	else if (node->av[1])
+		status = ft_atoll(node->av[1]);
 	ft_putendl_fd("exit", STDOUT_FILENO);
 	destroy_arglist();
 	destroy_envplist();

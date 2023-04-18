@@ -7,6 +7,8 @@ static void	exec_commands(t_cleanlist *node)
 
 	if (!*node->av)
 		exit(1);
+	splitted_paths = get_paths(envplist()->next);
+	bin_path = find_working_path(node->av[0], splitted_paths);
 	if (strchr(node->av[0], '/'))
 	{
 		if (access(bin_path, F_OK) != 0)
@@ -14,8 +16,6 @@ static void	exec_commands(t_cleanlist *node)
 		if (execve(node->av[0], node->av, data()->envp) == -1)
 			exit (1);
 	}
-	splitted_paths = get_paths(envplist()->next);
-	bin_path = find_working_path(node->av[0], splitted_paths);
 	if (!bin_path)
 	{
 		g_exit_status = 127;

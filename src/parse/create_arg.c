@@ -16,25 +16,21 @@ int	arg_counter(t_toklist *x)
 void	create_arglist(void)
 {
 	t_toklist	*x;
-	t_operator	rdr;
-	t_operator	pipe;
+	t_operator	op[2];
+	int			i[2];
 	char		**av;
-	int			i;
 	int			ac;
-	int			index;
-	int			t_index;
 
 	x = toklist()->next;
-	t_index = 0;
+	i[1] = 0;
 	while (x)
 	{
-		index = t_index;
-		rdr = NONE;
-		pipe = NONE;
+		op[0] = NONE;
+		op[1] = NONE;
 		ac = 0;
 		if (x->operator != NONE && x->operator != PIPE)
 		{
-			rdr = x->operator;
+			op[0] = x->operator;
 			x = x->next;
 			av = malloc(sizeof(char *) * 2);
 			av[0] = ft_strcpy(x->token);
@@ -47,24 +43,25 @@ void	create_arglist(void)
 			av = malloc(sizeof(char *) * arg_counter(x));
 			if (!av)
 				return ;
-			i = 0;
+			i[0] = 0;
 			while (x && x->operator == NONE)
 			{
 				if (x->token)
 				{
-					av[i++] = ft_strcpy(x->token);
+					av[i[0]++] = ft_strcpy(x->token);
 					ac++;
 				}
 				x = x->next;
 			}
-			av[i] = NULL;
+			av[i[0]] = NULL;
 		}
 		if (x && x->operator == PIPE)
 		{
-			pipe = x->operator;
+			op[1] = x->operator;
 			x = x->next;
-			t_index++;
 		}
-		add_argnode(new_argnode(ac, av, rdr, pipe, index), arglist());
+		add_argnode(new_argnode(ac, av, op, i[1]), arglist());
+		if (x && x->operator == PIPE)
+			i[1]++;
 	}
 }

@@ -47,23 +47,3 @@ void	destroy_cleanlist(void)
 		free (tmp);
 	}
 }
-
-void	print_cleanlist(void)
-{
-	t_cleanlist	*t;
-	int			i;
-
-	t = cleanlist()->next;
-	while (t)
-	{
-		i = 0;
-		printf("rdr: %i\n", t->rdr);
-		printf("index: %i\n", t->index);
-		printf("ac: %i\n", t->ac);
-		printf("frase: ");
-		while (t->av[i])
-			printf("%s ", t->av[i++]);
-		t = t->next;
-		printf("\n\n");
-	}
-}

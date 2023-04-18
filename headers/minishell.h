@@ -71,23 +71,20 @@ t_toklist	*new_toknode(char *token, t_operator operator);
 void		add_toknode(t_toklist *new, t_toklist *x);
 void		destroy_toklist(void);
 int			tokenizer(char *input);
-void		print_toklist(void);
 void		add_argnode(t_arglist *new, t_arglist *x);
-t_arglist	*new_argnode(int ac, char **av, t_operator	rdr, \
-			t_operator	pipe, int index);
+t_arglist	*new_argnode(int ac, char **av, t_operator *op, int index);
 void		create_arglist(void);
 void		destroy_arglist(void);
-void		print_arglist(void);
 void		add_envpnode(t_envplist *new, t_envplist *x);
 t_envplist	*new_envpnode(char *name, char *value, char *full);
 void		destroy_envplist(void);
 void		init_envplist(char **envp);
-void		print_envplist(void);
 t_cleanlist	*new_cleannode(int ac, char **av, int index, t_operator rdr);
 void		add_cleannode(t_cleanlist *new, t_cleanlist *x);
 void		destroy_cleanlist(void);
-void		print_cleanlist(void);
 void		create_cleanlist(void);
+int			alphanumeric(char *input, int i);
+int			pipe_redirections(char *input, int i);
 
 // parse lib
 char		*parse_strjoin(char const *s1, char const *s2);

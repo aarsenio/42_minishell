@@ -87,17 +87,21 @@ void	cmd_export(t_cleanlist *node)
 				{
 					free(fetch_node(node->av[i])->var_value);
 					free(fetch_node(node->av[i])->full);
-					fetch_node(node->av[i])->var_value = copy_value(node->av[i]);
+					fetch_node(node->av[i])->var_value = \
+					copy_value(node->av[i]);
 					fetch_node(node->av[i])->full = ft_strcpy(node->av[i]);
 				}
 				else
-					add_envpnode(new_envpnode(copy_name(node->av[i]), copy_value(node->av[i]), ft_strcpy(node->av[i])), envplist());
+					add_envpnode(new_envpnode(copy_name(node->av[i]), \
+					copy_value(node->av[i]), ft_strcpy(node->av[i])), \
+					envplist());
 			}
 			else
 			{
 				if (fetch_node(node->av[i]))
 					return ;
-				add_envpnode(new_envpnode(copy_name(node->av[i]), NULL, ft_strcpy(node->av[i])), envplist());
+				add_envpnode(new_envpnode(copy_name(node->av[i]), NULL, \
+				ft_strcpy(node->av[i])), envplist());
 			}
 		}
 	}

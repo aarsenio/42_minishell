@@ -4,7 +4,7 @@ static int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
-// TODO: Arranjar exit 
+
 static int	is_num_long_long(char *s)
 {
 	long long	n;
@@ -12,7 +12,8 @@ static int	is_num_long_long(char *s)
 	int			i;
 
 	i = 0;
-	if (ft_strcmp(s, "-9223372036854775809") <= 0 || ft_strcmp(s, "9223372036854775808") <= 0)
+	if (ft_strcmp(s, "-9223372036854775809") <= 0 || \
+	ft_strcmp(s, "9223372036854775808") <= 0)
 		return (0);
 	while ((s[i] && s[i] == ' ') || (s[i] >= 9 && s[i] <= 13))
 		i++;

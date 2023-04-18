@@ -23,12 +23,11 @@ void	create_cleanlist(void)
 	t_toklist	*t;
 	t_operator	rdr;
 	char		**av;
-	int			index;
-	int			i;
+	int			i[2];
 	int			ac;
 
 	t = toklist()->next;
-	index = 0;
+	i[1] = 0;
 	while (t)
 	{
 		rdr = NONE;
@@ -36,12 +35,12 @@ void	create_cleanlist(void)
 		if (!av)
 			return ;
 		ac = 0;
-		i = 0;
+		i[0] = 0;
 		while (t && t->operator != PIPE)
 		{
 			if (t && t->operator == NONE)
 			{
-				av[i++] = ft_strcpy(t->token);
+				av[i[0]++] = ft_strcpy(t->token);
 				ac++;
 				t = t->next;
 			}
@@ -51,9 +50,9 @@ void	create_cleanlist(void)
 				t = t->next->next;
 			}
 		}
-		av[i] = NULL;
-		add_cleannode(new_cleannode(ac, av, index, rdr), cleanlist());
-		index++;
+		av[i[0]] = NULL;
+		add_cleannode(new_cleannode(ac, av, i[1], rdr), cleanlist());
+		i[1]++;
 		if (t && t->operator == PIPE)
 			t = t->next;
 	}

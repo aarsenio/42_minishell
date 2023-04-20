@@ -54,7 +54,6 @@ int	cmd_exit(t_cleanlist *node)
 	destroy_cleanlist();
 	free(data()->envp);
 	free(data()->input);
-	data()->input = NULL;
 	rl_clear_history();
 	exit(status);
 }

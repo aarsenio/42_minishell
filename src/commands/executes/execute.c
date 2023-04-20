@@ -14,7 +14,7 @@ static void	exec_commands(t_cleanlist *node)
 		if (access(node->av[0], F_OK) != 0)
 			no_such_file_or_dir(node->av[0]);
 		if (execve(node->av[0], node->av, data()->envp) == -1)
-			exit (1);
+			exit (1); //TODO:mais frees?
 	}
 	if (!bin_path)
 	{
@@ -37,7 +37,7 @@ void	exec_executables(t_cleanlist *node)
 	if (node->fdout != -1)
 		close(node->fdout);
 	if (builtins(node))
-		exit(0);
+		exit(g_exit_status);
 	exec_commands(node);
 }
 
@@ -96,15 +96,12 @@ void	execute(void)
 	{
 		loop_arglist_redirects();
 		loop_cleanlist_execute();
-		exit(0);
 	}
 	else
 	{
 		waitpid(-1, &wait_status, 0);
 		if (WIFEXITED(wait_status))
-			g_exit_status = wait_status;
-		if (!WTERMSIG(wait_status))
-			g_exit_status = wait_status;
+			g_exit_status = wait_status >> 8;
 	}
 	return ;
 }

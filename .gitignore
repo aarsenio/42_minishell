@@ -59,3 +59,4 @@ pipex_here_doc.c
 temp_execute.c
 temp_get_path.c
 temp_redirects.c
+minishell-tester

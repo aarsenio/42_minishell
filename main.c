@@ -26,11 +26,28 @@ int	check_input(char *input)
 	return (1);
 }
 
+static void	sig_handler(int signal)
+{
+	if (signal == SIGQUIT)
+		return ;
+	if (signal == SIGINT)
+	{
+		g_exit_status = 130;
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	return ;
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	(void)av;
 
+	signal(SIGQUIT, sig_handler);
+	signal(SIGINT, sig_handler);
 	init_shell(envp);
 	while (1)
 	{

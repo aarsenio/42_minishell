@@ -90,6 +90,7 @@ void		destroy_cleanlist(void);
 void		create_cleanlist(void);
 int			alphanumeric(char *input, int i);
 int			pipe_redirections(char *input, int i);
+void		print_arlist(void);
 
 // parse lib
 char		*parse_strjoin(char const *s1, char const *s2);

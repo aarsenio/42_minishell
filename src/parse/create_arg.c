@@ -25,6 +25,12 @@ static char	**create_arg_redirect(t_toklist *x, char **av)
 	x = x->next;
 	data()->i = data()->i + 2;
 	data()->ac = 1;
+	if (x && x->operator == PIPE)
+	{
+		data()->op[1] = x->operator;
+		x = x->next;
+		data()->i++;
+	}
 	return (av);
 }
 
@@ -61,17 +67,22 @@ void	create_arglist(void)
 
 	x = toklist()->next;
 	i = 0;
+	data()->old_i = 0;
+	data()->i = 0;
 	while (x)
 	{
 		data()->op[0] = NONE;
 		data()->op[1] = NONE;
-		i = 0;
+		data()->ac = 0;
 		if (x->operator != NONE && x->operator != PIPE)
 			av = create_arg_redirect(x, av);
 		else
 			av = create_arg_no_redirect(x, av, 0);
-		while (x && data()->old_i <= data()->i)
+		while (x && data()->old_i < data()->i)
+		{
 			x = x->next;
+			data()->old_i++;
+		}
 		add_argnode(new_argnode(data()->ac, av, data()->op, i), arglist());
 		if (x && x->operator == PIPE)
 			i++;

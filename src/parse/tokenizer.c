@@ -54,8 +54,7 @@ static int	token_checker_pt2(t_toklist *t)
 {
 	if (t->operator != NONE)
 	{
-		ft_putendl_fd("minishell: syntax error \
-			near unexpected token `newline'", 2);
+		ft_putendl_fd("minishell: syntax error near unexpected token `newline'", 2);
 		return (0);
 	}
 	return (1);

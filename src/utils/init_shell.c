@@ -1,20 +1,5 @@
 #include <minishell.h>
 
-static void	sig_handler(int signal)
-{
-	if (signal == SIGQUIT)
-		return ;
-	if (signal == SIGINT)
-	{
-		g_exit_status = 130;
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	return ;
-}
-
 int	ft_envplstsize(void)
 {
 	t_envplist	*temp;
@@ -51,8 +36,6 @@ void	update_envp(void)
 void	init_shell(char **envp)
 {
 	(void)envp;
-	signal(SIGQUIT, sig_handler);
-	signal(SIGINT, sig_handler);
 	init_envplist(envp);
 	update_envp();
 }

@@ -6,6 +6,8 @@ static void	sig_handler_heredoc(int signal)
 		return ;
 	if (signal == SIGINT)
 	{
+		//close(fd); //TODO:fechar fds
+		g_exit_status = 130;
 		write(1, "\n", 1);
 		exit(g_exit_status);
 	}
@@ -79,5 +81,8 @@ void	exec_outputs(t_arglist *arg_node)
 		fd = open(arg_node->av[0], O_WRONLY | O_CREAT | O_APPEND, 0666);
 	while (t_clean && arg_node->index != t_clean->index)
 		t_clean = t_clean->next;
-	t_clean->fdout = fd;
+	if (t_clean)
+		t_clean->fdout = fd;
+	else
+		close(fd);
 }

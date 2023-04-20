@@ -9,7 +9,7 @@ static	void	exit_destroy_free(void)
 	free(data()->input);
 	data()->input = NULL;
 	rl_clear_history();
-	exit(0);
+	exit(g_exit_status);
 }
 
 void	perror_exit(char *msg)

@@ -45,7 +45,6 @@ int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	(void)av;
-
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
 	init_shell(envp);

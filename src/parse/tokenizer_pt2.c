@@ -1,15 +1,5 @@
 #include <minishell.h>
 
-static t_toklist	*lst_node(void)
-{
-	t_toklist	*t;
-
-	t = toklist()->next;
-	while (t->next)
-		t = t->next;
-	return (t);
-}
-
 static int	letter_count(char *input, int i)
 {
 	int	result;
@@ -53,22 +43,10 @@ int	pipe_redirections(char *input, int i)
 	return (i + 1);
 }
 
-int	alphanumeric(char *input, int i)
+static void	alphanumeric_pt2(char *input, int tmp, char *token)
 {
-	char		*token;
-	int			j;
-	int			tmp;
 	t_toklist	*x;
 
-	j = 0;
-	tmp = i;
-	token = malloc(sizeof(char) * (letter_count(input, i) + 1));
-	if (!token)
-		return (0);
-	while (input[i] && !is_space(input[i]) && !is_operator(input[i]) && \
-	!is_quote(input[i]))
-		token[j++] = input[i++];
-	token[j] = '\0';
 	if (expander_checker(token) && lst_node()->operator != R_IN_UNT)
 		token = expander(token);
 	if (tmp != 0 && is_quote(input[tmp - 1]))
@@ -81,5 +59,23 @@ int	alphanumeric(char *input, int i)
 	}
 	else
 		add_toknode(new_toknode(token, NONE), toklist());
+}
+
+int	alphanumeric(char *input, int i)
+{
+	char		*token;
+	int			j;
+	int			tmp;
+
+	j = 0;
+	tmp = i;
+	token = malloc(sizeof(char) * (letter_count(input, i) + 1));
+	if (!token)
+		return (0);
+	while (input[i] && !is_space(input[i]) && !is_operator(input[i]) && \
+	!is_quote(input[i]))
+		token[j++] = input[i++];
+	token[j] = '\0';
+	alphanumeric_pt2(input, tmp, token);
 	return (i);
 }

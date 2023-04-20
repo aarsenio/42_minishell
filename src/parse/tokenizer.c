@@ -12,26 +12,14 @@ static int	quote_count(char *input, int i)
 	return (result);
 }
 
-static int	quotes(char *input, int i)
+static void	quotes_pt2(char *input, int *k, char *token, char quote)
 {
-	char		*token;
-	char		quote;
-	int			j;
-	int			t;
 	t_toklist	*x;
 
-	j = 0;
-	t = i;
-	quote = input[i];
-	token = malloc(sizeof(char) * (quote_count(input, i) + 1));
-	if (!token)
-		return (0);
-	while (input[++i] != quote)
-		token[j++] = input[i];
-	token[j] = '\0';
 	if (quote == '"' && expander_checker(token))
 		token = expander(token);
-	if (t != 0 && !is_space(input[t - 1]) && !is_operator(input[t - 1]))
+	if (k[1] != 0 && !is_space(input[k[1] - 1]) && \
+	!is_operator(input[k[1] - 1]))
 	{
 		x = toklist()->next;
 		while (x->next)
@@ -41,7 +29,36 @@ static int	quotes(char *input, int i)
 	}
 	else
 		add_toknode(new_toknode(token, NONE), toklist());
+}
+
+static int	quotes(char *input, int i)
+{
+	char		*token;
+	char		quote;
+	int			k[2];
+
+	k[0] = 0;
+	k[1] = i;
+	quote = input[i];
+	token = malloc(sizeof(char) * (quote_count(input, i) + 1));
+	if (!token)
+		return (0);
+	while (input[++i] != quote)
+		token[k[0]++] = input[i];
+	token[k[0]] = '\0';
+	quotes_pt2(input, k, token, quote);
 	return (i + 1);
+}
+
+static int	token_checker_pt2(t_toklist *t)
+{
+	if (t->operator != NONE)
+	{
+		ft_putendl_fd("minishell: syntax error \
+			near unexpected token `newline'", 2);
+		return (0);
+	}
+	return (1);
 }
 
 static int	token_checker(void)
@@ -66,12 +83,8 @@ static int	token_checker(void)
 		}
 		t = t->next;
 	}
-	if (t->operator != NONE)
-	{
-		ft_putendl_fd("minishell: syntax error \
-			near unexpected token `newline'", 2);
+	if (!token_checker_pt2(t))
 		return (0);
-	}
 	return (1);
 }
 

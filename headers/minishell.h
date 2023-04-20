@@ -70,6 +70,7 @@ typedef struct s_data
 t_toklist	*new_toknode(char *token, t_operator operator);
 void		add_toknode(t_toklist *new, t_toklist *x);
 void		destroy_toklist(void);
+t_toklist	*lst_node(void);
 int			tokenizer(char *input);
 void		add_argnode(t_arglist *new, t_arglist *x);
 t_arglist	*new_argnode(int ac, char **av, t_operator *op, int index);

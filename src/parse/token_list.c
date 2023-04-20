@@ -39,3 +39,13 @@ void	destroy_toklist(void)
 		free (tmp);
 	}
 }
+
+t_toklist	*lst_node(void)
+{
+	t_toklist	*t;
+
+	t = toklist()->next;
+	while (t->next)
+		t = t->next;
+	return (t);
+}

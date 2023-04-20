@@ -28,14 +28,16 @@ static void	exec_commands(t_cleanlist *node)
 
 void	exec_executables(t_cleanlist *node)
 {
-	if (node->fdin)
-		dup2(node->fdin, STDIN_FILENO);
-	if (node->fdout)
-		dup2(node->fdout, STDOUT_FILENO);
 	if (node->fdin != -1)
+	{
+		dup2(node->fdin, STDIN_FILENO);
 		close(node->fdin);
+	}
 	if (node->fdout != -1)
+	{
+		dup2(node->fdout, STDOUT_FILENO);
 		close(node->fdout);
+	}
 	if (builtins(node))
 		exit(g_exit_status);
 	exec_commands(node);

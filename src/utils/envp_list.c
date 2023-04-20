@@ -43,6 +43,7 @@ void	destroy_envplist(void)
 			free(tmp->full);
 		free (tmp);
 	}
+	free(data()->envp);
 }
 
 void	order_envplist(void)

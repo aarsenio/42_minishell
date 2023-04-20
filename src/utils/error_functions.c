@@ -5,7 +5,6 @@ static	void	exit_destroy_free(void)
 	destroy_arglist();
 	destroy_envplist();
 	destroy_cleanlist();
-	free(data()->envp);
 	free(data()->input);
 	data()->input = NULL;
 	rl_clear_history();

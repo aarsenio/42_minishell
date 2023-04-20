@@ -37,7 +37,7 @@ int	cmd_exit(t_cleanlist *node)
 	if (node->ac > 2)
 	{
 		ft_putendl_fd("minishell: exit: too many arguments", 2);
-		return (1);
+		return (2);
 	}
 	if (node->av[1] && is_num_long_long(node->av[1]))
 	{

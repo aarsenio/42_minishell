@@ -74,7 +74,7 @@ void	cmd_export(t_cleanlist *node)
 	{
 		if (!is_valid(node->av[i][0]))
 		{
-			g_exit_status = 2;
+			g_exit_status = 1;
 			ft_putstr_fd("minishell: export: `", 2);
 			ft_putstr_fd(node->av[i], 2);
 			ft_putendl_fd("': not a valid identifier", 2);

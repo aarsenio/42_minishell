@@ -9,6 +9,7 @@ static void	exec_commands(t_cleanlist *node)
 		exit(1);
 	splitted_paths = get_paths(envplist()->next);
 	bin_path = find_working_path(node->av[0], splitted_paths);
+	fprintf(stderr, "infile %d\n", node->fdin);
 	if (ft_strchr(node->av[0], '/'))
 	{
 		if (access(node->av[0], F_OK) != 0)
@@ -28,9 +29,9 @@ static void	exec_commands(t_cleanlist *node)
 
 void	exec_executables(t_cleanlist *node)
 {
-	if (node->rdr == R_IN || node->rdr == R_IN_UNT)
+	if (node->fdin)
 		dup2(node->fdin, STDIN_FILENO);
-	if (node->rdr == R_OUT_REP || node->rdr == R_OUT_APP)
+	if (node->fdout)
 		dup2(node->fdout, STDOUT_FILENO);
 	if (node->fdin != -1)
 		close(node->fdin);
@@ -60,27 +61,29 @@ static void	loop_cleanlist_execute(void)
 
 static void	loop_arglist_redirects(void)
 {
-	t_arglist	*t_one;
-	t_arglist	*t_two;
+	t_arglist	*t;
 
-	t_one = arglist()->next;
-	t_two = arglist()->next;
-	while (t_one)
+	t = arglist()->next;
+	while (t)
 	{
-		if (t_one->rdr == R_IN_UNT)
-			heredoc(t_one);
-		t_one = t_one->next;
+		if (t->rdr == R_IN_UNT)
+			heredoc(t);
+		t = t->next;
 	}
-	while (t_two)
+	t = arglist()->next;
+	while (t)
 	{
-		if (t_two->rdr == R_IN)
-			exec_input(t_two);
-		else if (t_two->rdr == R_OUT_REP || t_two->rdr == R_OUT_APP)
-			exec_outputs(t_two);
-		t_two = t_two->next;
+		if (t->rdr == R_IN)
+			exec_input(t);
+		else if (t->rdr == R_OUT_REP || t->rdr == R_OUT_APP)
+			exec_outputs(t);
+		t = t->next;
 	}
 }
-
+/*Starts executing process, initiate fds, forks, the child starts the
+redirections and executions functions, the parets keeps the original
+stdin and out for when when minisheel starts again in a new prompt,
+and waits for the child, gets the wait status and passes it to g_exit_status*/
 void	execute(void)
 {
 	int		wait_status;
@@ -100,6 +103,7 @@ void	execute(void)
 	else
 	{
 		waitpid(-1, &wait_status, 0);
+		printf("waitstatus: %d\n", wait_status);
 		if (WIFEXITED(wait_status))
 			g_exit_status = wait_status >> 8;
 	}

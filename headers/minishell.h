@@ -64,6 +64,10 @@ typedef struct s_data
 {
 	char				**envp;
 	char				*input;
+	int					ac;
+	int					i;
+	int					old_i;
+	t_operator			op[2];
 }t_data;
 
 // parse

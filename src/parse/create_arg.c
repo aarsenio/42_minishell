@@ -13,55 +13,67 @@ int	arg_counter(t_toklist *x)
 	return (result + 1);
 }
 
+static char	**create_arg_redirect(t_toklist *x, char **av)
+{
+	data()->op[0] = x->operator;
+	x = x->next;
+	av = malloc(sizeof(char *) * 2);
+	if (!av)
+		return (NULL);
+	av[0] = ft_strcpy(x->token);
+	av[1] = NULL;
+	x = x->next;
+	data()->i = data()->i + 2;
+	data()->ac = 1;
+	return (av);
+}
+
+static char	**create_arg_no_redirect(t_toklist *x, char **av, int i)
+{
+	av = malloc(sizeof(char *) * arg_counter(x));
+	if (!av)
+		return (NULL);
+	while (x && x->operator == NONE)
+	{
+		if (x->token)
+		{
+			av[i++] = ft_strcpy(x->token);
+			data()->ac++;
+		}
+		x = x->next;
+		data()->i++;
+	}
+	av[i] = NULL;
+	if (x && x->operator == PIPE)
+	{
+		data()->op[1] = x->operator;
+		x = x->next;
+		data()->i++;
+	}
+	return (av);
+}
+
 void	create_arglist(void)
 {
 	t_toklist	*x;
-	t_operator	op[2];
-	int			i[2];
+	int			i;
 	char		**av;
-	int			ac;
 
 	x = toklist()->next;
-	i[1] = 0;
+	i = 0;
 	while (x)
 	{
-		op[0] = NONE;
-		op[1] = NONE;
-		ac = 0;
+		data()->op[0] = NONE;
+		data()->op[1] = NONE;
+		i = 0;
 		if (x->operator != NONE && x->operator != PIPE)
-		{
-			op[0] = x->operator;
-			x = x->next;
-			av = malloc(sizeof(char *) * 2);
-			av[0] = ft_strcpy(x->token);
-			av[1] = NULL;
-			x = x->next;
-			ac = 1;
-		}
+			av = create_arg_redirect(x, av);
 		else
-		{
-			av = malloc(sizeof(char *) * arg_counter(x));
-			if (!av)
-				return ;
-			i[0] = 0;
-			while (x && x->operator == NONE)
-			{
-				if (x->token)
-				{
-					av[i[0]++] = ft_strcpy(x->token);
-					ac++;
-				}
-				x = x->next;
-			}
-			av[i[0]] = NULL;
-		}
-		if (x && x->operator == PIPE)
-		{
-			op[1] = x->operator;
+			av = create_arg_no_redirect(x, av, 0);
+		while (x && data()->old_i <= data()->i)
 			x = x->next;
-		}
-		add_argnode(new_argnode(ac, av, op, i[1]), arglist());
+		add_argnode(new_argnode(data()->ac, av, data()->op, i), arglist());
 		if (x && x->operator == PIPE)
-			i[1]++;
+			i++;
 	}
 }

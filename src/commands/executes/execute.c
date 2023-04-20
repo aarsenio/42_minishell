@@ -9,7 +9,6 @@ static void	exec_commands(t_cleanlist *node)
 		exit(1);
 	splitted_paths = get_paths(envplist()->next);
 	bin_path = find_working_path(node->av[0], splitted_paths);
-	fprintf(stderr, "infile %d\n", node->fdin);
 	if (ft_strchr(node->av[0], '/'))
 	{
 		if (access(node->av[0], F_OK) != 0)
@@ -103,7 +102,6 @@ void	execute(void)
 	else
 	{
 		waitpid(-1, &wait_status, 0);
-		printf("waitstatus: %d\n", wait_status);
 		if (WIFEXITED(wait_status))
 			g_exit_status = wait_status >> 8;
 	}

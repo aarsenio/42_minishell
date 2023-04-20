@@ -66,7 +66,7 @@ char	*expander(char *token)
 	i = 0;
 	while (token[i])
 	{
-		if (token[i + 1] && token[i] == '$' && !is_space(token[i + 1]))
+		if (token[i + 1] && token[i] == '$' && is_alpha(token[i + 1]))
 		{
 			t = token;
 			ex_tmp = malloc(sizeof(char) * (expendable_len(t, i) + 1));
@@ -74,7 +74,7 @@ char	*expander(char *token)
 				return (NULL);
 			j = 0;
 			k = i + 1;
-			while (token[k] && !is_space(token[k]) && token[k] != '$')
+			while (token[k] && !is_space(token[k]) && !is_quote(token[k]) && token[k] != '$')
 				ex_tmp[j++] = token[k++];
 			ex_tmp[j] = '\0';
 			i += ft_strlen(replace_search(ex_tmp));

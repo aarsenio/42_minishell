@@ -132,6 +132,7 @@ size_t		ft_strlen(const char *s);
 char		*ft_itoa(int n);
 long long	ft_atoll(const char *str);
 int			ft_strchr(char *s, char c);
+int			is_alpha(int c);
 
 //utils
 int			varname_length(char *str);

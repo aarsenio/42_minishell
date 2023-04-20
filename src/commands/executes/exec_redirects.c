@@ -30,6 +30,8 @@ void	heredoc(t_arglist *arg_node)
 			break ;
 		if (!ft_strcmp(buff, arg_node->av[0]))
 			break ;
+		if (expander_checker(buff))
+			buff = expander(buff);
 		ft_putendl_fd(buff, fd[1]);
 	}
 	while (t_clean && arg_node->index != t_clean->index)

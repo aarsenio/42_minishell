@@ -1,12 +1,5 @@
 #include <minishell.h>
 
-static int	is_valid(int c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	return (0);
-}
-
 static int	is_value(char *str)
 {
 	int	i;
@@ -72,7 +65,7 @@ void	cmd_export(t_cleanlist *node)
 		export_print();
 	while (node->av[++i])
 	{
-		if (!is_valid(node->av[i][0]))
+		if (!is_alpha(node->av[i][0]))
 		{
 			g_exit_status = 1;
 			ft_putstr_fd("minishell: export: `", 2);

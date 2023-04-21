@@ -1,8 +1,8 @@
 CC			= 	cc
-CFLAGS		= 	-Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS		= 	-Wall -Wextra -Werror -g -fsanitize=address
 RM			= 	/bin/rm -f
 NAME		= 	minishell
-INCLUDES	= 	./headers
+INCLUDES	= 	./headers -I /usr/include/readline
 
 SRCS		= 	main.c $(shell find src/ -name '*.c')
 OBJS		= 	$(SRCS:.c=.o)
@@ -14,7 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\033[0;32mOBJECT FILES COMPILED\033[0m"
-	@$(CC) $(CFLAGS) -I$(INCLUDES) $(OBJS) -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include -o $(NAME)
+	@$(CC) $(CFLAGS) -I$(INCLUDES) $(OBJS) -lreadline -I /usr/include/readline -o $(NAME)
 	@echo "\033[0;32mMINISHELL IS READY TO USE\033[0m"
 
 clean:

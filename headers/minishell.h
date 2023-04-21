@@ -6,8 +6,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include <readline.h>
+# include <history.h>
 # include <stdlib.h>
 # include <signal.h>
 
@@ -64,16 +64,21 @@ typedef struct s_data
 {
 	char				**envp;
 	char				*input;
+	int					ac;
+	int					i;
+	int					old_i;
+	t_operator			op[2];
 }t_data;
 
 // parse
 t_toklist	*new_toknode(char *token, t_operator operator);
 void		add_toknode(t_toklist *new, t_toklist *x);
 void		destroy_toklist(void);
+t_toklist	*lst_node(void);
 int			tokenizer(char *input);
 void		add_argnode(t_arglist *new, t_arglist *x);
 t_arglist	*new_argnode(int ac, char **av, t_operator *op, int index);
-void		create_arglist(void);
+void		create_arglist(int i);
 void		destroy_arglist(void);
 void		add_envpnode(t_envplist *new, t_envplist *x);
 t_envplist	*new_envpnode(char *name, char *value, char *full);
@@ -85,6 +90,7 @@ void		destroy_cleanlist(void);
 void		create_cleanlist(void);
 int			alphanumeric(char *input, int i);
 int			pipe_redirections(char *input, int i);
+int			quotes(char *input, int i);
 
 // parse lib
 char		*parse_strjoin(char const *s1, char const *s2);
@@ -132,6 +138,7 @@ size_t		ft_strlen(const char *s);
 char		*ft_itoa(int n);
 long long	ft_atoll(const char *str);
 int			ft_strchr(char *s, char c);
+int			is_alpha(int c);
 
 //utils
 int			varname_length(char *str);

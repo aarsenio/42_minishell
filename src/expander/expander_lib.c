@@ -16,7 +16,8 @@ int	expendable_len(char *token, int i)
 	int	len;
 
 	len = 0;
-	while (token[++i] && !is_space(token[i]) && !is_quote(token[i]) && token[i] != '$')
+	while (token[++i] && !is_space(token[i]) && \
+	!is_quote(token[i]) && token[i] != '$')
 		len++;
 	return (len);
 }

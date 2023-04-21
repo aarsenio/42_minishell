@@ -38,13 +38,18 @@ void	destroy_arglist(void)
 	{
 		tmp = arglist()->next;
 		arglist()->next = arglist()->next->next;
-		i = 0;
+		i = -1;
 		if (tmp->av)
 		{
-			while (tmp->av[i])
-				free (tmp->av[i++]);
+			while (tmp->av[++i])
+			{
+				free (tmp->av[i]);
+				tmp->av[i] = NULL;
+			}
 			free (tmp->av);
+			tmp->av = NULL;
 		}
 		free (tmp);
+		tmp = NULL;
 	}
 }

@@ -67,3 +67,23 @@ void	order_envplist(void)
 		t1 = t1->next;
 	}
 }
+
+t_envplist	*fetch_node(char *str)
+{
+	t_envplist	*t;
+	char		*name;
+
+	t = envplist()->next;
+	name = copy_name(str);
+	while (t)
+	{
+		if (!ft_strcmp(name, t->var_name))
+		{
+			free(name);
+			return (t);
+		}
+		t = t->next;
+	}
+	free(name);
+	return (NULL);
+}

@@ -31,59 +31,54 @@ int	is_varname(char *str, char *var, int i)
 char	*replace(char *t, char *var, char *replace)
 {
 	char	*result;
-	int		i;
-	int		j;
-	int		k;
+	int		i[3];
 
 	result = malloc(sizeof(char) * (ft_strlen(t) \
 		- ft_strlen(var) + ft_strlen(replace) + 2));
-	i = -1;
-	j = 0;
-	while (t[++i])
+	i[0] = -1;
+	i[1] = 0;
+	while (t[++i[0]])
 	{
-		if (t[i] == '$' && t[i + 1] && is_varname(t, var, i + 1))
+		if (t[i[0]] == '$' && t[i[0] + 1] && is_varname(t, var, i[0] + 1))
 			break ;
-		result[j++] = t[i];
+		result[i[1]++] = t[i[0]];
 	}
-	i += ft_strlen(var);
-	k = -1;
-	while (replace && replace[++k])
-		result[j++] = replace[k];
-	while (t[++i])
-		result[j++] = t[i];
-	result[j] = '\0';
+	i[0] += ft_strlen(var);
+	i[2] = -1;
+	while (replace && replace[++i[2]])
+		result[i[1]++] = replace[i[2]];
+	while (t[++i[0]])
+		result[i[1]++] = t[i[0]];
+	result[i[1]] = '\0';
+	free(t);
 	return (result);
 }
 
 char	*expander(char *token)
 {
-	int		i;
-	int		j;
-	int		k;
+	int		i[3];
 	char	*ex_tmp;
-	char	*t;
 
-	i = 0;
-	while (token[i])
+	i[0] = 0;
+	while (token[i[0]])
 	{
-		if (token[i + 1] && token[i] == '$' && is_alpha(token[i + 1]))
+		if (token[i[0] + 1] && token[i[0]] == '$' && is_alpha(token[i[0] + 1]))
 		{
-			t = token;
-			ex_tmp = malloc(sizeof(char) * (expendable_len(t, i) + 1));
+			ex_tmp = malloc(sizeof(char) * (expendable_len(token, i[0]) + 1));
 			if (!ex_tmp)
 				return (NULL);
-			j = 0;
-			k = i + 1;
-			while (token[k] && !is_space(token[k]) && !is_quote(token[k]) && token[k] != '$')
-				ex_tmp[j++] = token[k++];
-			ex_tmp[j] = '\0';
-			i += ft_strlen(replace_search(ex_tmp));
-			token = replace(t, ex_tmp, replace_search(ex_tmp));
+			i[1] = 0;
+			i[2] = i[0] + 1;
+			while (token[i[2]] && !is_space(token[i[2]]) && \
+			!is_quote(token[i[2]]) && token[i[2]] != '$')
+				ex_tmp[i[1]++] = token[i[2]++];
+			ex_tmp[i[1]] = '\0';
+			i[0] += ft_strlen(replace_search(ex_tmp));
+			token = replace(token, ex_tmp, replace_search(ex_tmp));
 			free(ex_tmp);
-			free(t);
 		}
 		else
-			i++;
+			i[0]++;
 	}
 	return (token);
 }

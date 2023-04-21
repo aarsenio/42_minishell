@@ -11,27 +11,7 @@ static int	is_value(char *str)
 	return (0);
 }
 
-t_envplist	*fetch_node(char *str)
-{
-	t_envplist	*t;
-	char		*name;
-
-	t = envplist()->next;
-	name = copy_name(str);
-	while (t)
-	{
-		if (!ft_strcmp(name, t->var_name))
-		{
-			free(name);
-			return (t);
-		}
-		t = t->next;
-	}
-	free(name);
-	return (NULL);
-}
-
-void	export_print(void)
+static void	export_print(void)
 {
 	t_envplist	*t;
 	int			i;
@@ -55,6 +35,32 @@ void	export_print(void)
 	}
 }
 
+static void	export_var(t_cleanlist *node, int i)
+{
+	if (is_value(node->av[i]))
+	{
+		if (fetch_node(node->av[i]))
+		{
+			free(fetch_node(node->av[i])->var_value);
+			free(fetch_node(node->av[i])->full);
+			fetch_node(node->av[i])->var_value = \
+			copy_value(node->av[i]);
+			fetch_node(node->av[i])->full = ft_strcpy(node->av[i]);
+		}
+		else
+			add_envpnode(new_envpnode(copy_name(node->av[i]), \
+			copy_value(node->av[i]), ft_strcpy(node->av[i])), \
+			envplist());
+	}
+	else
+	{
+		if (fetch_node(node->av[i]))
+			return ;
+		add_envpnode(new_envpnode(copy_name(node->av[i]), NULL, \
+		ft_strcpy(node->av[i])), envplist());
+	}
+}
+
 void	cmd_export(t_cleanlist *node)
 {
 	int		i;
@@ -73,30 +79,7 @@ void	cmd_export(t_cleanlist *node)
 			ft_putendl_fd("': not a valid identifier", 2);
 		}
 		else
-		{
-			if (is_value(node->av[i]))
-			{
-				if (fetch_node(node->av[i]))
-				{
-					free(fetch_node(node->av[i])->var_value);
-					free(fetch_node(node->av[i])->full);
-					fetch_node(node->av[i])->var_value = \
-					copy_value(node->av[i]);
-					fetch_node(node->av[i])->full = ft_strcpy(node->av[i]);
-				}
-				else
-					add_envpnode(new_envpnode(copy_name(node->av[i]), \
-					copy_value(node->av[i]), ft_strcpy(node->av[i])), \
-					envplist());
-			}
-			else
-			{
-				if (fetch_node(node->av[i]))
-					return ;
-				add_envpnode(new_envpnode(copy_name(node->av[i]), NULL, \
-				ft_strcpy(node->av[i])), envplist());
-			}
-		}
+			export_var(node, i);
 	}
 	update_envp();
 }

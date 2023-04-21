@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	arg_counter(t_toklist *x)
+static int	arg_counter(t_toklist *x)
 {
 	int	result;
 
@@ -59,14 +59,12 @@ static char	**create_arg_no_redirect(t_toklist *x, char **av, int i)
 	return (av);
 }
 
-void	create_arglist(void)
+void	create_arglist(int i)
 {
 	t_toklist	*x;
-	int			i;
 	char		**av;
 
 	x = toklist()->next;
-	i = 0;
 	data()->old_i = 0;
 	data()->i = 0;
 	while (x)

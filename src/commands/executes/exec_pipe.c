@@ -12,14 +12,16 @@ void	exec_pipe(t_cleanlist *node)
 		perror_exit("Error forking in exec_pipe");
 	if (pid == 0)
 	{
-		dup2(pipe_fd[1], STDOUT_FILENO);
+		if (node->fdout == -1)
+			dup2(pipe_fd[1], STDOUT_FILENO);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
 		exec_executables(node);
 	}
 	else
 	{
-		dup2(pipe_fd[0], STDIN_FILENO);
+		if (node->fdin == -1)
+			dup2(pipe_fd[0], STDIN_FILENO);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
 	}

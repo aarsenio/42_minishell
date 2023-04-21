@@ -1,0 +1,4 @@
+1. pipes
+2. Heredoc, fechar fds e msg
+3. testar
+4. limpar mem_leaks e fds

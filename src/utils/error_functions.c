@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-static	void	exit_destroy_free(void)
+void	exit_destroy_free(void)
 {
 	destroy_arglist();
 	destroy_envplist();

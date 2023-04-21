@@ -157,6 +157,7 @@ void		update_envp(void);
 void		init_shell(char **envp);
 void		cmd_not_found(char *cmd_name);
 void		no_such_file_or_dir(char *path);
+void		exit_destroy_free(void);
 void		exit_free_matrix(t_cleanlist *node, char **matrix, char *str);
 void		free_matrix(char **matrix);
 void		perror_exit(char *msg);

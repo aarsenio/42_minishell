@@ -5,7 +5,6 @@ static void	exec_commands(t_cleanlist *node)
 	char	*bin_path;
 	char	**splitted_paths;
 
-	fprintf(stderr, "stdin: %d\nstdout: %d\n", node->fdin, node->fdout);
 	if (!*node->av)
 		exit(1);
 	splitted_paths = get_paths(envplist()->next);

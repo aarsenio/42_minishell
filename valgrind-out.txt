@@ -1,77 +1,173 @@
-==133466== Memcheck, a memory error detector
-==133466== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==133466== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==133466== Command: ./minishell
-==133466== Parent PID: 133361
-==133466== 
-==133466== 
-==133466== FILE DESCRIPTORS: 20 open at exit.
-==133466== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 49: /dev/ptmx
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 48: /usr/share/code/resources/app/node_modules.asar
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 46: /nfs/homes/nhorta-g/.config/Code/logs/20230421T122526/ptyhost.log
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 43: /usr/share/fonts/truetype/liberation2/LiberationSerif-Regular.ttf
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 42: /usr/share/code/resources/app/node_modules.asar
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 41: /dev/shm/.org.chromium.Chromium.peYv8F (deleted)
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 40: /dev/shm/.org.chromium.Chromium.aVjrNE (deleted)
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open AF_UNIX socket 39: <unknown>
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 34: /tmp/.org.chromium.Chromium.5fdZnH (deleted)
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 33: /proc/62901/status
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 32: /nfs/homes/nhorta-g/.config/Code/Dictionaries/en-US-10-1.bdic
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 31: /dev/shm/.org.chromium.Chromium.K9D3LH (deleted)
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 30: /proc/62901/statm
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open AF_UNIX socket 29: <unknown>
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 20: /usr/share/code/v8_context_snapshot.bin
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 3: /sgoinfre/goinfre/Perso/nhorta-g/mini/valgrind-out.txt
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 2: /dev/pts/4
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 1: /dev/pts/4
-==133466==    <inherited from parent>
-==133466== 
-==133466== Open file descriptor 0: /dev/pts/4
-==133466==    <inherited from parent>
-==133466== 
-==133466== 
-==133466== HEAP SUMMARY:
-==133466==     in use at exit: 0 bytes in 0 blocks
-==133466==   total heap usage: 14 allocs, 14 frees, 632 bytes allocated
-==133466== 
-==133466== All heap blocks were freed -- no leaks are possible
-==133466== 
-==133466== For lists of detected and suppressed errors, rerun with: -s
-==133466== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1101696== Memcheck, a memory error detector
+==1101696== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1101696== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1101696== Command: ./minishell
+==1101696== Parent PID: 1101619
+==1101696== 
+==1101727== 
+==1101727== FILE DESCRIPTORS: 19 open at exit.
+==1101727== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 48: /usr/share/code/resources/app/node_modules.asar
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 46: /nfs/homes/nhorta-g/.config/Code/logs/20230424T113949/ptyhost.log
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 43: /usr/share/fonts/truetype/liberation2/LiberationSerif-Regular.ttf
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 42: /dev/shm/.org.chromium.Chromium.MGUh22 (deleted)
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 41: /usr/share/code/resources/app/node_modules.asar
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 40: /dev/shm/.org.chromium.Chromium.cEVYU1 (deleted)
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open AF_UNIX socket 39: <unknown>
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 34: /tmp/.org.chromium.Chromium.ACX3u1 (deleted)
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 33: /proc/1088801/status
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 32: /nfs/homes/nhorta-g/.config/Code/Dictionaries/en-US-10-1.bdic
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 31: /dev/shm/.org.chromium.Chromium.0oIGe0 (deleted)
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 30: /proc/1088801/statm
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open AF_UNIX socket 29: <unknown>
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 20: /usr/share/code/v8_context_snapshot.bin
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 3: /sgoinfre/goinfre/Perso/nhorta-g/mini/valgrind-out.txt
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 2: /dev/pts/1
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 1: /dev/pts/1
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== Open file descriptor 0: /dev/pts/1
+==1101727==    <inherited from parent>
+==1101727== 
+==1101727== 
+==1101727== HEAP SUMMARY:
+==1101727==     in use at exit: 214,400 bytes in 540 blocks
+==1101727==   total heap usage: 774 allocs, 234 frees, 236,875 bytes allocated
+==1101727== 
+==1101727== 8 bytes in 2 blocks are still reachable in loss record 3 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x405ECB: ft_strcpy (ft_strcpy.c:9)
+==1101727==    by 0x405511: create_arg_no_redirect (create_arg.c:42)
+==1101727==    by 0x4052AD: create_arglist (create_arg.c:70)
+==1101727==    by 0x404EFC: tokenizer (tokenizer.c:64)
+==1101727==    by 0x40147A: main (main.c:40)
+==1101727== 
+==1101727== 8 bytes in 2 blocks are still reachable in loss record 4 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x405ECB: ft_strcpy (ft_strcpy.c:9)
+==1101727==    by 0x40573C: manage_arg (create_clean.c:34)
+==1101727==    by 0x405647: create_cleanlist (create_clean.c:58)
+==1101727==    by 0x404F01: tokenizer (tokenizer.c:65)
+==1101727==    by 0x40147A: main (main.c:40)
+==1101727== 
+==1101727== 18 bytes in 4 blocks are still reachable in loss record 12 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x405ECB: ft_strcpy (ft_strcpy.c:9)
+==1101727==    by 0x4053F2: create_arg_redirect (create_arg.c:23)
+==1101727==    by 0x405295: create_arglist (create_arg.c:68)
+==1101727==    by 0x404EFC: tokenizer (tokenizer.c:64)
+==1101727==    by 0x40147A: main (main.c:40)
+==1101727== 
+==1101727== 32 bytes in 2 blocks are still reachable in loss record 19 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x4054A7: create_arg_no_redirect (create_arg.c:35)
+==1101727==    by 0x4052AD: create_arglist (create_arg.c:70)
+==1101727==    by 0x404EFC: tokenizer (tokenizer.c:64)
+==1101727==    by 0x40147A: main (main.c:40)
+==1101727== 
+==1101727== 32 bytes in 2 blocks are still reachable in loss record 20 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x4056BD: manage_arg (create_clean.c:25)
+==1101727==    by 0x405647: create_cleanlist (create_clean.c:58)
+==1101727==    by 0x404F01: tokenizer (tokenizer.c:65)
+==1101727==    by 0x40147A: main (main.c:40)
+==1101727== 
+==1101727== 64 bytes in 4 blocks are still reachable in loss record 24 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x4053C9: create_arg_redirect (create_arg.c:20)
+==1101727==    by 0x405295: create_arglist (create_arg.c:68)
+==1101727==    by 0x404EFC: tokenizer (tokenizer.c:64)
+==1101727==    by 0x40147A: main (main.c:40)
+==1101727== 
+==1101727== 80 bytes in 2 blocks are still reachable in loss record 26 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x404A5E: new_cleannode (clean_list.c:20)
+==1101727==    by 0x4057B8: manage_arg (create_clean.c:45)
+==1101727==    by 0x405647: create_cleanlist (create_clean.c:58)
+==1101727==    by 0x404F01: tokenizer (tokenizer.c:65)
+==1101727==    by 0x40147A: main (main.c:40)
+==1101727== 
+==1101727== 192 bytes in 6 blocks are still reachable in loss record 30 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x40441F: new_argnode (arg_list.c:20)
+==1101727==    by 0x405342: create_arglist (create_arg.c:76)
+==1101727==    by 0x404EFC: tokenizer (tokenizer.c:64)
+==1101727==    by 0x40147A: main (main.c:40)
+==1101727== 
+==1101727== 600 bytes in 1 blocks are still reachable in loss record 35 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x4034EB: update_envp (init_shell.c:43)
+==1101727==    by 0x4035A1: init_shell (init_shell.c:57)
+==1101727==    by 0x401402: main (main.c:33)
+==1101727== 
+==1101727== 1,049 bytes in 74 blocks are still reachable in loss record 43 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x403710: copy_name (init_envplist.c:30)
+==1101727==    by 0x4038BE: init_envplist (init_envplist.c:63)
+==1101727==    by 0x40359C: init_shell (init_shell.c:56)
+==1101727==    by 0x401402: main (main.c:33)
+==1101727== 
+==1101727== 1,799 bytes in 74 blocks are still reachable in loss record 46 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x4037F3: copy_value (init_envplist.c:48)
+==1101727==    by 0x4038D3: init_envplist (init_envplist.c:64)
+==1101727==    by 0x40359C: init_shell (init_shell.c:56)
+==1101727==    by 0x401402: main (main.c:33)
+==1101727== 
+==1101727== 2,848 bytes in 74 blocks are still reachable in loss record 49 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x405ECB: ft_strcpy (ft_strcpy.c:9)
+==1101727==    by 0x4038E8: init_envplist (init_envplist.c:64)
+==1101727==    by 0x40359C: init_shell (init_shell.c:56)
+==1101727==    by 0x401402: main (main.c:33)
+==1101727== 
+==1101727== 2,960 bytes in 74 blocks are still reachable in loss record 50 of 75
+==1101727==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1101727==    by 0x403ABD: new_envpnode (envp_list.c:20)
+==1101727==    by 0x4038F8: init_envplist (init_envplist.c:63)
+==1101727==    by 0x40359C: init_shell (init_shell.c:56)
+==1101727==    by 0x401402: main (main.c:33)
+==1101727== 
+==1101727== LEAK SUMMARY:
+==1101727==    definitely lost: 0 bytes in 0 blocks
+==1101727==    indirectly lost: 0 bytes in 0 blocks
+==1101727==      possibly lost: 0 bytes in 0 blocks
+==1101727==    still reachable: 9,690 bytes in 321 blocks
+==1101727==         suppressed: 204,710 bytes in 219 blocks
+==1101727== 
+==1101727== For lists of detected and suppressed errors, rerun with: -s
+==1101727== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

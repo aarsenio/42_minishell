@@ -13,6 +13,16 @@ static void	sig_handler_heredoc(int signal)
 	}
 }
 
+void	foward_list_index_close(int fd, int index, t_cleanlist *c_list)
+{
+	while (c_list && index != c_list->index)
+		c_list = c_list->next;
+	if (c_list)
+		c_list->fdin = fd;
+	else
+		close(fd);
+}
+
 void	heredoc(t_arglist *arg_node)
 {
 	t_cleanlist	*t_clean;
@@ -34,12 +44,7 @@ void	heredoc(t_arglist *arg_node)
 			buff = expander(buff);
 		ft_putendl_fd(buff, fd[1]);
 	}
-	while (t_clean && arg_node->index != t_clean->index)
-		t_clean = t_clean->next;
-	if (t_clean)
-		t_clean->fdin = fd[0];
-	else
-		close(fd[0]);
+	foward_list_index_close(fd[2], arg_node->index, t_clean);
 	close(fd[1]);
 	free(buff);
 }
@@ -60,7 +65,6 @@ void	exec_input(t_arglist *arg_node)
 			t_clean->fdin = infile;
 		else
 			close(infile);
-		fprintf(stderr, "in_clean_index: %d\nin_arg_index: %d\n", t_clean->index, arg_node->index);
 	}
 	else
 	{
@@ -83,7 +87,6 @@ void	exec_outputs(t_arglist *arg_node)
 		fd = open(arg_node->av[0], O_WRONLY | O_CREAT | O_APPEND, 0666);
 	while (t_clean && arg_node->index != t_clean->index)
 		t_clean = t_clean->next;
-	fprintf(stderr, "out_clean_index: %d\nout_arg_index: %d\n", t_clean->index, arg_node->index);
 	if (t_clean)
 		t_clean->fdout = fd;
 	else

@@ -39,7 +39,7 @@ void	exec_executables(t_cleanlist *node)
 		close(node->fdout);
 	}
 	if (builtins(node))
-		exit(g_exit_status);
+		exit_destroy_free();
 	exec_commands(node);
 }
 

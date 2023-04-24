@@ -1,7 +1,23 @@
 #include <minishell.h>
 
+void	close_fds(void)
+{
+	t_cleanlist	*t;
+
+	t = cleanlist()->next;
+	while (t)
+	{
+		if (t->fdin != -1)
+			close(t->fdin);
+		if (t->fdout != -1)
+			close(t->fdout);
+	}
+	t = t->next;
+}
+
 void	exit_destroy_free(void)
 {
+	close_fds();
 	destroy_arglist();
 	destroy_envplist();
 	destroy_cleanlist();

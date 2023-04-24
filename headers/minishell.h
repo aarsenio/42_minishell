@@ -141,6 +141,7 @@ int			ft_strchr(char *s, char c);
 int			is_alpha(int c);
 
 //utils
+void		sig_handler(int signal);
 int			varname_length(char *str);
 int			varvalue_length(char *str);
 char		*copy_value(char *str);

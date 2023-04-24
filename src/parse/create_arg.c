@@ -26,11 +26,7 @@ static char	**create_arg_redirect(t_toklist *x, char **av)
 	data()->i = data()->i + 2;
 	data()->ac = 1;
 	if (x && x->operator == PIPE)
-	{
 		data()->op[1] = x->operator;
-		x = x->next;
-		data()->i++;
-	}
 	return (av);
 }
 
@@ -51,11 +47,7 @@ static char	**create_arg_no_redirect(t_toklist *x, char **av, int i)
 	}
 	av[i] = NULL;
 	if (x && x->operator == PIPE)
-	{
 		data()->op[1] = x->operator;
-		x = x->next;
-		data()->i++;
-	}
 	return (av);
 }
 
@@ -83,6 +75,9 @@ void	create_arglist(int i)
 		}
 		add_argnode(new_argnode(data()->ac, av, data()->op, i), arglist());
 		if (x && x->operator == PIPE)
+		{
 			i++;
+			x = x->next;
+		}
 	}
 }

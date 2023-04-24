@@ -13,6 +13,16 @@ static void	sig_handler_heredoc(int signal)
 	}
 }
 
+void	foward_list_index_close(int fd, int index, t_cleanlist *c_list)
+{
+	while (c_list && index != c_list->index)
+		c_list = c_list->next;
+	if (c_list)
+		c_list->fdin = fd;
+	else
+		close(fd);
+}
+
 void	heredoc(t_arglist *arg_node)
 {
 	t_cleanlist	*t_clean;
@@ -34,12 +44,7 @@ void	heredoc(t_arglist *arg_node)
 			buff = expander(buff);
 		ft_putendl_fd(buff, fd[1]);
 	}
-	while (t_clean && arg_node->index != t_clean->index)
-		t_clean = t_clean->next;
-	if (t_clean)
-		t_clean->fdin = fd[0];
-	else
-		close(fd[0]);
+	foward_list_index_close(fd[2], arg_node->index, t_clean);
 	close(fd[1]);
 	free(buff);
 }
@@ -63,7 +68,6 @@ void	exec_input(t_arglist *arg_node)
 	}
 	else
 	{
-		g_exit_status = 1;
 		error_msg = ft_strjoin("minishell: ", arg_node->av[0]);
 		perror(error_msg);
 		free(error_msg);

@@ -53,10 +53,5 @@ Mkfile.old
 dkms.conf
 
 #Nuno's personals
-pipex_execute_utils.c
-pipex_execute.c
-pipex_here_doc.c
-temp_execute.c
-temp_get_path.c
-temp_redirects.c
+temps_prints.c
 minishell-tester

@@ -63,18 +63,11 @@ static void	loop_cleanlist_execute(void)
  it (pipe, execute and store fd in writting and of pipe and reading end is
  stored in ->fdin of each node). Than second loop where there is exec_input
  or output, opens files and stores file discriptor in ->fdou of each node*/
+
 static void	loop_arglist_redirects(void)
 {
 	t_arglist	*t;
-	/*
-	t = arglist()->next;
-	while (t)
-	{
-		if (t->rdr == R_IN_UNT)
-			heredoc(t);
-		t = t->next;
-	}
-	*/
+
 	t = arglist()->next;
 	while (t)
 	{
@@ -92,6 +85,7 @@ static void	loop_arglist_redirects(void)
  stdin and out for when when minisheel starts again in a new prompt,
  and waits for the child, gets the wait status and passes it to
  g_exit_status*/
+
 void	execute(void)
 {
 	int		wait_status;

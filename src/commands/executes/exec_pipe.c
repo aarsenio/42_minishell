@@ -20,7 +20,7 @@ void	exec_pipe(t_cleanlist *node)
 	}
 	else
 	{
-		if (node->fdin == -1)
+		if (node->next->fdin == -1)
 			dup2(pipe_fd[0], STDIN_FILENO);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);

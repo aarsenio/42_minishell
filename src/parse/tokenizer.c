@@ -61,7 +61,7 @@ int	tokenizer(char *input)
 		destroy_toklist();
 		return (0);
 	}
-	create_arglist(0);
+	create_arglist(0, toklist()->next);
 	create_cleanlist();
 	destroy_toklist();
 	return (1);

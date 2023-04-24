@@ -6,7 +6,10 @@ static void	exec_commands(t_cleanlist *node)
 	char	**splitted_paths;
 
 	if (!*node->av)
-		exit(1);
+	{
+		g_exit_status = 1;
+		exit_destroy_free();
+	}
 	splitted_paths = get_paths(envplist()->next);
 	bin_path = find_working_path(node->av[0], splitted_paths);
 	if (ft_strchr(node->av[0], '/'))

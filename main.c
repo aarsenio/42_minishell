@@ -52,6 +52,5 @@ int	main(int ac, char **av, char **envp)
 			exit_destroy_free();
 		}
 		free(data()->input);
-		data()->input = NULL;
 	}
 }

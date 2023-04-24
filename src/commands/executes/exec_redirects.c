@@ -6,8 +6,8 @@ static void	sig_handler_heredoc(int signal)
 		return ;
 	if (signal == SIGINT)
 	{
-		write(1, "\n", 1);
 		g_exit_status = 130;
+		write(1, "\n", 1);
 		exit_destroy_free();
 	}
 }

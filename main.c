@@ -36,6 +36,7 @@ int	main(int ac, char **av, char **envp)
 		data()->input = readline("minishell$ ");
 		if (data()->input && data()->input[0])
 		{
+			signal(SIGINT, SIG_IGN);
 			add_history(data()->input);
 			if (check_input(data()->input) && tokenizer(data()->input))
 			{
@@ -43,6 +44,7 @@ int	main(int ac, char **av, char **envp)
 				destroy_cleanlist();
 				destroy_arglist();
 			}
+			signal(SIGINT, sig_handler);
 		}
 		else if (!data()->input)
 		{
@@ -50,6 +52,5 @@ int	main(int ac, char **av, char **envp)
 			exit_destroy_free();
 		}
 		free(data()->input);
-		data()->input = NULL;
 	}
 }

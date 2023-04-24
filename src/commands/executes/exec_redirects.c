@@ -6,10 +6,9 @@ static void	sig_handler_heredoc(int signal)
 		return ;
 	if (signal == SIGINT)
 	{
-		//close(fd); //TODO:fechar fds
 		g_exit_status = 130;
 		write(1, "\n", 1);
-		exit(g_exit_status);
+		exit_destroy_free();
 	}
 }
 

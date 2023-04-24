@@ -1,32 +1,50 @@
 #include <minishell.h>
 
-static void	change_path(void)
+static void	change_old(void)
+{
+	free(fetch_node("OLDPWD")->full);
+	free(fetch_node("OLDPWD")->var_value);
+	fetch_node("OLDPWD")->var_value = malloc(1);
+	fetch_node("OLDPWD")->var_value[0] = '\0';
+	(fetch_node)("OLDPWD")->full = \
+	ft_strjoin(fetch_node("OLDPWD")->var_name, "=");
+}
+
+static void	change_old_pwd(void)
 {
 	char	*t;
+	char	*t2;
 
+	free(fetch_node("OLDPWD")->var_value);
+	free(fetch_node("OLDPWD")->full);
+	fetch_node("OLDPWD")->var_value = fetch_node("PWD")->var_value;
+	t = ft_strjoin(fetch_node("OLDPWD")->var_name, "=");
+	t2 = ft_strjoin(t, fetch_node("OLDPWD")->var_value);
+	fetch_node("OLDPWD")->full = t2;
+	free(t);
+}
+
+static void	change_pwd(void)
+{
+	char	*t;
+	char	*t2;
+
+	free(fetch_node("PWD")->full);
+	(fetch_node)("PWD")->var_value = getcwd(NULL, 0);
+	t = ft_strjoin(fetch_node("PWD")->var_name, "=");
+	t2 = ft_strjoin(t, fetch_node("PWD")->var_value);
+	fetch_node("PWD")->full = t2;
+	free(t);
+}
+
+static void	change_path(void)
+{
 	if (fetch_node("OLDPWD"))
-	{
-		free(fetch_node("OLDPWD")->full);
-		free(fetch_node("OLDPWD")->var_value);
-		fetch_node("OLDPWD")->var_value = malloc(1);
-		fetch_node("OLDPWD")->var_value[0] = '\0';
-		fetch_node("OLDPWD")->full = ft_strjoin(fetch_node("OLDPWD")->var_name, "=");
-	}
+		change_old();
 	if (fetch_node("OLDPWD") && fetch_node("PWD"))
-	{
-		fetch_node("OLDPWD")->var_value = fetch_node("PWD")->var_value;
-		free(fetch_node("OLDPWD")->full);
-		t = ft_strjoin(fetch_node("OLDPWD")->var_name, "=");
-		fetch_node("OLDPWD")->full = ft_strjoin(t, fetch_node("OLDPWD")->var_value);
-		free(t);
-	}
+		change_old_pwd();
 	if (fetch_node("PWD"))
-	{
-		fetch_node("PWD")->var_value = getcwd(NULL, 0);
-		t = ft_strjoin(fetch_node("PWD")->var_name, "=");
-		fetch_node("PWD")->full = ft_strjoin(t, fetch_node("PWD")->var_value);
-		free(t);
-	}
+		change_pwd();
 }
 
 int	cmd_cd(t_cleanlist *node)
@@ -40,20 +58,11 @@ int	cmd_cd(t_cleanlist *node)
 		return (2);
 	}
 	s = node->av[1];
-	if (node->ac == 1 || !ft_strcmp(node->av[1], "-"))
-	{
-		if (!fetch_node("OLDPWD"))
-		{
-			ft_putendl_fd("minishell: cd: OLDPWD not set", 2);
-			return (1);
-		}
-		s = fetch_node("OLDPWD")->var_value;
-	}
-	if (node->ac == 1 || !ft_strcmp(node->av[1], "~"))
+	if (node->ac == 1)
 		s = getenv("HOME");
 	if (chdir(s) == -1)
 	{
-		err_msg = ft_strjoin("minishell: cd: ", node->av[1]);
+		err_msg = ft_strjoin("minishell: cd: ", s);
 		perror(err_msg);
 		free(err_msg);
 		return (2);

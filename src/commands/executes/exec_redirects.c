@@ -44,7 +44,7 @@ void	heredoc(t_arglist *arg_node)
 			buff = expander(buff);
 		ft_putendl_fd(buff, fd[1]);
 	}
-	foward_list_index_close(fd[2], arg_node->index, t_clean);
+	foward_list_index_close(fd[0], arg_node->index, t_clean);
 	close(fd[1]);
 	free(buff);
 }

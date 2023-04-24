@@ -60,10 +60,10 @@ void	exec_input(t_arglist *arg_node)
 			t_clean->fdin = infile;
 		else
 			close(infile);
+		fprintf(stderr, "in_clean_index: %d\nin_arg_index: %d\n", t_clean->index, arg_node->index);
 	}
 	else
 	{
-		g_exit_status = 1;
 		error_msg = ft_strjoin("minishell: ", arg_node->av[0]);
 		perror(error_msg);
 		free(error_msg);
@@ -83,6 +83,7 @@ void	exec_outputs(t_arglist *arg_node)
 		fd = open(arg_node->av[0], O_WRONLY | O_CREAT | O_APPEND, 0666);
 	while (t_clean && arg_node->index != t_clean->index)
 		t_clean = t_clean->next;
+	fprintf(stderr, "out_clean_index: %d\nout_arg_index: %d\n", t_clean->index, arg_node->index);
 	if (t_clean)
 		t_clean->fdout = fd;
 	else

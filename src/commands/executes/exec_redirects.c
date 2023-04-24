@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_redirects.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/24 19:59:57 by nhorta-g          #+#    #+#             */
+/*   Updated: 2023/04/24 19:59:58 by nhorta-g         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static void	sig_handler_heredoc(int signal)
@@ -58,19 +70,15 @@ void	exec_input(t_arglist *arg_node)
 	if (access(arg_node->av[0], F_OK) == 0)
 	{
 		infile = open(arg_node->av[0], O_RDONLY, 0666);
-		while (t_clean && arg_node->index != t_clean->index)
-			t_clean = t_clean->next;
-		if (t_clean)
-			t_clean->fdin = infile;
-		else
-			close(infile);
+		foward_list_index_close(infile, arg_node->index, t_clean);
 	}
 	else
 	{
+		g_exit_status = 1;
 		error_msg = ft_strjoin("minishell: ", arg_node->av[0]);
 		perror(error_msg);
 		free(error_msg);
-		exit(1);
+		exit_destroy_free();
 	}
 }
 

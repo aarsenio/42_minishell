@@ -1,2 +1,0 @@
-env |grep GNOME >out | ls >>out | <<a cat
-<inf cat >out | <inf1 cat >out1

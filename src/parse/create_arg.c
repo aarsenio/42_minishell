@@ -51,12 +51,10 @@ static char	**create_arg_no_redirect(t_toklist *x, char **av, int i)
 	return (av);
 }
 
-void	create_arglist(int i)
+void	create_arglist(int i, t_toklist	*x)
 {
-	t_toklist	*x;
-	char		**av;
+	char	**av;
 
-	x = toklist()->next;
 	data()->old_i = 0;
 	data()->i = 0;
 	while (x)

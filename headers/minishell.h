@@ -78,7 +78,7 @@ t_toklist	*lst_node(void);
 int			tokenizer(char *input);
 void		add_argnode(t_arglist *new, t_arglist *x);
 t_arglist	*new_argnode(int ac, char **av, t_operator *op, int index);
-void		create_arglist(int i);
+void		create_arglist(int i, t_toklist	*x);
 void		destroy_arglist(void);
 void		add_envpnode(t_envplist *new, t_envplist *x);
 t_envplist	*new_envpnode(char *name, char *value, char *full);

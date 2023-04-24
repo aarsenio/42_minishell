@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_functions.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/24 20:01:06 by nhorta-g          #+#    #+#             */
+/*   Updated: 2023/04/24 20:01:07 by nhorta-g         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	close_fds(void)
@@ -11,8 +23,8 @@ void	close_fds(void)
 			close(t->fdin);
 		if (t->fdout != -1)
 			close(t->fdout);
+		t = t->next;
 	}
-	t = t->next;
 }
 
 void	exit_destroy_free(void)

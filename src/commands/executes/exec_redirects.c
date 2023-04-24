@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_redirects.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/24 19:59:57 by nhorta-g          #+#    #+#             */
+/*   Updated: 2023/04/24 19:59:58 by nhorta-g         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static void	sig_handler_heredoc(int signal)
@@ -62,10 +74,11 @@ void	exec_input(t_arglist *arg_node)
 	}
 	else
 	{
+		g_exit_status = 1;
 		error_msg = ft_strjoin("minishell: ", arg_node->av[0]);
 		perror(error_msg);
 		free(error_msg);
-		exit(1);
+		exit_destroy_free();
 	}
 }
 

@@ -54,6 +54,13 @@ char	*replace(char *t, char *var, char *replace)
 	return (result);
 }
 
+static int	validate(char *token, int i)
+{
+	if (!is_space(token[i + 1]) && !is_quote(token[i + 1]))
+		return (1);
+	return (0);
+}
+
 char	*expander(char *token)
 {
 	int		i[3];
@@ -62,7 +69,7 @@ char	*expander(char *token)
 	i[0] = 0;
 	while (token[i[0]])
 	{
-		if (token[i[0] + 1] && token[i[0]] == '$' && is_alpha(token[i[0] + 1]))
+		if (token[i[0] + 1] && token[i[0]] == '$' && validate(token, i[0]))
 		{
 			ex_tmp = malloc(sizeof(char) * (expendable_len(token, i[0]) + 1));
 			if (!ex_tmp)

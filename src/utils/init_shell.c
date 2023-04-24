@@ -1,6 +1,5 @@
 #include <minishell.h>
 
-
 static void	sig_handler(int signal)
 {
 	if (signal == SIGQUIT)

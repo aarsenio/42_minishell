@@ -65,7 +65,6 @@ int	main(int ac, char **av, char **envp)
 			add_history(data()->input);
 			if (check_input(data()->input) && tokenizer(data()->input))
 			{
-				print_arglist();
 				execute();
 				destroy_cleanlist();
 				destroy_arglist();

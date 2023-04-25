@@ -14,8 +14,6 @@
 
 static void	sig_handler_heredoc(int signal)
 {
-	if (signal == SIGQUIT)
-		return ;
 	if (signal == SIGINT)
 	{
 		g_exit_status = 130;
@@ -40,7 +38,7 @@ void	heredoc(t_arglist *arg_node)
 	int			fd[2];
 	char		*buff;
 
-	signal(SIGQUIT, sig_handler_heredoc);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler_heredoc);
 	t_clean = cleanlist()->next;
 	pipe(fd);

@@ -174,6 +174,5 @@ void		exit_destroy_free(void);
 void		exit_free_matrix(t_cleanlist *node, char **matrix, char *str);
 void		free_matrix(char **matrix);
 void		perror_exit(char *msg);
-void 		print_arglist(void);
 
 #endif

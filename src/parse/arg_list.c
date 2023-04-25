@@ -65,3 +65,22 @@ void	destroy_arglist(void)
 		tmp = NULL;
 	}
 }
+
+void print_arglist(void)
+{
+	int	i = -1;
+	t_arglist *t;
+
+	t = arglist()->next;
+	while (t)
+	{
+		printf("ac = %i\n", t->ac);
+		printf("index = %i\n", t->index);
+		printf("pipe = %i\n", t->pipe);
+		printf("rdr = %i\n", t->rdr);
+		while (t->av[++i])
+			printf("frase = %s", t->av[i]);
+		printf("\n");
+		t = t->next;
+	}
+}

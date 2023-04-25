@@ -17,7 +17,7 @@ static int	token_checker_pt2(t_toklist *t)
 	char	*msg;
 
 	msg = "minishell: syntax error near unexpected token `newline'";
-	if (t->operator != NONE)
+	if (t && t->operator != NONE)
 	{
 		ft_putendl_fd(msg, 2);
 		return (0);
@@ -30,15 +30,17 @@ static int	token_checker(void)
 	t_toklist	*t;
 
 	t = toklist()->next;
-	if (t->operator == PIPE)
+	if (!t)
+		return (0);
+	if (t && t->operator == PIPE)
 	{
 		ft_putendl_fd("minishell: syntax error near unexpected token `|'", 2);
 		return (0);
 	}
-	while (t->next)
+	while (t && t->next)
 	{
-		if (t->operator != NONE && t->operator \
-			!= PIPE && t->next->operator == PIPE)
+		if (t->operator != NONE && t->operator != PIPE && \
+		t->next->operator == PIPE)
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
 			ft_putstr_fd(t->next->token, 2);

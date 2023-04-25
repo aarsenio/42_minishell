@@ -14,8 +14,6 @@
 
 void	sig_handler(int signal)
 {
-	if (signal == SIGQUIT)
-		return ;
 	if (signal == SIGINT)
 	{
 		g_exit_status = 130;
@@ -62,7 +60,7 @@ void	update_envp(void)
 
 void	init_shell(char **envp)
 {
-	signal(SIGQUIT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 	init_envplist(envp);
 	update_envp();

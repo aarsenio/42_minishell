@@ -18,9 +18,11 @@ int	expander_checker(char *str)
 
 	i = -1;
 	while (str[++i])
+	{
 		if (str[i] == '$' && str[i + 1] && \
 		!is_space(str[i + 1]) && !is_quote(str[i + 1]))
 			return (1);
+	}
 	return (0);
 }
 

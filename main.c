@@ -14,12 +14,25 @@
 
 int	g_exit_status = 0;
 
-int	check_input(char *input)
+static int	white_spaces(char *input)
+{
+	int	i;
+
+	i = -1;
+	while (input[++i])
+		if (input[i] != ' ' || input[i] != '\t' || input[i] != '\n')
+			return (0);
+	return (1);
+}
+
+static int	check_input(char *input)
 {
 	int		i;
 	char	symbol;
 
 	i = -1;
+	if (white_spaces(input))
+		return (0);
 	while (input && input[++i])
 	{
 		if (input[i] == '"' || input[i] == '\'')
@@ -52,6 +65,7 @@ int	main(int ac, char **av, char **envp)
 			add_history(data()->input);
 			if (check_input(data()->input) && tokenizer(data()->input))
 			{
+				print_arglist();
 				execute();
 				destroy_cleanlist();
 				destroy_arglist();

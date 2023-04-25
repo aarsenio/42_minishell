@@ -67,7 +67,7 @@ int	cmd_cd(t_cleanlist *node)
 	if (node->ac > 2)
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", 2);
-		return (2);
+		return (1);
 	}
 	s = node->av[1];
 	if (node->ac == 1)

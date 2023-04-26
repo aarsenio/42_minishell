@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 19:59:13 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/26 15:51:22 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:58:03 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int			cmd_exit(t_cleanlist *node);
 void		execute(void);
 void		exec_executables(t_cleanlist *node);
 void		exec_input(t_arglist *arg_node);
-void		heredoc(t_arglist *arg_node);
+void		heredoc(t_arglist *arg_node, int i);
 void		exec_outputs(t_arglist *arg_node);
 void		exec_pipe(t_cleanlist *node);
 char		**get_paths(t_envplist *head);

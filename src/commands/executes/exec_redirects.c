@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 19:59:57 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/26 15:51:59 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:57:42 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ void	foward_list_index_close(int fd, int index, t_cleanlist *c_list)
 		close(fd);
 }
 
-void	heredoc(t_arglist *arg_node)
+void	heredoc(t_arglist *arg_node, int i)
 {
 	t_cleanlist	*t_clean;
 	int			fd[2];
 	char		*buff;
-	int			i[3];
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler_heredoc);

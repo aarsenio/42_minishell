@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:00:07 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 20:00:08 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:57:26 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,13 @@ static void	loop_cleanlist_execute(void)
 static void	loop_arglist_redirects(void)
 {
 	t_arglist	*t;
+	int			i[3];
 
 	t = arglist()->next;
 	while (t)
 	{
 		if (t->rdr == R_IN_UNT)
-			heredoc(t);
+			heredoc(t, i);
 		else if (t->rdr == R_IN)
 			exec_input(t);
 		else if (t->rdr == R_OUT_REP || t->rdr == R_OUT_APP)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:00:14 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 20:00:15 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:54:30 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*replace_search(char *str)
 	while (tmp)
 	{
 		if (!ft_strcmp(str, tmp->var_name))
-			return (tmp->var_value);
+			return (ft_strcpy(tmp->var_value));
 		tmp = tmp->next;
 	}
 	return (NULL);
@@ -62,6 +62,7 @@ char	*replace(char *t, char *var, char *replace)
 	while (t[++i[0]])
 		result[i[1]++] = t[i[0]];
 	result[i[1]] = '\0';
+	free(replace);
 	free(t);
 	return (result);
 }

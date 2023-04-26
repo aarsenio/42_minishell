@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:00:56 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 20:00:57 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:31:56 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_toklist	*lst_node(void)
 {
 	t_toklist	*t;
 
-	t = toklist()->next;
-	while (t->next)
+	t = toklist();
+	while (t && t->next)
 		t = t->next;
 	return (t);
 }

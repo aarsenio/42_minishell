@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 19:59:57 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/26 15:19:20 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:51:59 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	heredoc(t_arglist *arg_node)
 	{
 		buff = readline("> ");
 		if (!buff)
+		{
+			write(1, "\n", 1);
 			break ;
+		}
 		if (!ft_strcmp(buff, arg_node->av[0]))
 			break ;
 		if (expander_checker(buff))

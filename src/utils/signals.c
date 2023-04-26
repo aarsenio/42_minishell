@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:54:19 by aarsenio          #+#    #+#             */
-/*   Updated: 2023/04/26 13:04:22 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:51:39 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	sig_handler_interactive(int signal)
 
 static void	sig_handler(int sig)
 {
-	if (sig == SIGQUIT)
+	if (sig == SIGQUIT )
 		write(1, "Quit (core dumped)", 18);
 	write(1, "\n", 1);
 }

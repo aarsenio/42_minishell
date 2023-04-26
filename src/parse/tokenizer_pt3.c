@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_pt3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:00:59 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 20:01:00 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:19:36 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static int	quote_count(char *input, int i)
 static void	quotes_pt2(char *input, int *k, char *token, char quote)
 {
 	t_toklist	*x;
+	int			i[3];
 
 	if (quote == '"' && expander_checker(token))
-		token = expander(token);
+		token = expander(token, NULL, i);
 	if (k[1] != 0 && !is_space(input[k[1] - 1]) && \
 	!is_operator(input[k[1] - 1]))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 19:59:57 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 19:59:58 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:19:20 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	heredoc(t_arglist *arg_node)
 	t_cleanlist	*t_clean;
 	int			fd[2];
 	char		*buff;
+	int			i[3];
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler_heredoc);
@@ -50,7 +51,7 @@ void	heredoc(t_arglist *arg_node)
 		if (!ft_strcmp(buff, arg_node->av[0]))
 			break ;
 		if (expander_checker(buff))
-			buff = expander(buff);
+			buff = expander(buff, NULL, i);
 		ft_putendl_fd(buff, fd[1]);
 	}
 	foward_list_index_close(fd[0], arg_node->index, t_clean);

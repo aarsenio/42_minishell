@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:00:14 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/26 14:54:30 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:16:37 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,8 @@ static int	validate(char *token, int i)
 	return (0);
 }
 
-char	*expander(char *token)
+char	*expander(char *token, char *ex_tmp, int i[3])
 {
-	int		i[3];
-	char	*ex_tmp;
-
 	i[0] = 0;
 	while (token[i[0]])
 	{
@@ -93,7 +90,9 @@ char	*expander(char *token)
 			!is_quote(token[i[2]]) && token[i[2]] != '$')
 				ex_tmp[i[1]++] = token[i[2]++];
 			ex_tmp[i[1]] = '\0';
-			i[0] += ft_strlen(replace_search(ex_tmp));
+			data()->tmp = replace_search(ex_tmp);
+			i[0] += ft_strlen(data()->tmp);
+			free(data()->tmp);
 			token = replace(token, ex_tmp, replace_search(ex_tmp));
 			free(ex_tmp);
 		}

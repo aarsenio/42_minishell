@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:01:56 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 20:01:57 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:57:18 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ int	main(int ac, char **av, char **envp)
 	init_shell(envp);
 	while (1)
 	{
+		interactive();
 		data()->input = readline("minishell$ ");
 		if (data()->input && data()->input[0])
 		{
-			signal(SIGINT, SIG_IGN);
+			not_interactive();
 			add_history(data()->input);
 			if (check_input(data()->input) && tokenizer(data()->input))
 			{
@@ -69,7 +70,6 @@ int	main(int ac, char **av, char **envp)
 				destroy_cleanlist();
 				destroy_arglist();
 			}
-			signal(SIGINT, sig_handler);
 		}
 		else if (!data()->input)
 		{

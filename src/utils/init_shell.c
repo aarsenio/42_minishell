@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:01:16 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 20:01:17 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:54:16 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	sig_handler(int signal)
-{
-	if (signal == SIGINT)
-	{
-		g_exit_status = 130;
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	return ;
-}
 
 int	ft_envplstsize(void)
 {
@@ -60,8 +47,6 @@ void	update_envp(void)
 
 void	init_shell(char **envp)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
 	init_envplist(envp);
 	update_envp();
 }

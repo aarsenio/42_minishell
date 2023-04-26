@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 19:59:13 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 19:59:15 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:58:31 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ int			ft_strchr(char *s, char c);
 int			is_alpha(int c);
 
 //utils
-void		sig_handler(int signal);
+void		not_interactive(void);
+void		interactive(void);
 int			varname_length(char *str);
 int			varvalue_length(char *str);
 char		*copy_value(char *str);

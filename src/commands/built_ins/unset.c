@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhorta-g <nhorta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 19:59:53 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/24 19:59:54 by nhorta-g         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:46:15 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	cmd_unset(t_cleanlist *node)
 	g_exit_status = 0;
 	while (node->av[++i])
 	{
-		if (!is_valid(node->av[i]))
+		if (!is_valid(node->av[i]) || !is_alpha(node->av[i][0]))
 		{
 			g_exit_status = 2;
 			ft_putstr_fd("bash: unset: `", 2);

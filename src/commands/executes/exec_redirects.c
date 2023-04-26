@@ -32,7 +32,7 @@ void	foward_list_index_close(int fd, int index, t_cleanlist *c_list)
 		close(fd);
 }
 
-void	heredoc(t_arglist *arg_node, int i)
+void	heredoc(t_arglist *arg_node, int i[3])
 {
 	t_cleanlist	*t_clean;
 	int			fd[2];
@@ -46,10 +46,7 @@ void	heredoc(t_arglist *arg_node, int i)
 	{
 		buff = readline("> ");
 		if (!buff)
-		{
-			write(1, "\n", 1);
 			break ;
-		}
 		if (!ft_strcmp(buff, arg_node->av[0]))
 			break ;
 		if (expander_checker(buff))

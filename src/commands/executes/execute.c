@@ -115,6 +115,7 @@ void	execute(void)
 		perror_exit("Error creating pipe");
 	if (pid == 0)
 	{
+		not_interactive();
 		loop_arglist_redirects();
 		loop_cleanlist_execute();
 	}

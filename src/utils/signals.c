@@ -27,7 +27,7 @@ static void	sig_handler_interactive(int signal)
 static void	sig_handler(int sig)
 {
 	if (sig == SIGQUIT)
-		write(1, "Quit (core dumped)", 18);
+		write(1, "Quit (core dumped)\n", 19);
 	write(1, "\n", 1);
 }
 

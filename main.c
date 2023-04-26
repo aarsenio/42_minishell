@@ -62,7 +62,7 @@ int	main(int ac, char **av, char **envp)
 		data()->input = readline("minishell$ ");
 		if (data()->input && data()->input[0])
 		{
-			not_interactive();
+			signal(SIGINT, SIG_IGN);
 			add_history(data()->input);
 			if (check_input(data()->input) && tokenizer(data()->input))
 			{

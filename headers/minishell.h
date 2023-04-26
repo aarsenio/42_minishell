@@ -132,7 +132,7 @@ int			cmd_exit(t_cleanlist *node);
 void		execute(void);
 void		exec_executables(t_cleanlist *node);
 void		exec_input(t_arglist *arg_node);
-void		heredoc(t_arglist *arg_node, int i);
+void		heredoc(t_arglist *arg_node, int i[3]);
 void		exec_outputs(t_arglist *arg_node);
 void		exec_pipe(t_cleanlist *node);
 char		**get_paths(t_envplist *head);

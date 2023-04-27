@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:00:57 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/26 15:19:40 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:36:03 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	alphanumeric_pt2(char *input, int tmp, char *token)
 	int			i[3];
 
 	if (expander_checker(token) && lst_node()->operator != R_IN_UNT)
-		token = expander(token, NULL, i);
+		token = expander(token, NULL, i, NULL);
 	if (tmp != 0 && is_quote(input[tmp - 1]))
 	{
 		x = toklist()->next;

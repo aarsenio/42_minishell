@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 19:59:13 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/26 15:58:03 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:36:10 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_data
 {
 	char				**envp;
 	char				*input;
-	char				*tmp;
 	int					ac;
 	int					i;
 	int					old_i;
@@ -113,7 +112,7 @@ int			is_quote(char x);
 t_operator	get_operator(char *op);
 
 // expander
-char		*expander(char *token, char *ex_tmp, int i[3]);
+char		*expander(char *token, char *ex_tmp, int i[3], char *tmp);
 int			expander_checker(char *str);
 int			expendable_len(char *token, int i);
 

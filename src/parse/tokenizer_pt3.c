@@ -6,7 +6,7 @@
 /*   By: aarsenio <aarsenio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:00:59 by nhorta-g          #+#    #+#             */
-/*   Updated: 2023/04/26 15:19:36 by aarsenio         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:35:56 by aarsenio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	quotes_pt2(char *input, int *k, char *token, char quote)
 	int			i[3];
 
 	if (quote == '"' && expander_checker(token))
-		token = expander(token, NULL, i);
+		token = expander(token, NULL, i, NULL);
 	if (k[1] != 0 && !is_space(input[k[1] - 1]) && \
 	!is_operator(input[k[1] - 1]))
 	{
